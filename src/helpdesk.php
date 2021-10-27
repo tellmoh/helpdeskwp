@@ -53,5 +53,8 @@ class Main {
      *
 	 * @access   private
 	 */
-	private function load_dependencies() { }
+	private function load_dependencies() {
+
+        require_once HELPDESK_PATH . 'src/form/form.php';
+    }
 }

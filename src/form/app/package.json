@@ -1,0 +1,26 @@
+{
+    "main": "src/index.js",
+    "dependencies": {
+        "@emotion/react": "^11.4.1",
+        "@emotion/styled": "^11.3.0",
+        "@mui/material": "^5.0.4",
+        "@mui/styles": "^5.0.1",
+        "axios": "^0.21.1",
+        "react-hook-form": "^7.17.4",
+        "react-hot-toast": "^2.1.1"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^18.0.1"
+    },
+    "scripts": {
+        "build": "wp-scripts build",
+        "check-engines": "wp-scripts check-engines",
+        "check-licenses": "wp-scripts check-licenses",
+        "lint:css": "wp-scripts lint-style",
+        "lint:js": "wp-scripts lint-js",
+        "start": "wp-scripts start",
+        "test:e2e": "wp-scripts test-e2e",
+        "test:unit": "wp-scripts test-unit-js",
+        "packages-update": "wp-scripts packages-update"
+    }
+}
