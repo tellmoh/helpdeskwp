@@ -56,5 +56,6 @@ class Main {
 	private function load_dependencies() {
 
         require_once HELPDESK_PATH . 'src/form/form.php';
+        require_once HELPDESK_PATH . 'src/admin/post-type/post-type.php';
     }
 }
