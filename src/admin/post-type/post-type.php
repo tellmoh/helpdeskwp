@@ -30,7 +30,6 @@ class PostType {
             'capability_type'    => 'post',
             'has_archive'        => true,
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'comments' ),
-            'taxonomies'         => array( 'category' ),
             'show_in_rest'       => true
         );
 

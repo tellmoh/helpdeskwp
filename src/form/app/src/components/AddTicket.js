@@ -4,8 +4,16 @@ import { Form, Input, Select, Textarea } from './Components'
 
 const AddTicket = () => {
 
-    const { createTicket } = useContext(TicketContext)
+    const { createTicket, type, category } = useContext(TicketContext)
     const onSubmit = (data) => createTicket(data);
+
+    const types = type.map((type) => {
+        return type.name
+    })
+
+    const categories = category.map((category) => {
+        return category.name
+    })
 
     return (
         <Form className="helpdesk-add-ticket" onSubmit={onSubmit}>
@@ -14,17 +22,11 @@ const AddTicket = () => {
             <span>Subject</span>
             <Input name="title" type="text" />
 
-            <span>Name</span>
-            <Input name="name" type="text" />
-
-            <span>Email</span>
-            <Input name="email" type="email" />
-
             <span>Category</span>
-            <Select name="category" options={['theme', 'plugin']} />
+            <Select name="category" options={categories} />
 
             <span>Type</span>
-            <Select name="type" options={['Sale', 'Bug']} />
+            <Select name="type" options={types} />
 
             <span>Description</span>
             <Textarea name="description" />

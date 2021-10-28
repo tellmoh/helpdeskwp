@@ -6,19 +6,29 @@ export const TicketContext = createContext()
 
 const TicketContextProvider = (props) => {
     const [ticket, setTicket] = useState([])
+    const [type, setType] = useState([])
+    const [category, setCategory] = useState([])
     const [totalPages, setTotalPages] = useState()
 
     useEffect(() => {
-        takeForm()
+        takeTickets()
     }, [])
 
-    const takeForm = async (page = 1) => {
-        const ticket = await fetchForm(page)
+    useEffect(() => {
+        takeType()
+    }, [])
+
+    useEffect(() => {
+        takeCategory()
+    }, [])
+
+    const takeTickets = async (page = 1) => {
+        const ticket = await fetchTickets(page)
         setTicket(ticket)
         setTotalPages(parseInt(ticket[1]))
     }
 
-    const fetchForm = async (page) => {
+    const fetchTickets = async (page) => {
         let data
         await axios.get(`${helpdesk_form.url}wp/v2/ticket/?page=${page}`)
             .then( (res) => {
@@ -26,6 +36,36 @@ const TicketContextProvider = (props) => {
                     res.data,
                     res.headers['x-wp-totalpages']
                 ]
+            })
+
+        return data
+    }
+
+    const takeType = async () => {
+        const type = await fetchType()
+        setType(type)
+    }
+
+    const fetchType = async () => {
+        let data
+        await axios.get(`${helpdesk_form.url}wp/v2/ticket_type/`)
+            .then( (res) => {
+                data = res.data
+            })
+
+        return data
+    }
+
+    const takeCategory = async () => {
+        const category = await fetchCategory()
+        setCategory(category)
+    }
+
+    const fetchCategory = async () => {
+        let data
+        await axios.get(`${helpdesk_form.url}wp/v2/ticket_category/`)
+            .then( (res) => {
+                data = res.data
             })
 
         return data
@@ -60,11 +100,11 @@ const TicketContextProvider = (props) => {
             console.log(err)
         })
 
-        takeForm()
+        takeTickets()
     }
 
     return (
-        <TicketContext.Provider value={{ createTicket }}>
+        <TicketContext.Provider value={{ createTicket, type, category }}>
             {props.children}
         </TicketContext.Provider>
     )

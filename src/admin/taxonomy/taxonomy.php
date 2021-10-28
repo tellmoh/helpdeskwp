@@ -41,6 +41,35 @@ class Taxonomy {
 
         register_taxonomy( 'ticket_type', array( 'ticket' ), $args );
     }
+
+    public static function category() {
+        $labels = array(
+            'name'              => _x( 'Categories', 'taxonomy general name', 'helpdesk' ),
+            'singular_name'     => _x( 'Category', 'taxonomy singular name', 'helpdesk' ),
+            'search_items'      => __( 'Search Categories', 'helpdesk' ),
+            'all_items'         => __( 'All Categories', 'helpdesk' ),
+            'parent_item'       => __( 'Parent Category', 'helpdesk' ),
+            'parent_item_colon' => __( 'Parent Category:', 'helpdesk' ),
+            'edit_item'         => __( 'Edit Category', 'helpdesk' ),
+            'update_item'       => __( 'Update Category', 'helpdesk' ),
+            'add_new_item'      => __( 'Add New Category', 'helpdesk' ),
+            'new_item_name'     => __( 'New Category Name', 'helpdesk' ),
+            'menu_name'         => __( 'Categories', 'helpdesk' ),
+        );
+
+        $args = array(
+            'hierarchical'      => true,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'show_in_rest'      => true,
+            'rewrite'           => array( 'slug' => 'category' ),
+        );
+
+        register_taxonomy( 'ticket_category', array( 'ticket' ), $args );
+    }
 }
 
+add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'category' ) );
 add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'types' ) );

@@ -63,7 +63,7 @@ class Tickets {
         );
 
         wp_set_object_terms( $ticket_id, $type, 'ticket_type' );
-        wp_set_object_terms( $ticket_id, $category, 'category' );
+        wp_set_object_terms( $ticket_id, $category, 'ticket_category' );
 
         if ( $ticket_id ) {
             return $ticket_id;
