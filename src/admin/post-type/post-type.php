@@ -29,7 +29,7 @@ class PostType {
             'rewrite'            => array( 'slug' => 'ticket' ),
             'capability_type'    => 'post',
             'has_archive'        => true,
-            'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
+            'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'comments' ),
             'taxonomies'         => array( 'category' ),
             'show_in_rest'       => true
         );

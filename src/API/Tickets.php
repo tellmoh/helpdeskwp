@@ -39,6 +39,8 @@ class Tickets {
 
         $ticket_id = $this->add_ticket( $params['title'], $params['type'], $params['category'] );
 
+        $this->add_comment( $params['description'], $ticket_id );
+
         if ( $ticket_id ) {
             return new \WP_REST_Response( $ticket_id, 201 );
         }
@@ -68,6 +70,26 @@ class Tickets {
         }
 
         return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdesk' ), array( 'status' => 500 ) );
+    }
+
+    public function add_comment( string $comment, string $post_id ) {
+        $current_user = wp_get_current_user();
+
+        $data = array(
+            'comment_post_ID'      => $post_id,
+            'comment_content'      => $comment,
+            'user_id'              => $current_user->ID,
+            'comment_author'       => $current_user->user_login,
+            'comment_author_email' => $current_user->user_email,
+            'comment_author_url'   => $current_user->user_url,
+        );
+
+        $comment_id = wp_insert_comment( $data );
+        if ( ! is_wp_error( $comment_id ) ) {
+            return new \WP_REST_Response( $comment_id, 201 );
+        }
+
+        return new \WP_Error( 'cant-add-comment', __( 'Can\'t add the comment', 'helpdesk' ), array( 'status' => 500 ) );
     }
 }
 
