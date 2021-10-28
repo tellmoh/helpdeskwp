@@ -1,17 +1,18 @@
 import { useContext } from 'react'
-import { useForm } from 'react-hook-form'
+import { TicketContext } from '../contexts/TicketContext'
 import { Form, Input, Select, Textarea } from './Components'
 
 const AddTicket = () => {
 
-    const onSubmit = (data) => Add(data);
+    const { createTicket } = useContext(TicketContext)
+    const onSubmit = (data) => createTicket(data);
 
     return (
         <Form className="helpdesk-add-ticket" onSubmit={onSubmit}>
             <h4>Submit a ticket</h4>
 
             <span>Subject</span>
-            <Input name="subject" type="text" />
+            <Input name="title" type="text" />
 
             <span>Name</span>
             <Input name="name" type="text" />

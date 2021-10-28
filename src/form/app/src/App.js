@@ -1,10 +1,12 @@
-
+import TicketContextProvider from './contexts/TicketContext'
 import AddTicket from './components/AddTicket'
 import './index.css'
 
 const App = () => {
     return (
-        <AddTicket />
+        <TicketContextProvider>
+            <AddTicket />
+        </TicketContextProvider>
     )
 }
 

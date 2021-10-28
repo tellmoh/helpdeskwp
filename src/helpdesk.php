@@ -54,7 +54,7 @@ class Main {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
+        require_once HELPDESK_PATH . 'src/API/Tickets.php';
         require_once HELPDESK_PATH . 'src/form/form.php';
         require_once HELPDESK_PATH . 'src/admin/post-type/post-type.php';
         require_once HELPDESK_PATH . 'src/admin/taxonomy/taxonomy.php';
