@@ -15,6 +15,7 @@ const List = () => {
         return (
             <div key={ticket.id} className="helpdesk-ticket">
                 <h4 className="ticket-title">{ticket.title.rendered}</h4>
+                <span className="helpdesk-username">{ticket.user}</span>
             </div>
         )
     })
