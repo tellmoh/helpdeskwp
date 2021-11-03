@@ -25,7 +25,7 @@ class PostType {
             'public'             => true,
             'publicly_queryable' => true,
             'show_ui'            => true,
-            'show_in_menu'       => true,
+            'show_in_menu'       => false,
             'rewrite'            => array( 'slug' => 'ticket' ),
             'capability_type'    => 'post',
             'has_archive'        => true,

@@ -1,0 +1,157 @@
+<?php
+/**
+ * @since   1.0.0
+ *
+ * @package Helpdesk
+ */
+
+namespace Helpdesk;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class Dashboard
+ */
+class Dashboard {
+
+    /**
+	 * Instance
+	 *
+	 * @var string
+	 */
+	private static $instance = null;
+
+	/**
+	 * Instance of the class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public static function instance() {
+		if ( self::$instance == null ) {
+			self::$instance = new Dashboard();
+		}
+		return self::$instance;
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access private
+	 */
+	private function __construct() {
+		$this->load_dependencies();
+		$this->hooks();
+	}
+
+	/**
+	 * Init hooks
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access private
+	 */
+	private function hooks() {
+        add_action( 'admin_menu', array( $this, 'dashboard_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Load the dependencies.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access private
+	 */
+	private function load_dependencies() { }
+
+	/**
+	 * Dashboard output
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function helpdesk_dashboard() {
+		echo '<div id="helpdesk-dashboard"></div>';
+	}
+
+    /**
+	 * Dashboard menu
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+    public function dashboard_menu() {
+        add_menu_page(
+			__( 'Helpdesk Dashboard', 'helpdesk' ),
+			'Tickets',
+			'manage_options',
+			'helpdesk',
+			array( $this, 'helpdesk_dashboard' ),
+			'dashicons-tickets-alt',
+			10
+		);
+
+		add_submenu_page(
+			'helpdesk',
+			__( 'Category', 'helpdesk' ),
+			__( 'Category', 'helpdesk' ),
+			'manage_options',
+			'edit-tags.php?taxonomy=ticket_category&post_type=ticket',
+			array()
+		);
+
+        add_submenu_page(
+			'helpdesk',
+			__( 'Type', 'helpdesk' ),
+			__( 'Type', 'helpdesk' ),
+			'manage_options',
+			'edit-tags.php?taxonomy=ticket_type&post_type=ticket',
+			array()
+		);
+    }
+
+	/**
+	 * enqueue scripts
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function enqueue_scripts() {
+
+		if ( isset( $_GET['page'] ) && $_GET['page'] === 'helpdesk'  ) {
+			wp_enqueue_script(
+				'helpdesk-dashboard',
+				HELPDESK_URL . 'src/dashboard/app/build/index.js',
+				array( 'wp-element' ),
+				HELPDESK,
+				true
+			);
+
+			wp_localize_script(
+				'helpdesk-dashboard',
+				'helpdesk_dashboard',
+				array(
+					'url'   => esc_url_raw( rest_url() ),
+					'nonce' => wp_create_nonce( 'wp_rest' ),
+				)
+			);
+
+			wp_enqueue_style(
+				'helpdesk-dashboard',
+				HELPDESK_URL . 'src/dashboard/app/build/index.css',
+				array(),
+				HELPDESK,
+				'all'
+			);
+		}
+	}
+}
+
+Dashboard::instance();
