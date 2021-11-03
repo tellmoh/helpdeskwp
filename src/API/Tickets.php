@@ -56,12 +56,14 @@ class Tickets {
     }
 
     public function add_ticket( string $title, string $type, string $category ) {
+        $current_user = get_current_user_id();
+
         $ticket_id = wp_insert_post(
             array(
                 'post_title'  => $title,
                 'post_type'   => 'ticket',
                 'post_status' => 'publish',
-                'post_author' => 1
+                'post_author' => $current_user
             )
         );
 
