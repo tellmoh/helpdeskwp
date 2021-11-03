@@ -75,11 +75,11 @@ const TicketContextProvider = (props) => {
         const config = {
             headers: {
               'X-WP-Nonce': helpdesk_form.nonce,
-              'Content-Type': 'application/json'
+              'Content-Type': 'multipart/form-data',
             }
         }
 
-        await axios.post(`${helpdesk_form.url}helpdesk/v1/tickets`, JSON.stringify(data), config)
+        await axios.post(`${helpdesk_form.url}helpdesk/v1/tickets`, data, config)
         .then(function () {
             toast('Created.', {
                 duration: 2000,

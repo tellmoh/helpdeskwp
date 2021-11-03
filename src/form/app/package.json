@@ -6,7 +6,6 @@
         "@mui/material": "^5.0.4",
         "@mui/styles": "^5.0.1",
         "axios": "^0.21.1",
-        "react-hook-form": "^7.17.4",
         "react-hot-toast": "^2.1.1"
     },
     "devDependencies": {
