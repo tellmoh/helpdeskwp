@@ -56,6 +56,7 @@ class Dashboard {
 	 */
 	private function hooks() {
         add_action( 'admin_menu', array( $this, 'dashboard_menu' ) );
+        add_action( 'rest_api_init', array( $this, 'register_user_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -77,6 +78,39 @@ class Dashboard {
 	 */
 	public function helpdesk_dashboard() {
 		echo '<div id="helpdesk-dashboard"></div>';
+	}
+
+    /**
+	 * Register user field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function register_user_field() {
+		register_rest_field(
+			'ticket',
+			'user',
+			array(
+				'get_callback'    => array( $this, 'get_user' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
+
+    /**
+	 * Returns the user.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function get_user( $object ) {
+
+        $author = get_the_author_meta( 'display_name', $object['author'] );
+
+		return $author;
 	}
 
     /**
