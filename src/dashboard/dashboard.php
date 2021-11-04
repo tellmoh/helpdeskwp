@@ -57,6 +57,7 @@ class Dashboard {
 	private function hooks() {
         add_action( 'admin_menu', array( $this, 'dashboard_menu' ) );
         add_action( 'rest_api_init', array( $this, 'register_user_field' ) );
+        add_action( 'rest_api_init', array( $this, 'register_category_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -97,6 +98,39 @@ class Dashboard {
 				'schema'          => null,
 			)
 		);
+	}
+
+    /**
+	 * Register category field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function register_category_field() {
+		register_rest_field(
+			'ticket',
+			'category',
+			array(
+				'get_callback'    => array( $this, 'get_category' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
+
+    /**
+	 * Returns the category.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function get_category( $object ) {
+
+        $category = get_term_by( 'id', $object['ticket_category'][0], 'ticket_category' )->name;
+
+		return $category;
 	}
 
     /**
