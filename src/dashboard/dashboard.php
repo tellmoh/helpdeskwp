@@ -58,6 +58,7 @@ class Dashboard {
         add_action( 'admin_menu', array( $this, 'dashboard_menu' ) );
         add_action( 'rest_api_init', array( $this, 'register_user_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_category_field' ) );
+        add_action( 'rest_api_init', array( $this, 'register_type_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -120,6 +121,25 @@ class Dashboard {
 	}
 
     /**
+	 * Register type field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function register_type_field() {
+		register_rest_field(
+			'ticket',
+			'type',
+			array(
+				'get_callback'    => array( $this, 'get_type' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
+
+    /**
 	 * Returns the category.
 	 *
 	 * @since 1.0.0
@@ -132,6 +152,24 @@ class Dashboard {
 
         if ( $category ) {
             return $category;
+        }
+
+        return '';
+	}
+
+    /**
+	 * Returns the type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function get_type( $object ) {
+
+        $type = get_term_by( 'id', $object['ticket_type'][0], 'ticket_type' )->name;
+
+        if ( $type ) {
+            return $type;
         }
 
         return '';
