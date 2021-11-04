@@ -15,7 +15,8 @@ const List = () => {
         return (
             <div key={ticket.id} className="helpdesk-ticket">
                 <h4 className="ticket-title">{ticket.title.rendered}</h4>
-                <span className="helpdesk-username">{ticket.user}</span>
+                <div className="helpdesk-username">{ticket.user}</div>
+                <div className="helpdesk-category">in: {ticket.category}</div>
             </div>
         )
     })

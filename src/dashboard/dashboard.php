@@ -130,7 +130,11 @@ class Dashboard {
 
         $category = get_term_by( 'id', $object['ticket_category'][0], 'ticket_category' )->name;
 
-		return $category;
+        if ( $category ) {
+            return $category;
+        }
+
+        return '';
 	}
 
     /**
