@@ -17,6 +17,7 @@ const List = () => {
                 <h4 className="ticket-title">{ticket.title.rendered}</h4>
                 <div className="helpdesk-username">{ticket.user}</div>
                 <div className="helpdesk-category">in: {ticket.category}</div>
+                <div className="helpdesk-type">Type: {ticket.type}</div>
             </div>
         )
     })
