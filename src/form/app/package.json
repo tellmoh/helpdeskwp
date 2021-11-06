@@ -20,6 +20,7 @@
         "start": "wp-scripts start",
         "test:e2e": "wp-scripts test-e2e",
         "test:unit": "wp-scripts test-unit-js",
-        "packages-update": "wp-scripts packages-update"
+        "packages-update": "wp-scripts packages-update",
+        "format": "wp-scripts format"
     }
 }

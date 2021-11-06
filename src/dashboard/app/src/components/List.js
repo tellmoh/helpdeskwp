@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { TicketContext } from '../contexts/TicketContext'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { Link } from "react-router-dom";
 
 const List = () => {
     const { ticket, totalPages, takeTickets } = useContext(TicketContext)
@@ -14,7 +15,9 @@ const List = () => {
     const tickets = ticket.map((ticket) => {
         return (
             <div key={ticket.id} className="helpdesk-ticket">
-                <h4 className="ticket-title">{ticket.title.rendered}</h4>
+                <Link to={`/ticket/${ticket.id}`}>
+                    <h4 className="ticket-title">{ticket.title.rendered}</h4>
+                </Link>
                 <div className="helpdesk-username">{ticket.user}</div>
                 <div className="helpdesk-category">in: {ticket.category}</div>
                 <div className="helpdesk-type">Type: {ticket.type}</div>
