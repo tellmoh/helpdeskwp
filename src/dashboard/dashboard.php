@@ -148,7 +148,11 @@ class Dashboard {
 	 */
 	public function get_category( $object ) {
 
-        $category = get_term_by( 'id', $object['ticket_category'][0], 'ticket_category' )->name;
+		$category = '';
+
+		if ( isset( $object['ticket_category'][0] ) ) {
+			$category = get_term_by( 'id', $object['ticket_category'][0], 'ticket_category' )->name;
+		}
 
         if ( $category ) {
             return $category;
@@ -166,7 +170,11 @@ class Dashboard {
 	 */
 	public function get_type( $object ) {
 
-        $type = get_term_by( 'id', $object['ticket_type'][0], 'ticket_type' )->name;
+		$type = '';
+
+		if ( isset( $object['ticket_type'][0] ) ) {
+			$type = get_term_by( 'id', $object['ticket_type'][0], 'ticket_type' )->name;
+		}
 
         if ( $type ) {
             return $type;

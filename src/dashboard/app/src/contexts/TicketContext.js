@@ -31,12 +31,8 @@ const TicketContextProvider = (props) => {
         return data
     }
 
-    const getTicket = (id) => {
-        console.log(id)
-    }
-
     return (
-        <TicketContext.Provider value={{ ticket, totalPages, takeTickets, getTicket }}>
+        <TicketContext.Provider value={{ ticket, totalPages, takeTickets }}>
             {props.children}
         </TicketContext.Provider>
     )
