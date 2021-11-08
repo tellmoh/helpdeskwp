@@ -97,7 +97,7 @@ const Ticket = () => {
 
     return (
         <div>
-            <Link to="/">
+            <Link to="/?page=helpdesk">
                 Back
             </Link>
             {singleTicket &&
@@ -116,9 +116,7 @@ const Ticket = () => {
                             <span className="by-name">{comment.author_name}</span>
                             <div className="ticket-comment-body">
                                 {comment.content.rendered &&
-                                    <div className="ticket-comment-content">
-                                        {comment.content.rendered}
-                                    </div>
+                                    <div dangerouslySetInnerHTML={{__html: comment.content.rendered}} />
                                 }
                             </div>
                         </div>
