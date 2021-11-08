@@ -3,13 +3,14 @@ body {
 }
 
 #helpdesk-dashboard {
-    margin: 30px;
+    margin: 60px auto;
+    max-width: 85%;
 }
 
 .helpdesk-ticket {
     background: #fff;
     padding: 5px 15px;
-    border-radius: 10px;
+    border-radius: 0px;
     margin-bottom: 10px;
     border: 1px solid #e7e7e7;
 }
@@ -28,4 +29,40 @@ body {
 
 .ticket-comment:nth-child(even) {
     background-color: #cccccc;
+}
+
+.helpdesk-tickets {
+    width: 65%;
+    float: left;
+}
+
+#helpdesk-dashboard .helpdesk-filters {
+    width: 20%;
+    display: inline-block;
+    background: #fff;
+    border-radius: 5px;
+    margin: 0 20px;
+    padding: 10px 20px;
+}
+
+#helpdesk-dashboard .MuiSelect-root {
+    width: 100%;
+    margin: 10px 0;
+}
+
+#helpdesk-dashboard .MuiSelect-select {
+    padding: 10px;
+    font-size: 13px;
+}
+
+.MuiMenuItem-gutters {
+    font-size: 13px !important;
+}
+
+.helpdesk-filters p {
+    margin-bottom: 0;
+}
+
+.helpdesk-filters button {
+    margin: 20px 0;
 }

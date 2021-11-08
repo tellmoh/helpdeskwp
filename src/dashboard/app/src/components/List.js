@@ -12,26 +12,24 @@ const List = () => {
         takeTickets(value)
     };
 
-    const tickets = ticket.map((ticket) => {
-        return (
-            <div key={ticket.id} className="helpdesk-ticket">
-                <Link to={`/ticket/${ticket.id}`}>
-                    <h4 className="ticket-title">{ticket.title.rendered}</h4>
-                </Link>
-                <div className="helpdesk-username">{ticket.user}</div>
-                <div className="helpdesk-category">in: {ticket.category}</div>
-                <div className="helpdesk-type">Type: {ticket.type}</div>
-            </div>
-        )
-    })
-
     return (
-        <>
-            {tickets}
+        <div className="helpdesk-tickets">
+            {ticket && ticket.map((ticket) => {
+                return (
+                    <div key={ticket.id} className="helpdesk-ticket">
+                        <Link to={`/ticket/${ticket.id}`}>
+                            <h4 className="ticket-title">{ticket.title.rendered}</h4>
+                        </Link>
+                        <div className="helpdesk-username">{ticket.user}</div>
+                        <div className="helpdesk-category">in: {ticket.category}</div>
+                        <div className="helpdesk-type">Type: {ticket.type}</div>
+                    </div>
+                )
+            })}
             <Stack spacing={2}>
                 <Pagination count={totalPages} page={page} color="primary" onChange={handleChange}/>
             </Stack>
-        </>
+        </div>
     )
 }
 
