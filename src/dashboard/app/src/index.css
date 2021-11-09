@@ -15,7 +15,7 @@ body {
     border: 1px solid #e7e7e7;
 }
 
-.ticket-comment {
+.ticket-reply {
     background: #ffffff;
     border-radius: 5px;
     border: 1px solid #e7e7e7;
@@ -23,11 +23,11 @@ body {
     margin: 15px 0;
 }
 
-.helpdesk-add-new-comment textarea {
+.helpdesk-add-new-reply textarea {
     width: 100%;
 }
 
-.ticket-comment:nth-child(even) {
+.ticket-reply:nth-child(even) {
     background-color: #cccccc;
 }
 

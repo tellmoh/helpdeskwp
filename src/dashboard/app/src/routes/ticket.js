@@ -7,8 +7,8 @@ import { Toaster } from 'react-hot-toast'
 
 const Ticket = () => {
     const [singleTicket, setSingleTicket] = useState(null)
-    const [comments, setComments] = useState(null)
-    const [comment, setComment] = useState('')
+    const [replies, setReplies] = useState(null)
+    const [reply, setReply] = useState('')
 
     let params = useParams();
 
@@ -17,7 +17,7 @@ const Ticket = () => {
     }, [])
 
     useEffect(() => {
-        takeComments()
+        takeReplies()
     }, [])
 
     const takeTicket = async () => {
@@ -35,14 +35,20 @@ const Ticket = () => {
         return data
     }
 
-    const takeComments = async () => {
-        const comments = await fetchComments(params.ticketId)
-        setComments(comments)
+    const takeReplies = async () => {
+        const replies = await fetchReplies(params.ticketId)
+        setReplies(replies)
     }
 
-    const fetchComments = async (id) => {
+    const fetchReplies = async (id) => {
+        const config = {
+            headers: {
+                'X-WP-Nonce': helpdesk_dashboard.nonce,
+            }
+        }
+
         let data
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/comments?post=${id}&?per_page=9999`)
+        await axios.get(`${helpdesk_dashboard.url}helpdesk/v1/replies/?parent=${id}`, config)
             .then( (res) => {
                 data = res.data
             })
@@ -50,22 +56,15 @@ const Ticket = () => {
         return data
     }
 
-    const sendComment = async (data) => {
+    const sendReply = async (data) => {
         const config = {
             headers: {
               'X-WP-Nonce': helpdesk_dashboard.nonce,
-              'Content-Type': 'application/json',
+              'Content-Type': 'multipart/form-data',
             }
         }
 
-        const commentData = {
-            'content': data,
-            'author': '1',
-            'post': params.ticketId,
-            'status': 'approve'
-        }
-
-        await axios.post(`${helpdesk_dashboard.url}wp/v2/comments`, JSON.stringify(commentData), config)
+        await axios.post(`${helpdesk_dashboard.url}helpdesk/v1/replies`, data, config)
         .then(function () {
             toast('Sent.', {
                 duration: 2000,
@@ -75,7 +74,7 @@ const Ticket = () => {
             })
         })
         .catch(function (err) {
-            toast('Couldn\'t send the comment.', {
+            toast('Couldn\'t send the reply.', {
                 duration: 2000,
                 icon: '❌',
                 style: {
@@ -85,14 +84,18 @@ const Ticket = () => {
             console.log(err)
         })
 
-        takeComments()
+        takeReplies()
     }
 
-    const submitComment = (event) => {
+    const submitReply = (event) => {
         event.preventDefault()
 
-        sendComment(comment)
-        setComment('')
+        let formData = new FormData();
+        formData.append("reply", reply);
+        formData.append("parent", params.ticketId);
+
+        sendReply(formData)
+        setReply('')
     }
 
     return (
@@ -108,15 +111,15 @@ const Ticket = () => {
                     <div>Type: {singleTicket.type}</div>
                 </div>
             }
-            <div className="helpdesk-ticket-comments">
-            {comments &&
-                comments.map((comment) => {
+            <div className="helpdesk-ticket-replies">
+            {replies &&
+                replies.map((reply) => {
                     return (
-                        <div key={comment.id} className="ticket-comment">
-                            <span className="by-name">{comment.author_name}</span>
-                            <div className="ticket-comment-body">
-                                {comment.content.rendered &&
-                                    <div dangerouslySetInnerHTML={{__html: comment.content.rendered}} />
+                        <div key={reply.id} className="ticket-reply">
+                            <span className="by-name">{reply.author}</span>
+                            <div className="ticket-reply-body">
+                                {reply.reply &&
+                                    <div dangerouslySetInnerHTML={{__html: reply.reply}} />
                                 }
                             </div>
                         </div>
@@ -124,9 +127,9 @@ const Ticket = () => {
                 })
             }
             </div>
-            <div className="helpdesk-add-new-comment">
-                <form onSubmit={submitComment}>
-                    <textarea name="comment" rows="10" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+            <div className="helpdesk-add-new-reply">
+                <form onSubmit={submitReply}>
+                    <textarea name="reply" rows="10" value={reply} onChange={(e) => setReply(e.target.value)}></textarea>
                     <input type="submit" value="Send" />
                 </form>
             </div>
