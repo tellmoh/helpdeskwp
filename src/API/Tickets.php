@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
  */
 class Tickets {
 
-    private $namespace = 'helpdesk';
-    private $base      = 'tickets';
-    private $version   = 'v1';
+    protected $namespace = 'helpdesk';
+    protected $base      = 'tickets';
+    protected $version   = 'v1';
 
     public function register_routes() {
         register_rest_route(
@@ -38,14 +38,14 @@ class Tickets {
             return array();
         }
 
-        $ticket  = $this->add_ticket( $params['title'], $params['type'], $params['category'] );
-        $image   = $this->save_image( $files, $ticket->data );
-        $comment = $this->add_comment( $params['description'], $ticket->data, $image->data );
+        $ticket = $this->add_ticket( $params['title'], $params['type'], $params['category'] );
+        $image  = $this->save_image( $files, $ticket->data );
+        $reply  = $this->add_reply( $params['description'], $ticket->data, $image->data );
 
         $res = array(
             'ticket'  => $ticket,
             'media'   => $image,
-            'comment' => $comment
+            'reply' => $reply
         );
 
         if ( $ticket->data ) {
@@ -77,28 +77,28 @@ class Tickets {
         return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
-    public function add_comment( string $comment, string $post_id, string $image ) {
-        $current_user = wp_get_current_user();
+    public function add_reply( string $reply, string $ticket_id, string $images ) {
+        $current_user = get_current_user_id();
 
-        $data = array(
-            'comment_post_ID'      => $post_id,
-            'comment_content'      => $comment,
-            'user_id'              => $current_user->ID,
-            'comment_author'       => $current_user->user_login,
-            'comment_author_email' => $current_user->user_email,
-            'comment_author_url'   => $current_user->user_url,
-            'comment_meta'         => array(
-                'media' => $image,
-            ),
+        $reply_id = wp_insert_post(
+            array(
+                'post_title'   => $ticket_id,
+                'post_content' => $reply,
+                'post_type'    => 'reply',
+                'post_status'  => 'publish',
+                'post_parent'  => $ticket_id,
+                'post_author'  => $current_user,
+                'meta_input'   => array(
+                    'reply_images' => $images,
+                ),
+            )
         );
 
-        $comment = wp_insert_comment( $data );
-
-        if ( ! is_wp_error( $comment ) ) {
-            return new \WP_REST_Response( $comment, 201 );
+        if ( ! is_wp_error( $reply_id ) ) {
+            return new \WP_REST_Response( $reply_id, 201 );
         }
 
-        return new \WP_Error( 'cant-add-comment', __( 'Can\'t add the comment', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-add-reply', __( 'Can\'t add the reply', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
     public function save_image( array $image, string $ticket_id ) {
@@ -106,17 +106,19 @@ class Tickets {
         $filetype = wp_check_filetype( $image['media']['name'], '' );
         $upload   = wp_upload_bits( $image['media']['name'], '', $file );
 
-        $attachment = wp_insert_attachment(
-            array(
-                'guid'           => $upload['url'],
-                'post_mime_type' => $filetype['type'],
-            ),
-            $upload['file'],
-            $ticket_id
-        );
+        if ( ! $upload['error'] ) {
+            $attachment_id = wp_insert_attachment(
+                array(
+                    'guid'           => $upload['url'],
+                    'post_mime_type' => $filetype['type'],
+                ),
+                $upload['file'],
+                $ticket_id
+            );
 
-        if ( ! is_wp_error( $attachment ) ) {
-            return new \WP_REST_Response( $attachment, 201 );
+            if ( ! is_wp_error( $attachment_id ) ) {
+                return new \WP_REST_Response( $attachment_id, 201 );
+            }
         }
 
         return new \WP_Error( 'cant-save-image', __( 'Can\'t save the image', 'helpdesk' ), array( 'status' => 500 ) );
