@@ -18,6 +18,7 @@ const Filters = () => {
     const [type, setType] = useState('');
     const [agents, setAgents] = useState('');
     const [status, setStatus] = useState('');
+    const [priority, setPriority] = useState('');
 
     const handleCategoryChange = (event) => {
         setFilterCategory(event.target.value);
@@ -53,6 +54,10 @@ const Filters = () => {
 
     useEffect(() => {
         takeStatus()
+    }, [])
+
+    useEffect(() => {
+        takePriority()
     }, [])
 
     const takeCategory = async () => {
@@ -91,6 +96,20 @@ const Filters = () => {
     const fetchStatus = async () => {
         let data;
         await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_status/?per_page=50`)
+            .then( (res) => {
+                data = res.data
+            })
+        return data
+    }
+
+    const takePriority = async () => {
+        const priority = await fetchPriority()
+        setPriority(priority)
+    }
+
+    const fetchPriority = async () => {
+        let data;
+        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_priority/?per_page=50`)
             .then( (res) => {
                 data = res.data
             })
@@ -149,10 +168,9 @@ const Filters = () => {
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value={'low'}>Low</MenuItem>
-                    <MenuItem value={'medium'}>Medium</MenuItem>
-                    <MenuItem value={'high'}>High</MenuItem>
-                    <MenuItem value={'urgent'}>Urgent</MenuItem>
+                    {priority && priority.map((priority) => {
+                        return <MenuItem key={priority.id} value={priority.id}>{priority.name}</MenuItem>
+                    })}
                 </Select>
             </div>
             <div>
