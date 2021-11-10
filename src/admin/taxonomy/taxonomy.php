@@ -97,8 +97,37 @@ class Taxonomy {
 
         register_taxonomy( 'ticket_priority', array( 'ticket' ), $args );
     }
+
+    public static function status() {
+        $labels = array(
+            'name'              => _x( 'Status', 'taxonomy general name', 'helpdesk' ),
+            'singular_name'     => _x( 'Status', 'taxonomy singular name', 'helpdesk' ),
+            'search_items'      => __( 'Search Status', 'helpdesk' ),
+            'all_items'         => __( 'All Status', 'helpdesk' ),
+            'parent_item'       => __( 'Parent Status', 'helpdesk' ),
+            'parent_item_colon' => __( 'Parent Status:', 'helpdesk' ),
+            'edit_item'         => __( 'Edit Status', 'helpdesk' ),
+            'update_item'       => __( 'Update Status', 'helpdesk' ),
+            'add_new_item'      => __( 'Add New Status', 'helpdesk' ),
+            'new_item_name'     => __( 'New Status Name', 'helpdesk' ),
+            'menu_name'         => __( 'Status', 'helpdesk' ),
+        );
+
+        $args = array(
+            'hierarchical'      => true,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_in_menu'      => false,
+            'query_var'         => true,
+            'show_in_rest'      => true,
+            'rewrite'           => array( 'slug' => 'status' ),
+        );
+
+        register_taxonomy( 'ticket_status', array( 'ticket' ), $args );
+    }
 }
 
 add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'category' ) );
 add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'types' ) );
 add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'priority' ) );
+add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'status' ) );
