@@ -34,7 +34,6 @@ class Taxonomy {
             'labels'            => $labels,
             'show_ui'           => true,
             'show_in_menu'      => false,
-            'show_admin_column' => true,
             'query_var'         => true,
             'show_in_rest'      => true,
             'rewrite'           => array( 'slug' => 'type' ),
@@ -63,7 +62,6 @@ class Taxonomy {
             'labels'            => $labels,
             'show_ui'           => true,
             'show_in_menu'      => false,
-            'show_admin_column' => true,
             'query_var'         => true,
             'show_in_rest'      => true,
             'rewrite'           => array( 'slug' => 'category' ),
@@ -71,7 +69,36 @@ class Taxonomy {
 
         register_taxonomy( 'ticket_category', array( 'ticket' ), $args );
     }
+
+    public static function priority() {
+        $labels = array(
+            'name'              => _x( 'Prioritise', 'taxonomy general name', 'helpdesk' ),
+            'singular_name'     => _x( 'Priority', 'taxonomy singular name', 'helpdesk' ),
+            'search_items'      => __( 'Search Prioritise', 'helpdesk' ),
+            'all_items'         => __( 'All Prioritise', 'helpdesk' ),
+            'parent_item'       => __( 'Parent Priority', 'helpdesk' ),
+            'parent_item_colon' => __( 'Parent Priority:', 'helpdesk' ),
+            'edit_item'         => __( 'Edit Priority', 'helpdesk' ),
+            'update_item'       => __( 'Update Priority', 'helpdesk' ),
+            'add_new_item'      => __( 'Add New Priority', 'helpdesk' ),
+            'new_item_name'     => __( 'New Priority Name', 'helpdesk' ),
+            'menu_name'         => __( 'Prioritise', 'helpdesk' ),
+        );
+
+        $args = array(
+            'hierarchical'      => true,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_in_menu'      => false,
+            'query_var'         => true,
+            'show_in_rest'      => true,
+            'rewrite'           => array( 'slug' => 'priority' ),
+        );
+
+        register_taxonomy( 'ticket_priority', array( 'ticket' ), $args );
+    }
 }
 
 add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'category' ) );
 add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'types' ) );
+add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'priority' ) );

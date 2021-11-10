@@ -232,6 +232,15 @@ class Dashboard {
 			'edit-tags.php?taxonomy=ticket_type&post_type=ticket',
 			array()
 		);
+
+		add_submenu_page(
+			'helpdesk',
+			__( 'Priority', 'helpdesk' ),
+			__( 'Priority', 'helpdesk' ),
+			'manage_options',
+			'edit-tags.php?taxonomy=ticket_priority&post_type=ticket',
+			array()
+		);
     }
 
 	/**
