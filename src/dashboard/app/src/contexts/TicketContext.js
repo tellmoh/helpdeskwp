@@ -31,8 +31,12 @@ const TicketContextProvider = (props) => {
         return data
     }
 
+    const applyFilters = ( category, priority, status, type, agent ) => {
+        console.log(category, priority, status, type, agent)
+    }
+
     return (
-        <TicketContext.Provider value={{ ticket, totalPages, takeTickets }}>
+        <TicketContext.Provider value={{ ticket, totalPages, takeTickets, applyFilters }}>
             {props.children}
         </TicketContext.Provider>
     )

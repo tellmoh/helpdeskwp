@@ -1,19 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { TicketContext } from '../contexts/TicketContext'
 
 const Filters = () => {
+    const { applyFilters } = useContext(TicketContext)
     const [filterCategory, setFilterCategory] = useState('');
     const [filterPriority, setFilterPriority] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
-    const [filterType, setTypeStatus] = useState('');
-    const [filterAgent, setAgentStatus] = useState('');
+    const [filterType, setFilterType] = useState('');
+    const [filterAgent, setFilterAgent] = useState('');
+
     const [category, setCategory] = useState('');
     const [type, setType] = useState('');
     const [agents, setAgents] = useState('');
+    const [status, setStatus] = useState('');
 
     const handleCategoryChange = (event) => {
         setFilterCategory(event.target.value);
@@ -28,11 +32,11 @@ const Filters = () => {
     };
 
     const handleTypeChange = (event) => {
-        setTypeStatus(event.target.value);
+        setFilterType(event.target.value);
     };
 
     const handleAgentChange = (event) => {
-        setAgentStatus(event.target.value);
+        setFilterAgent(event.target.value);
     };
 
     useEffect(() => {
@@ -45,6 +49,10 @@ const Filters = () => {
 
     useEffect(() => {
         takeAgents()
+    }, [])
+
+    useEffect(() => {
+        takeStatus()
     }, [])
 
     const takeCategory = async () => {
@@ -75,6 +83,20 @@ const Filters = () => {
         return data
     }
 
+    const takeStatus = async () => {
+        const status = await fetchStatus()
+        setStatus(status)
+    }
+
+    const fetchStatus = async () => {
+        let data;
+        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_status/?per_page=50`)
+            .then( (res) => {
+                data = res.data
+            })
+        return data
+    }
+
     const takeAgents = async () => {
         const agents = await fetchAgents()
         setAgents(agents)
@@ -93,6 +115,10 @@ const Filters = () => {
                 data = res.data
             })
         return data
+    }
+
+    const apply = () => {
+        applyFilters(filterCategory, filterPriority, filterStatus, filterType, filterAgent)
     }
 
     return (
@@ -139,10 +165,9 @@ const Filters = () => {
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value={'open'}>Open</MenuItem>
-                    <MenuItem value={'pending'}>Pending</MenuItem>
-                    <MenuItem value={'resolved'}>Resolved</MenuItem>
-                    <MenuItem value={'closed'}>Closed</MenuItem>
+                    {status && status.map((status) => {
+                        return <MenuItem key={status.id} value={status.id}>{status.name}</MenuItem>
+                    })}
                 </Select>
             </div>
             <div>
@@ -176,7 +201,7 @@ const Filters = () => {
                 </Select>
             </div>
             <Stack direction="column">
-                <Button variant="contained">Apply</Button>
+                <Button variant="contained" onClick={apply}>Apply</Button>
             </Stack>
         </div>
     )
