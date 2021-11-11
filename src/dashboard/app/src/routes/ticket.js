@@ -4,6 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Toaster } from 'react-hot-toast'
+import Properties from '../components/Properties';
 
 const Ticket = () => {
     const [singleTicket, setSingleTicket] = useState(null)
@@ -99,43 +100,46 @@ const Ticket = () => {
     }
 
     return (
-        <div>
-            <Link to="/?page=helpdesk">
-                Back
-            </Link>
-            {singleTicket &&
-                <div className="helpdesk-single-ticket">
-                    <h1>{singleTicket.title.rendered}</h1>
-                    <div>By: {singleTicket.user}</div>
-                    <div>In: {singleTicket.category}</div>
-                    <div>Type: {singleTicket.type}</div>
+        <>
+            <div className="helpdesk-tickets">
+                <Link to="/?page=helpdesk">
+                    Back
+                </Link>
+                {singleTicket &&
+                    <div className="helpdesk-single-ticket">
+                        <h1>{singleTicket.title.rendered}</h1>
+                        <div>By: {singleTicket.user}</div>
+                        <div>In: {singleTicket.category}</div>
+                        <div>Type: {singleTicket.type}</div>
+                    </div>
+                }
+                <div className="helpdesk-add-new-reply">
+                    <form onSubmit={submitReply}>
+                        <textarea name="reply" rows="10" value={reply} onChange={(e) => setReply(e.target.value)}></textarea>
+                        <input type="submit" value="Send" />
+                    </form>
                 </div>
-            }
-            <div className="helpdesk-ticket-replies">
-            {replies &&
-                replies.map((reply) => {
-                    return (
-                        <div key={reply.id} className="ticket-reply">
-                            <span className="by-name">{reply.author}</span>
-                            <div className="ticket-reply-body">
-                                {reply.reply &&
-                                    <div dangerouslySetInnerHTML={{__html: reply.reply}} />
-                                }
+                <div className="helpdesk-ticket-replies">
+                {replies &&
+                    replies.map((reply) => {
+                        return (
+                            <div key={reply.id} className="ticket-reply">
+                                <span className="by-name">{reply.author}</span>
+                                <div className="ticket-reply-body">
+                                    {reply.reply &&
+                                        <div dangerouslySetInnerHTML={{__html: reply.reply}} />
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    )
-                })
-            }
+                        )
+                    })
+                }
+                </div>
+                <Outlet />
+                <Toaster />
             </div>
-            <div className="helpdesk-add-new-reply">
-                <form onSubmit={submitReply}>
-                    <textarea name="reply" rows="10" value={reply} onChange={(e) => setReply(e.target.value)}></textarea>
-                    <input type="submit" value="Send" />
-                </form>
-            </div>
-            <Outlet />
-            <Toaster />
-        </div>
+            <Properties />
+        </>
     )
 }
 
