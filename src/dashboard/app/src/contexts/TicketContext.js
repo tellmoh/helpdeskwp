@@ -12,15 +12,31 @@ const TicketContextProvider = (props) => {
         takeTickets()
     }, [])
 
-    const takeTickets = async (page = 1) => {
-        const ticket = await fetchTickets(page)
+    const takeTickets = async (page = 1, filters) => {
+        const ticket = await fetchTickets(page, filters)
         setTicket(ticket[0])
         setTotalPages(parseInt(ticket[1]))
     }
 
-    const fetchTickets = async (page) => {
+    const fetchTickets = async (page, filters) => {
+
+        var url
+
+        if ( filters ) {
+            const category = filters.category ? `&ticket_category=${filters.category}` : ''
+            const type = filters.type ? `&ticket_type=${filters.type}` : ''
+            const agent = filters.agent ? `&author=${filters.agent}` : ''
+            const priority = filters.priority ? `&ticket_priority=${filters.priority}` : ''
+            const status = filters.status ? `&ticket_status=${filters.status}` : ''
+
+            url = `${helpdesk_dashboard.url}wp/v2/ticket/?page=${page}${category}${type}${status}${priority}${agent}`
+
+        } else {
+            url = `${helpdesk_dashboard.url}wp/v2/ticket/?page=${page}`
+        }
+
         let data
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket/?page=${page}`)
+        await axios.get(url)
             .then( (res) => {
                 data = [
                     res.data,
@@ -31,8 +47,8 @@ const TicketContextProvider = (props) => {
         return data
     }
 
-    const applyFilters = ( category, priority, status, type, agent ) => {
-        console.log(category, priority, status, type, agent)
+    const applyFilters = ( filters ) => {
+        takeTickets(1, filters)
     }
 
     return (

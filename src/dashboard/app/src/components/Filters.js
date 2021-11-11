@@ -137,7 +137,14 @@ const Filters = () => {
     }
 
     const apply = () => {
-        applyFilters(filterCategory, filterPriority, filterStatus, filterType, filterAgent)
+        const filters = {
+            category: filterCategory,
+            priority: filterPriority,
+            status: filterStatus,
+            type: filterType,
+            agent: filterAgent
+        }
+        applyFilters(filters)
     }
 
     return (
