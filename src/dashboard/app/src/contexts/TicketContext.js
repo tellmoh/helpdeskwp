@@ -25,7 +25,7 @@ const TicketContextProvider = (props) => {
         if ( filters ) {
             const category = filters.category ? `&ticket_category=${filters.category}` : ''
             const type = filters.type ? `&ticket_type=${filters.type}` : ''
-            const agent = filters.agent ? `&author=${filters.agent}` : ''
+            const agent = filters.agent ? `&ticket_agent=${filters.agent}` : ''
             const priority = filters.priority ? `&ticket_priority=${filters.priority}` : ''
             const status = filters.status ? `&ticket_status=${filters.status}` : ''
 

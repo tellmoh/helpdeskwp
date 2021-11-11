@@ -122,14 +122,8 @@ const Filters = () => {
     }
 
     const fetchAgents = async () => {
-        const config = {
-            headers: {
-              'X-WP-Nonce': helpdesk_dashboard.nonce,
-            }
-        }
-
         let data;
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/users?roles=support_agent_role&?per_page=50`, config)
+        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_agent/?per_page=50`)
             .then( (res) => {
                 data = res.data
             })

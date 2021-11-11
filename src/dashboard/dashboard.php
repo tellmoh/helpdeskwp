@@ -250,6 +250,15 @@ class Dashboard {
 			'edit-tags.php?taxonomy=ticket_status&post_type=ticket',
 			array()
 		);
+
+		add_submenu_page(
+			'helpdesk',
+			__( 'Agent', 'helpdesk' ),
+			__( 'Agent', 'helpdesk' ),
+			'manage_options',
+			'edit-tags.php?taxonomy=ticket_agent&post_type=ticket',
+			array()
+		);
     }
 
 	/**
