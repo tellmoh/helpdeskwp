@@ -51,8 +51,44 @@ const TicketContextProvider = (props) => {
         takeTickets(1, filters)
     }
 
+    const updateProperties = async ( ticket, properties ) => {
+        const config = {
+            headers: {
+              'X-WP-Nonce': helpdesk_dashboard.nonce,
+              'Content-Type': 'application/json',
+            }
+        }
+
+        const data = {
+            ticket: ticket,
+            properties: properties
+        }
+
+        await axios.put(`${helpdesk_dashboard.url}helpdesk/v1/tickets`, JSON.stringify(data), config)
+        .then(function () {
+            toast('Updated.', {
+                duration: 2000,
+                style: {
+                    marginTop: 50
+                },
+            })
+        })
+        .catch(function (err) {
+            toast('Couldn\'t update the ticket.', {
+                duration: 2000,
+                icon: '❌',
+                style: {
+                    marginTop: 50
+                },
+            })
+            console.log(err)
+        })
+
+        takeTickets()
+    }
+
     return (
-        <TicketContext.Provider value={{ ticket, totalPages, takeTickets, applyFilters }}>
+        <TicketContext.Provider value={{ ticket, totalPages, takeTickets, applyFilters, updateProperties }}>
             {props.children}
         </TicketContext.Provider>
     )
