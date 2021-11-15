@@ -60,6 +60,7 @@ class Dashboard {
         add_action( 'rest_api_init', array( $this, 'register_category_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_type_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_priority_field' ) );
+        add_action( 'rest_api_init', array( $this, 'register_status_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -159,6 +160,25 @@ class Dashboard {
 		);
 	}
 
+	/**
+	 * Register status field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function register_status_field() {
+		register_rest_field(
+			'ticket',
+			'status',
+			array(
+				'get_callback'    => array( $this, 'get_status' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
+
     /**
 	 * Returns the category.
 	 *
@@ -220,6 +240,28 @@ class Dashboard {
 
         if ( $priority ) {
             return $priority;
+        }
+
+        return '';
+	}
+
+    /**
+	 * Returns the status.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function get_status( $object ) {
+
+		$status = '';
+
+		if ( isset( $object['ticket_status'][0] ) ) {
+			$status = get_term_by( 'id', $object['ticket_status'][0], 'ticket_status' )->name;
+		}
+
+        if ( $status ) {
+            return $status;
         }
 
         return '';
