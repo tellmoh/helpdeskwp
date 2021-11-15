@@ -61,6 +61,7 @@ class Dashboard {
         add_action( 'rest_api_init', array( $this, 'register_type_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_priority_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_status_field' ) );
+        add_action( 'rest_api_init', array( $this, 'register_agent_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -179,6 +180,25 @@ class Dashboard {
 		);
 	}
 
+	/**
+	 * Register agent field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function register_agent_field() {
+		register_rest_field(
+			'ticket',
+			'agent',
+			array(
+				'get_callback'    => array( $this, 'get_agent' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
+
     /**
 	 * Returns the category.
 	 *
@@ -262,6 +282,28 @@ class Dashboard {
 
         if ( $status ) {
             return $status;
+        }
+
+        return '';
+	}
+
+    /**
+	 * Returns the agent.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function get_agent( $object ) {
+
+		$agent = '';
+
+		if ( isset( $object['ticket_agent'][0] ) ) {
+			$agent = get_term_by( 'id', $object['ticket_agent'][0], 'ticket_agent' )->name;
+		}
+
+        if ( $agent ) {
+            return $agent;
         }
 
         return '';
