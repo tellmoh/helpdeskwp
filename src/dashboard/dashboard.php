@@ -59,6 +59,7 @@ class Dashboard {
         add_action( 'rest_api_init', array( $this, 'register_user_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_category_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_type_field' ) );
+        add_action( 'rest_api_init', array( $this, 'register_priority_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -139,6 +140,25 @@ class Dashboard {
 		);
 	}
 
+	/**
+	 * Register priority field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function register_priority_field() {
+		register_rest_field(
+			'ticket',
+			'priority',
+			array(
+				'get_callback'    => array( $this, 'get_priority' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
+
     /**
 	 * Returns the category.
 	 *
@@ -178,6 +198,28 @@ class Dashboard {
 
         if ( $type ) {
             return $type;
+        }
+
+        return '';
+	}
+
+    /**
+	 * Returns the priority.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function get_priority( $object ) {
+
+		$priority = '';
+
+		if ( isset( $object['ticket_priority'][0] ) ) {
+			$priority = get_term_by( 'id', $object['ticket_priority'][0], 'ticket_priority' )->name;
+		}
+
+        if ( $priority ) {
+            return $priority;
         }
 
         return '';
