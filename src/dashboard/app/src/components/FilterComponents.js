@@ -1,102 +1,96 @@
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Select from 'react-select';
 
-export function Category({ value, onChange, category }) {
+export function Category({ onChange, category }) {
+    let cat = [{ value: '', label: 'None' }];
+
+    {category && category.map((category) => {
+        cat.push({ value: category.id, label: category.name });
+    })}
+    const local = JSON.parse(localStorage.getItem('Category'))
     return(
         <div>
             <p>Category</p>
             <Select
-                displayEmpty
-                value={value}
+                defaultValue={local}
                 onChange={onChange}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                {category && category.map((category) => {
-                    return <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
-                })}
-            </Select>
+                options={cat}
+            />
         </div>
     )
 }
 
-export function Priority({ value, onChange, priority }) {
+export function Priority({ onChange, priority }) {
+    let pri = [{ value: '', label: 'None' }];
+
+    {priority && priority.map((priority) => {
+        pri.push({ value: priority.id, label: priority.name });
+    })}
+    const local = JSON.parse(localStorage.getItem('Priority'))
     return(
         <div>
             <p>Priority</p>
             <Select
-                displayEmpty
-                value={value}
+                defaultValue={local}
                 onChange={onChange}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                {priority && priority.map((priority) => {
-                    return <MenuItem key={priority.id} value={priority.id}>{priority.name}</MenuItem>
-                })}
-            </Select>
+                options={pri}
+            />
         </div>
     )
 }
 
-export function Status({ value, onChange, status }) {
+export function Status({ onChange, status }) {
+    let sta = [{ value: '', label: 'None' }];
+
+    {status && status.map((status) => {
+        sta.push({ value: status.id, label: status.name });
+    })}
+    const local = JSON.parse(localStorage.getItem('Status'))
     return(
         <div>
             <p>Status</p>
             <Select
-                displayEmpty
-                value={value}
+                defaultValue={local}
                 onChange={onChange}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                {status && status.map((status) => {
-                    return <MenuItem key={status.id} value={status.id}>{status.name}</MenuItem>
-                })}
-            </Select>
+                options={sta}
+            />
         </div>
     )
 }
 
-export function Type({ value, onChange, type }) {
+export function Type({ onChange, type }) {
+    let typ = [{ value: '', label: 'None' }];
+
+    {type && type.map((type) => {
+        typ.push({ value: type.id, label: type.name });
+    })}
+    const local = JSON.parse(localStorage.getItem('Type'))
     return(
         <div>
             <p>Type</p>
             <Select
-                displayEmpty
-                value={value}
+                defaultValue={local}
                 onChange={onChange}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                {type && type.map((type) => {
-                    return <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
-                })}
-            </Select>
+                options={typ}
+            />
         </div>
     )
 }
 
-export function Agent({ value, onChange, agents }) {
+export function Agent({ onChange, agents }) {
+    let agent = [{ value: '', label: 'None' }];
+
+    {agents && agents.map((agents) => {
+        agent.push({ value: agents.id, label: agents.name });
+    })}
+    const local = JSON.parse(localStorage.getItem('Agent'))
     return(
         <div>
             <p>Agent</p>
             <Select
-                displayEmpty
-                value={value}
+                defaultValue={local}
                 onChange={onChange}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                {agents && agents.map((agent) => {
-                    return <MenuItem key={agent.id} value={agent.id}>{agent.name}</MenuItem>
-                })}
-            </Select>
+                options={agent}
+            />
         </div>
     )
 }

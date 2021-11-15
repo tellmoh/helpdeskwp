@@ -48,22 +48,8 @@ body {
     padding: 10px 20px;
 }
 
-#helpdesk-dashboard .MuiSelect-root {
-    width: 100%;
-    margin: 10px 0;
-}
-
-#helpdesk-dashboard .MuiSelect-select {
-    padding: 10px;
-    font-size: 13px;
-}
-
 .MuiMenuItem-gutters {
     font-size: 13px !important;
-}
-
-.helpdesk-filters p {
-    margin-bottom: 0;
 }
 
 .helpdesk-filters button {

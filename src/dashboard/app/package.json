@@ -8,7 +8,8 @@
         "axios": "^0.21.1",
         "history": "5",
         "react-hot-toast": "^2.1.1",
-        "react-router-dom": "6"
+        "react-router-dom": "6",
+        "react-select": "^5.2.1"
     },
     "devDependencies": {
         "@wordpress/scripts": "^18.0.1"

@@ -21,34 +21,53 @@ const Filters = () => {
     const [filterType, setFilterType] = useState('');
     const [filterAgent, setFilterAgent] = useState('');
 
-    const handleCategoryChange = (event) => {
-        setFilterCategory(event.target.value);
+    const handleCategoryChange = (category) => {
+        setFilterCategory(category);
+        const local = JSON.stringify({ value: category.value, label: category.label })
+        localStorage.setItem('Category', local);
     };
 
-    const handlePriorityChange = (event) => {
-        setFilterPriority(event.target.value);
+    const handlePriorityChange = (priority) => {
+        setFilterPriority(priority);
+        const local = JSON.stringify({ value: priority.value, label: priority.label })
+        localStorage.setItem('Priority', local);
     };
 
-    const handleStatusChange = (event) => {
-        setFilterStatus(event.target.value);
+    const handleStatusChange = (status) => {
+        setFilterStatus(status);
+        const local = JSON.stringify({ value: status.value, label: status.label })
+        localStorage.setItem('Status', local);
     };
 
-    const handleTypeChange = (event) => {
-        setFilterType(event.target.value);
+    const handleTypeChange = (type) => {
+        setFilterType(type);
+        const local = JSON.stringify({ value: type.value, label: type.label })
+        localStorage.setItem('Type', local);
     };
 
-    const handleAgentChange = (event) => {
-        setFilterAgent(event.target.value);
+    const handleAgentChange = (agent) => {
+        setFilterAgent(agent);
+        const local = JSON.stringify({ value: agent.value, label: agent.label })
+        localStorage.setItem('Agent', local);
     };
+
+    const localFilters = {
+        category: JSON.parse(localStorage.getItem('Category')),
+        priority: JSON.parse(localStorage.getItem('Priority')),
+        status: JSON.parse(localStorage.getItem('Status')),
+        type: JSON.parse(localStorage.getItem('Type')),
+        agent: JSON.parse(localStorage.getItem('Agent'))
+    }
+
+    const filters = {
+        category: localFilters.category.value ? localFilters.category.value : filterCategory.value,
+        priority: localFilters.priority.value ? localFilters.priority.value : filterPriority.value,
+        status: localFilters.status.value ? localFilters.status.value : filterStatus.value,
+        type: localFilters.type.value ? localFilters.type.value : filterType.value,
+        agent: localFilters.agent.value ? localFilters.agent.value : filterAgent.value
+    }
 
     const apply = () => {
-        const filters = {
-            category: filterCategory,
-            priority: filterPriority,
-            status: filterStatus,
-            type: filterType,
-            agent: filterAgent
-        }
         applyFilters(filters)
     }
 
@@ -56,10 +75,10 @@ const Filters = () => {
         <div className="helpdesk-filters">
             <h3>Filters</h3>
             <Category value={filterCategory} onChange={handleCategoryChange} category={category} />
-            <Priority value={filterPriority} onChange={handlePriorityChange} priority={priority} />
-            <Status value={filterStatus} onChange={handleStatusChange} status={status} />
-            <Type value={filterType} onChange={handleTypeChange} type={type} />
-            <Agent value={filterAgent} onChange={handleAgentChange} agents={agents} />
+            <Priority onChange={handlePriorityChange} priority={priority} />
+            <Status onChange={handleStatusChange} status={status} />
+            <Type onChange={handleTypeChange} type={type} />
+            <Agent onChange={handleAgentChange} agents={agents} />
 
             <Stack direction="column">
                 <Button variant="contained" onClick={apply}>Apply</Button>
