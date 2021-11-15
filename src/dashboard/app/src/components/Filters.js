@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { TicketContext } from '../contexts/TicketContext'
@@ -12,7 +12,7 @@ import {
 } from './FilterComponents';
 
 const Filters = () => {
-    const { applyFilters } = useContext(TicketContext)
+    const { applyFilters, takeTickets } = useContext(TicketContext)
     const { category, type, agents, status, priority } = useContext(FiltersContext)
 
     const [filterCategory, setFilterCategory] = useState('');
@@ -70,6 +70,10 @@ const Filters = () => {
     const apply = () => {
         applyFilters(filters)
     }
+
+    useEffect(() => {
+        takeTickets( 1, filters )
+    },[])
 
     return (
         <div className="helpdesk-filters">

@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from 'react'
+import { useState, createContext } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
@@ -7,10 +7,6 @@ export const TicketContext = createContext()
 const TicketContextProvider = (props) => {
     const [ticket, setTicket] = useState([])
     const [totalPages, setTotalPages] = useState()
-
-    useEffect(() => {
-        takeTickets()
-    }, [])
 
     const takeTickets = async (page = 1, filters) => {
         const ticket = await fetchTickets(page, filters)
