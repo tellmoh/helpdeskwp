@@ -74,11 +74,11 @@ const Filters = () => {
     return (
         <div className="helpdesk-filters">
             <h3>Filters</h3>
-            <Category value={filterCategory} onChange={handleCategoryChange} category={category} />
-            <Priority onChange={handlePriorityChange} priority={priority} />
-            <Status onChange={handleStatusChange} status={status} />
-            <Type onChange={handleTypeChange} type={type} />
-            <Agent onChange={handleAgentChange} agents={agents} />
+            <Category value={filterCategory} onChange={handleCategoryChange} category={category} parent="filter"/>
+            <Priority onChange={handlePriorityChange} priority={priority} parent="filter" />
+            <Status onChange={handleStatusChange} status={status} parent="filter" />
+            <Type onChange={handleTypeChange} type={type} parent="filter" />
+            <Agent onChange={handleAgentChange} agents={agents} parent="filter" />
 
             <Stack direction="column">
                 <Button variant="contained" onClick={apply}>Apply</Button>

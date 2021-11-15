@@ -138,7 +138,7 @@ const Ticket = () => {
                 <Outlet />
                 <Toaster />
             </div>
-            <Properties ticket={params.ticketId} />
+            <Properties ticket={params.ticketId} ticketContent={singleTicket} />
         </>
     )
 }

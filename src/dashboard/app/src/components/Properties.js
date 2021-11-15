@@ -11,7 +11,7 @@ import {
     Agent
 } from './FilterComponents';
 
-const Properties = ({ ticket }) => {
+const Properties = ({ ticket, ticketContent }) => {
     const { updateProperties } = useContext(TicketContext)
     const { category, type, agents, status, priority } = useContext(FiltersContext)
 
@@ -22,31 +22,31 @@ const Properties = ({ ticket }) => {
     const [filterAgent, setFilterAgent] = useState('');
 
     const filters = {
-        category: filterCategory,
-        priority: filterPriority,
-        status: filterStatus,
-        type: filterType,
-        agent: filterAgent
+        category: filterCategory.value,
+        priority: filterPriority.value,
+        status: filterStatus.value,
+        type: filterType.value,
+        agent: filterAgent.value
     }
 
-    const handleCategoryChange = (event) => {
-        setFilterCategory(event.target.value);
+    const handleCategoryChange = (category) => {
+        setFilterCategory(category);
     };
 
-    const handlePriorityChange = (event) => {
-        setFilterPriority(event.target.value);
+    const handlePriorityChange = (priority) => {
+        setFilterPriority(priority);
     };
 
-    const handleStatusChange = (event) => {
-        setFilterStatus(event.target.value);
+    const handleStatusChange = (status) => {
+        setFilterStatus(status);
     };
 
-    const handleTypeChange = (event) => {
-        setFilterType(event.target.value);
+    const handleTypeChange = (type) => {
+        setFilterType(type);
     };
 
-    const handleAgentChange = (event) => {
-        setFilterAgent(event.target.value);
+    const handleAgentChange = (agent) => {
+        setFilterAgent(agent);
     };
 
     const updateTicket = () => {
@@ -54,18 +54,22 @@ const Properties = ({ ticket }) => {
     }
 
     return (
-        <div className="helpdesk-filters">
-            <h3>Properties</h3>
-            <Category value={filterCategory} onChange={handleCategoryChange} category={category} />
-            <Priority value={filterPriority} onChange={handlePriorityChange} priority={priority} />
-            <Status value={filterStatus} onChange={handleStatusChange} status={status} />
-            <Type value={filterType} onChange={handleTypeChange} type={type} />
-            <Agent value={filterAgent} onChange={handleAgentChange} agents={agents} />
+        <>
+        {ticketContent &&
+            <div className="helpdesk-filters">
+                <h3>Properties</h3>
+                <Category onChange={handleCategoryChange} category={category} parent="properties" value={ticketContent} />
+                <Priority onChange={handlePriorityChange} priority={priority} parent="properties" value={ticketContent} />
+                <Status onChange={handleStatusChange} status={status} parent="properties" value={ticketContent} />
+                <Type onChange={handleTypeChange} type={type} parent="properties" value={ticketContent} />
+                <Agent onChange={handleAgentChange} agents={agents} parent="properties" value={ticketContent} />
 
-            <Stack direction="column">
-                <Button variant="contained" onClick={updateTicket}>Update</Button>
-            </Stack>
-        </div>
+                <Stack direction="column">
+                    <Button variant="contained" onClick={updateTicket}>Update</Button>
+                </Stack>
+            </div>
+        }
+        </>
     )
 }
 
