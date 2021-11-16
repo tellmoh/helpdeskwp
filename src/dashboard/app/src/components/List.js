@@ -1,15 +1,18 @@
 import { useContext, useState } from 'react'
 import { TicketContext } from '../contexts/TicketContext'
+import { FiltersContext } from '../contexts/FiltersContext'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { Link } from "react-router-dom";
 
 const List = () => {
     const { ticket, totalPages, takeTickets } = useContext(TicketContext)
+    const { filters } = useContext(FiltersContext)
     const [page, setPage] = useState(1);
+
     const handleChange = (event, value) => {
         setPage(value);
-        takeTickets(value)
+        takeTickets(value, filters)
     };
 
     return (
