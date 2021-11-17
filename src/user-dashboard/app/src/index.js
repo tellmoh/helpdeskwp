@@ -2,5 +2,5 @@ import App from './App';
 
 ReactDOM.render(
   <App />,
-  document.getElementById('helpdesk-form')
+  document.getElementById('helpdesk-user-dashboard')
 );

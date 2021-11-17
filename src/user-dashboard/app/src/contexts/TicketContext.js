@@ -30,7 +30,7 @@ const TicketContextProvider = (props) => {
 
     const fetchTickets = async (page) => {
         let data
-        await axios.get(`${helpdesk_form.url}wp/v2/ticket/?page=${page}`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket/?page=${page}`)
             .then( (res) => {
                 data = [
                     res.data,
@@ -48,7 +48,7 @@ const TicketContextProvider = (props) => {
 
     const fetchType = async () => {
         let data
-        await axios.get(`${helpdesk_form.url}wp/v2/ticket_type/`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket_type/`)
             .then( (res) => {
                 data = res.data
             })
@@ -63,7 +63,7 @@ const TicketContextProvider = (props) => {
 
     const fetchCategory = async () => {
         let data
-        await axios.get(`${helpdesk_form.url}wp/v2/ticket_category/`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket_category/`)
             .then( (res) => {
                 data = res.data
             })
@@ -74,12 +74,12 @@ const TicketContextProvider = (props) => {
     const createTicket = async (data) => {
         const config = {
             headers: {
-              'X-WP-Nonce': helpdesk_form.nonce,
+              'X-WP-Nonce': user_dashboard.nonce,
               'Content-Type': 'multipart/form-data',
             }
         }
 
-        await axios.post(`${helpdesk_form.url}helpdesk/v1/tickets`, data, config)
+        await axios.post(`${user_dashboard.url}helpdesk/v1/tickets`, data, config)
         .then(function () {
             toast('Created.', {
                 duration: 2000,

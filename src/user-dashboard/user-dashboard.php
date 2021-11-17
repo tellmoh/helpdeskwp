@@ -10,9 +10,9 @@ namespace Helpdesk;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class Form
+ * Class UserDashboard
  */
-class Form {
+class UserDashboard {
 
     /**
 	 * Instance
@@ -30,7 +30,7 @@ class Form {
 	 */
 	public static function instance() {
 		if ( self::$instance == null ) {
-			self::$instance = new Form();
+			self::$instance = new UserDashboard();
 		}
 		return self::$instance;
 	}
@@ -55,18 +55,9 @@ class Form {
 	 * @access private
 	 */
 	private function hooks() {
-		add_shortcode( 'helpdesk_form', array( $this, 'helpdesk_form' ) );
+		add_shortcode( 'helpdesk_user_dashboard', array( $this, 'user_dashboard' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
-
-	/**
-	 * Load the dependencies.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access private
-	 */
-	private function load_dependencies() { }
 
 	/**
 	 * Shortcode output
@@ -75,8 +66,8 @@ class Form {
 	 *
 	 * @access public
 	 */
-	public function helpdesk_form() {
-		return '<div id="helpdesk-form"></div>';
+	public function user_dashboard() {
+		return '<div id="helpdesk-user-dashboard"></div>';
 	}
 
 	/**
@@ -90,18 +81,18 @@ class Form {
 
 		global $post;
 
-		if ( has_shortcode( $post->post_content, 'helpdesk_form' ) ) {
+		if ( has_shortcode( $post->post_content, 'helpdesk_user_dashboard' ) ) {
 			wp_enqueue_script(
-				'helpdesk-form',
-				HELPDESK_URL . 'src/form/app/build/index.js',
+				'user-dashboard',
+				HELPDESK_URL . 'src/user-dashboard/app/build/index.js',
 				array( 'wp-element' ),
 				HELPDESK,
 				true
 			);
 
 			wp_localize_script(
-				'helpdesk-form',
-				'helpdesk_form',
+				'user-dashboard',
+				'user_dashboard',
 				array(
 					'url'   => esc_url_raw( rest_url() ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
@@ -109,8 +100,8 @@ class Form {
 			);
 
 			wp_enqueue_style(
-				'helpdesk-form',
-				HELPDESK_URL . 'src/form/app/build/index.css',
+				'user-dashboard',
+				HELPDESK_URL . 'src/user-dashboard/app/build/index.css',
 				array(),
 				HELPDESK,
 				'all'
@@ -119,4 +110,4 @@ class Form {
 	}
 }
 
-Form::instance();
+UserDashboard::instance();
