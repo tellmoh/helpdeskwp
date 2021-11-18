@@ -1,3 +1,3 @@
-# ignore node dependency directories
+.DS_Store
 node_modules/
 yarn.lock

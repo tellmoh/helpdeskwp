@@ -24,13 +24,13 @@ const TicketContextProvider = (props) => {
 
     const takeTickets = async (page = 1) => {
         const ticket = await fetchTickets(page)
-        setTicket(ticket)
+        setTicket(ticket[0])
         setTotalPages(parseInt(ticket[1]))
     }
 
     const fetchTickets = async (page) => {
         let data
-        await axios.get(`${user_dashboard.url}wp/v2/ticket/?page=${page}`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket/?page=${page}&author=${user_dashboard.user}`)
             .then( (res) => {
                 data = [
                     res.data,
@@ -104,7 +104,15 @@ const TicketContextProvider = (props) => {
     }
 
     return (
-        <TicketContext.Provider value={{ createTicket, type, category }}>
+        <TicketContext.Provider
+        value={{
+            createTicket,
+            type,
+            category,
+            ticket,
+            takeTickets,
+            totalPages
+        }}>
             {props.children}
         </TicketContext.Provider>
     )

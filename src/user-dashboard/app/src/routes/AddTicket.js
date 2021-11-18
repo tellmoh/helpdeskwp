@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react'
 import { TicketContext } from '../contexts/TicketContext'
+import { Outlet, Link } from "react-router-dom";
 import {
     Input,
     Select,
     Textarea
-} from './Components'
+} from '../components/Components'
 
 
 const AddTicket = () => {
@@ -62,26 +63,32 @@ const AddTicket = () => {
     }
 
     return (
-        <form className="helpdesk-add-ticket" onSubmit={handleSubmit}>
-            <h4>Submit a ticket</h4>
+        <>
+            <Link to="/">
+                Back
+            </Link>
+            <form className="helpdesk-add-ticket" onSubmit={handleSubmit}>
+                <h4>Submit a ticket</h4>
 
-            <p>Subject</p>
-            <Input name="title" type="text" onChange={handleTitleChange} />
+                <p>Subject</p>
+                <Input name="title" type="text" onChange={handleTitleChange} />
 
-            <p>Category</p>
-            <Select name="category" options={categories} onChange={handleCategoryChange} />
+                <p>Category</p>
+                <Select name="category" options={categories} onChange={handleCategoryChange} />
 
-            <p>Type</p>
-            <Select name="type" options={types} onChange={handleTypeChange} />
+                <p>Type</p>
+                <Select name="type" options={types} onChange={handleTypeChange} />
 
-            <p>Description</p>
-            <Textarea name="description" onChange={handleDescChange} />
+                <p>Description</p>
+                <Textarea name="description" onChange={handleDescChange} />
 
-            <p>Media</p>
-            <Input type="file" onChange={handlePicturesChange} />
+                <p>Media</p>
+                <Input type="file" onChange={handlePicturesChange} />
 
-            <Input type="submit" />
-        </form>
+                <Input type="submit" />
+            </form>
+        <Outlet />
+        </>
     )
 }
 

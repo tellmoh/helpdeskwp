@@ -1,14 +1,8 @@
-import TicketContextProvider from './contexts/TicketContext'
-import { Toaster } from 'react-hot-toast'
-import AddTicket from './components/AddTicket'
-import './index.css'
+import MyTickets from './components/MyTickets';
 
 const App = () => {
     return (
-        <TicketContextProvider>
-            <AddTicket />
-            <Toaster />
-        </TicketContextProvider>
+        <MyTickets />
     )
 }
 
