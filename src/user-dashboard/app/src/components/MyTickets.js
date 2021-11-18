@@ -38,7 +38,9 @@ const MyTickets = () => {
             {ticket && ticket.map((ticket) => {
                 return (
                     <div key={ticket.id} className="helpdesk-ticket">
-                        <h4 className="ticket-title">{ticket.title.rendered}</h4>
+                        <Link to={`/ticket/${ticket.id}`}>
+                            <h4 className="ticket-title primary">{ticket.title.rendered}</h4>
+                        </Link>
                         <div className="ticket-meta">
                             <div className="helpdesk-username">{ticket.user}</div>
                             <div className="helpdesk-category">in: {ticket.category}</div>
