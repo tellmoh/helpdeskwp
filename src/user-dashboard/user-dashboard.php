@@ -43,7 +43,6 @@ class UserDashboard {
 	 * @access private
 	 */
 	private function __construct() {
-		$this->load_dependencies();
 		$this->hooks();
 	}
 
@@ -68,6 +67,22 @@ class UserDashboard {
 	 */
 	public function user_dashboard() {
 		return '<div id="helpdesk-user-dashboard"></div>';
+	}
+
+	/**
+	 * Returns the current user ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function user() {
+
+		if ( is_user_logged_in() ) {
+			return get_current_user_id();
+		}
+
+		return '';
 	}
 
 	/**
@@ -96,6 +111,7 @@ class UserDashboard {
 				array(
 					'url'   => esc_url_raw( rest_url() ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
+					'user'  => $this->user(),
 				)
 			);
 
