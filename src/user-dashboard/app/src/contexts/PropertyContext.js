@@ -49,7 +49,7 @@ const PropertyContextProvider = (props) => {
 
     const fetchCategory = async () => {
         let data;
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_category/?per_page=50`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket_category/?per_page=50`)
             .then( (res) => {
                 data = res.data
             })
@@ -63,7 +63,7 @@ const PropertyContextProvider = (props) => {
 
     const fetchType = async () => {
         let data;
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_type/?per_page=50`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket_type/?per_page=50`)
             .then( (res) => {
                 data = res.data
             })
@@ -77,7 +77,7 @@ const PropertyContextProvider = (props) => {
 
     const fetchStatus = async () => {
         let data;
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket_status/?per_page=50`)
+        await axios.get(`${user_dashboard.url}wp/v2/ticket_status/?per_page=50`)
             .then( (res) => {
                 data = res.data
             })

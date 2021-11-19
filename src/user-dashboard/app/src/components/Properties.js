@@ -42,7 +42,7 @@ const Properties = ({ ticket, ticketContent }) => {
     return (
         <>
             {ticketContent &&
-                <div className="helpdesk-filters">
+                <div className="helpdesk-properties">
                     <h3>Properties</h3>
                     <Category onChange={handleCategoryChange} category={category} value={ticketContent} />
                     <Status onChange={handleStatusChange} status={status} value={ticketContent} />
