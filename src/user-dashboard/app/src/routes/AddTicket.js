@@ -1,11 +1,17 @@
 import { useContext, useState } from 'react'
 import { TicketContext } from '../contexts/TicketContext'
 import { Outlet, Link } from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 import {
     Input,
-    Select,
+    SelectOptions,
     Textarea
 } from '../components/Components'
+
+const InputMedia = styled('input')({
+    display: 'none',
+});
 
 
 const AddTicket = () => {
@@ -21,12 +27,14 @@ const AddTicket = () => {
         category,
     } = useContext(TicketContext)
 
-    const types = type.map((type) => {
-        return type.name
+    let catItems = [];
+    category.map((category) => {
+        catItems.push({ value: category.id, label: category.name });
     })
 
-    const categories = category.map((category) => {
-        return category.name
+    let types = [];
+    type.map((type) => {
+        types.push({ value: type.id, label: type.name });
     })
 
     const handleSubmit = (e) => {
@@ -46,12 +54,12 @@ const AddTicket = () => {
         setTitle(e.target.value)
     }
 
-    const handleCategoryChange = (e) => {
-        setCat(e.target.value)
+    const handleCategoryChange = (category) => {
+        setCat(category)
     }
 
-    const handleTypeChange = (e) => {
-        setType(e.target.value)
+    const handleTypeChange = (type) => {
+        setType(type)
     }
 
     const handleDescChange = (e) => {
@@ -65,7 +73,7 @@ const AddTicket = () => {
     return (
         <>
             <Link to="/">
-                Back
+                <span className="helpdesk-back primary">Back</span>
             </Link>
             <form className="helpdesk-add-ticket" onSubmit={handleSubmit}>
                 <h4>Submit a ticket</h4>
@@ -73,21 +81,34 @@ const AddTicket = () => {
                 <p>Subject</p>
                 <Input name="title" type="text" onChange={handleTitleChange} />
 
-                <p>Category</p>
-                <Select name="category" options={categories} onChange={handleCategoryChange} />
+                <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
+                    <p>Category</p>
+                    <SelectOptions options={catItems} onChange={handleCategoryChange} />
+                </div>
 
-                <p>Type</p>
-                <Select name="type" options={types} onChange={handleTypeChange} />
+                <div className="helpdesk-w-50" style={{ paddingLeft: '10px' }}>
+                    <p>Type</p>
+                    <SelectOptions options={types} onChange={handleTypeChange} />
+                </div>
 
                 <p>Description</p>
                 <Textarea name="description" onChange={handleDescChange} />
 
-                <p>Media</p>
-                <Input type="file" onChange={handlePicturesChange} />
+                <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
+                    <p>Image</p>
+                    <label htmlFor="contained-button-file">
+                        <InputMedia accept="image/*" id="contained-button-file" multiple type="file" onChange={handlePicturesChange} />
+                        <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
+                    </label>
+                </div>
 
-                <Input type="submit" />
+                <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
+                    <div className="helpdesk-submit">
+                        <Input type="submit" />
+                    </div>
+                </div>
             </form>
-        <Outlet />
+            <Outlet />
         </>
     )
 }

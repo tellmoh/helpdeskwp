@@ -42,8 +42,7 @@ const MyTickets = () => {
                             <h4 className="ticket-title primary">{ticket.title.rendered}</h4>
                         </Link>
                         <div className="ticket-meta">
-                            <div className="helpdesk-username">{ticket.user}</div>
-                            <div className="helpdesk-category">in: {ticket.category}</div>
+                            <div className="helpdesk-category">In: {ticket.category}</div>
                             <div className="helpdesk-type">Type: {ticket.type}</div>
                         </div>
                     </div>
