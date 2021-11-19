@@ -56,7 +56,7 @@ const Properties = ({ ticket, ticketContent }) => {
     return (
         <>
         {ticketContent &&
-            <div className="helpdesk-filters">
+            <div className="helpdesk-properties">
                 <h3>Properties</h3>
                 <Category onChange={handleCategoryChange} category={category} parent="properties" value={ticketContent} />
                 <Priority onChange={handlePriorityChange} priority={priority} parent="properties" value={ticketContent} />

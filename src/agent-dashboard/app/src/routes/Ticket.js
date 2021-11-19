@@ -103,19 +103,19 @@ const Ticket = () => {
         <>
             <div className="helpdesk-tickets">
                 <Link to="/?page=helpdesk">
-                    Back
+                    <span className="helpdesk-back primary">Back</span>
                 </Link>
                 {singleTicket &&
-                    <div className="helpdesk-single-ticket">
+                    <div className="helpdesk-single-ticket ticket-meta">
                         <h1>{singleTicket.title.rendered}</h1>
                         <div>By: {singleTicket.user}</div>
                         <div>In: {singleTicket.category}</div>
                         <div>Type: {singleTicket.type}</div>
                     </div>
                 }
-                <div className="helpdesk-add-new-reply">
+                <div className="helpdesk-add-new-reply helpdesk-submit">
                     <form onSubmit={submitReply}>
-                        <textarea name="reply" rows="10" value={reply} onChange={(e) => setReply(e.target.value)}></textarea>
+                        <textarea name="reply" rows="5" value={reply} onChange={(e) => setReply(e.target.value)}></textarea>
                         <input type="submit" value="Send" />
                     </form>
                 </div>

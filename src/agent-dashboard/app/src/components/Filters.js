@@ -39,7 +39,7 @@ const Filters = () => {
     },[])
 
     return (
-        <div className="helpdesk-filters">
+        <div className="helpdesk-filters helpdesk-properties">
             <h3>Filters</h3>
             <Category onChange={handleCategoryChange} category={category} parent="filter"/>
             <Priority onChange={handlePriorityChange} priority={priority} parent="filter" />

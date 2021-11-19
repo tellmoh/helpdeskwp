@@ -166,12 +166,18 @@ ul.MuiPagination-ul button:focus {
 }
 
 .helpdesk-submit input[type="submit"] {
-    color: #fff;
-    border-color: #0051af;
     background: #0051af;
+    border-color: #0051af;
     border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: all .3s;
+    cursor: pointer;
 }
-
 .helpdesk-submit input[type="submit"]:hover {
     background: #fff;
     color: #0051af;
@@ -241,4 +247,8 @@ ul.MuiPagination-ul button:focus {
 span.by-name {
     color: hsl(0, 0%, 50%);
     font-size: 13px;
+}
+
+.helpdesk-submit textarea {
+    width: 100%;
 }
