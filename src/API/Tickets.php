@@ -112,6 +112,10 @@ class Tickets {
     }
 
     public function save_image( array $image, string $ticket_id ) {
+        if ( empty( $image ) ) {
+            return new \WP_REST_Response( __( 'Empty Image', 'helpdesk' ), 200 );
+        }
+
         $file     = file_get_contents( $image['media']['tmp_name'] );
         $filetype = wp_check_filetype( $image['media']['name'], '' );
         $upload   = wp_upload_bits( $image['media']['name'], '', $file );
