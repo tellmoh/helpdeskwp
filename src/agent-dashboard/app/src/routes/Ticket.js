@@ -28,7 +28,7 @@ const Ticket = () => {
 
     const fetchSingleTicket = async (id) => {
         let data
-        await axios.get(`${helpdesk_dashboard.url}wp/v2/ticket/${id}`)
+        await axios.get(`${helpdesk_agent_dashboard.url}wp/v2/ticket/${id}`)
             .then( (res) => {
                 data = res.data
             })
@@ -44,12 +44,12 @@ const Ticket = () => {
     const fetchReplies = async (id) => {
         const config = {
             headers: {
-                'X-WP-Nonce': helpdesk_dashboard.nonce,
+                'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
             }
         }
 
         let data
-        await axios.get(`${helpdesk_dashboard.url}helpdesk/v1/replies/?parent=${id}`, config)
+        await axios.get(`${helpdesk_agent_dashboard.url}helpdesk/v1/replies/?parent=${id}`, config)
             .then( (res) => {
                 data = res.data
             })
@@ -60,12 +60,12 @@ const Ticket = () => {
     const sendReply = async (data) => {
         const config = {
             headers: {
-              'X-WP-Nonce': helpdesk_dashboard.nonce,
+              'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
               'Content-Type': 'multipart/form-data',
             }
         }
 
-        await axios.post(`${helpdesk_dashboard.url}helpdesk/v1/replies`, data, config)
+        await axios.post(`${helpdesk_agent_dashboard.url}helpdesk/v1/replies`, data, config)
         .then(function () {
             toast('Sent.', {
                 duration: 2000,

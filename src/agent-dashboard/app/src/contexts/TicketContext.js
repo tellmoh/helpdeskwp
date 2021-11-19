@@ -25,10 +25,10 @@ const TicketContextProvider = (props) => {
             const priority = filters.priority ? `&ticket_priority=${filters.priority}` : ''
             const status = filters.status ? `&ticket_status=${filters.status}` : ''
 
-            url = `${helpdesk_dashboard.url}wp/v2/ticket/?page=${page}${category}${type}${status}${priority}${agent}`
+            url = `${helpdesk_agent_dashboard.url}wp/v2/ticket/?page=${page}${category}${type}${status}${priority}${agent}`
 
         } else {
-            url = `${helpdesk_dashboard.url}wp/v2/ticket/?page=${page}`
+            url = `${helpdesk_agent_dashboard.url}wp/v2/ticket/?page=${page}`
         }
 
         let data
@@ -50,7 +50,7 @@ const TicketContextProvider = (props) => {
     const updateProperties = async ( ticket, properties ) => {
         const config = {
             headers: {
-              'X-WP-Nonce': helpdesk_dashboard.nonce,
+              'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
               'Content-Type': 'application/json',
             }
         }
@@ -60,7 +60,7 @@ const TicketContextProvider = (props) => {
             properties: properties
         }
 
-        await axios.put(`${helpdesk_dashboard.url}helpdesk/v1/tickets`, JSON.stringify(data), config)
+        await axios.put(`${helpdesk_agent_dashboard.url}helpdesk/v1/tickets`, JSON.stringify(data), config)
         .then(function () {
             toast('Updated.', {
                 duration: 2000,

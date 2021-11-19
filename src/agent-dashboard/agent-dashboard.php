@@ -10,9 +10,9 @@ namespace Helpdesk;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class Dashboard
+ * Class Agent Dashboard
  */
-class Dashboard {
+class AgentDashboard {
 
     /**
 	 * Instance
@@ -30,7 +30,7 @@ class Dashboard {
 	 */
 	public static function instance() {
 		if ( self::$instance == null ) {
-			self::$instance = new Dashboard();
+			self::$instance = new AgentDashboard();
 		}
 		return self::$instance;
 	}
@@ -43,7 +43,6 @@ class Dashboard {
 	 * @access private
 	 */
 	private function __construct() {
-		$this->load_dependencies();
 		$this->hooks();
 	}
 
@@ -66,23 +65,14 @@ class Dashboard {
 	}
 
 	/**
-	 * Load the dependencies.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access private
-	 */
-	private function load_dependencies() { }
-
-	/**
 	 * Dashboard output
 	 *
 	 * @since 1.0.0
 	 *
 	 * @access public
 	 */
-	public function helpdesk_dashboard() {
-		echo '<div id="helpdesk-dashboard"></div>';
+	public function helpdesk_agent_dashboard() {
+		echo '<div id="helpdesk-agent-dashboard"></div>';
 	}
 
     /**
@@ -336,7 +326,7 @@ class Dashboard {
 			'Tickets',
 			'manage_options',
 			'helpdesk',
-			array( $this, 'helpdesk_dashboard' ),
+			array( $this, 'helpdesk_agent_dashboard' ),
 			'dashicons-tickets-alt',
 			10
 		);
@@ -398,16 +388,16 @@ class Dashboard {
 
 		if ( isset( $_GET['page'] ) && $_GET['page'] === 'helpdesk'  ) {
 			wp_enqueue_script(
-				'helpdesk-dashboard',
-				HELPDESK_URL . 'src/dashboard/app/build/index.js',
+				'helpdesk-agent-dashboard',
+				HELPDESK_URL . 'src/agent-dashboard/app/build/index.js',
 				array( 'wp-element' ),
 				HELPDESK,
 				true
 			);
 
 			wp_localize_script(
-				'helpdesk-dashboard',
-				'helpdesk_dashboard',
+				'helpdesk-agent-dashboard',
+				'helpdesk_agent_dashboard',
 				array(
 					'url'   => esc_url_raw( rest_url() ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
@@ -415,8 +405,8 @@ class Dashboard {
 			);
 
 			wp_enqueue_style(
-				'helpdesk-dashboard',
-				HELPDESK_URL . 'src/dashboard/app/build/index.css',
+				'helpdesk-agent-dashboard',
+				HELPDESK_URL . 'src/agent-dashboard/app/build/index.css',
 				array(),
 				HELPDESK,
 				'all'
@@ -425,4 +415,4 @@ class Dashboard {
 	}
 }
 
-Dashboard::instance();
+AgentDashboard::instance();

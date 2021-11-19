@@ -58,7 +58,7 @@ class Main {
         require_once HELPDESK_PATH . 'src/API/Replies.php';
         require_once HELPDESK_PATH . 'src/admin/roles/roles.php';
         require_once HELPDESK_PATH . 'src/user-dashboard/user-dashboard.php';
-        require_once HELPDESK_PATH . 'src/dashboard/dashboard.php';
+        require_once HELPDESK_PATH . 'src/agent-dashboard/agent-dashboard.php';
         require_once HELPDESK_PATH . 'src/admin/post-type/post-type.php';
         require_once HELPDESK_PATH . 'src/admin/taxonomy/taxonomy.php';
     }

@@ -1,5 +1,5 @@
 import App from './App';
-import Ticket from './routes/ticket';
+import Ticket from './routes/Ticket';
 import TicketContextProvider from './contexts/TicketContext'
 import FiltersContextProvider from './contexts/FiltersContext'
 import {
@@ -21,5 +21,5 @@ ReactDOM.render(
       </BrowserRouter>
     </FiltersContextProvider>
   </TicketContextProvider>,
-  document.getElementById('helpdesk-dashboard')
+  document.getElementById('helpdesk-agent-dashboard')
 );

@@ -2,7 +2,7 @@ body {
     background: #e7ecf0;
 }
 
-#helpdesk-dashboard {
+#helpdesk-agent-dashboard {
     margin: 60px auto;
     max-width: 85%;
 }
@@ -39,7 +39,7 @@ body {
     border-radius: 5px;
 }
 
-#helpdesk-dashboard .helpdesk-filters {
+#helpdesk-agent-dashboard .helpdesk-filters {
     width: 20%;
     display: inline-block;
     background: #fff;
