@@ -139,11 +139,11 @@ ul.MuiPagination-ul button:focus {
     fill: #8fa3f1;
 }
 
-#helpdesk-user-dashboard .helpdesk-add-ticket .css-319lph-ValueContainer {
+#helpdesk-user-dashboard .css-319lph-ValueContainer {
     padding: 6px 17px;
 }
 
-#helpdesk-user-dashboard .helpdesk-add-ticket .css-1pahdxg-control {
+#helpdesk-user-dashboard .css-1pahdxg-control {
     border-color: #8fa3f1 !important;
     box-shadow: none;
     border-radius: 7px;
