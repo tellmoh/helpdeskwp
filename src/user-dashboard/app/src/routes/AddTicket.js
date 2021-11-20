@@ -42,8 +42,8 @@ const AddTicket = () => {
 
         let formData = new FormData();
         formData.append("title", title);
-        formData.append("category", cat);
-        formData.append("type", typ);
+        formData.append("category", cat.label);
+        formData.append("type", typ.label);
         formData.append("description", desc);
         formData.append("media", pictures);
 
