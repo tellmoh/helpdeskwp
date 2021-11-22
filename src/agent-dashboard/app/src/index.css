@@ -150,7 +150,12 @@ ul.MuiPagination-ul button:focus {
     background: #0051af;
 }
 
-.helpdesk-submit {
+.helpdesk-submit-btn {
+    text-align: right;
+    margin: 10px 0;
+}
+
+.helpdesk-add-ticket .helpdesk-submit {
     text-align: right;
 }
 
@@ -245,6 +250,24 @@ span.by-name {
     text-decoration: none;
 }
 
-.helpdesk-submit textarea {
-    width: 100%;
+.helpdesk-editor .ProseMirror {
+    border: 1px solid #8fa3f1;
+    border-radius: 7px;
+    padding: 5px 20px;
+    color: hsl(0, 0%, 50%);
+    min-height: 180px;
+ }
+
+ .helpdesk-editor button {
+    border: unset;
+    background: transparent;
+    color: #8fa3f1;
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: 4px 10px;
+}
+
+.helpdesk-editor button:hover {
+    background: transparent;
+    color: #8fa3f1;
 }

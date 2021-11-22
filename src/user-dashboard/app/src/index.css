@@ -254,10 +254,6 @@ span.by-name {
     font-size: 13px;
 }
 
-.helpdesk-submit textarea {
-    width: 100%;
-}
-
 .helpdesk-editor .ProseMirror {
     border: 1px solid #8fa3f1;
     border-radius: 7px;
