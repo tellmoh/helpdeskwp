@@ -161,7 +161,12 @@ ul.MuiPagination-ul button:focus {
     background: #0051af;
 }
 
-.helpdesk-submit {
+.helpdesk-submit-btn {
+    text-align: right;
+    margin: 10px 0;
+}
+
+.helpdesk-add-ticket .helpdesk-submit {
     text-align: right;
 }
 

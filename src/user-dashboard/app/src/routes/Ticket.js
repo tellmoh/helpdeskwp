@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import { Toaster } from 'react-hot-toast'
 import Properties from '../components/Properties';
 import PropertyContextProvider from '../contexts/PropertyContext'
+import TextEditor from '../components/editor/Editor';
 
 const Ticket = () => {
     const [singleTicket, setSingleTicket] = useState(null)
@@ -21,6 +22,10 @@ const Ticket = () => {
     useEffect(() => {
         takeReplies()
     }, [])
+
+    const handleReplyChange = (reply) => {
+        setReply(reply)
+    }
 
     const takeTicket = async () => {
         const ticket = await fetchSingleTicket(params.ticketId)
@@ -113,8 +118,10 @@ const Ticket = () => {
                 }
                 <div className="helpdesk-add-new-reply helpdesk-submit">
                     <form onSubmit={submitReply}>
-                        <textarea name="reply" rows="5" value={reply} onChange={(e) => setReply(e.target.value)}></textarea>
-                        <input type="submit" value="Send" />
+                        <TextEditor onChange={handleReplyChange} />
+                        <div className="helpdesk-submit-btn">
+                            <input type="submit" value="Send" />
+                        </div>
                     </form>
                 </div>
                 <div className="helpdesk-ticket-replies">
