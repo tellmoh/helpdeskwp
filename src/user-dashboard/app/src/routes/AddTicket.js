@@ -3,16 +3,15 @@ import { TicketContext } from '../contexts/TicketContext'
 import { Outlet, Link } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import TextEditor from '../components/editor/Editor';
 import {
     Input,
     SelectOptions,
-    Textarea
 } from '../components/Components'
 
 const InputMedia = styled('input')({
     display: 'none',
 });
-
 
 const AddTicket = () => {
     const [title, setTitle] = useState([])
@@ -62,8 +61,8 @@ const AddTicket = () => {
         setType(type)
     }
 
-    const handleDescChange = (e) => {
-        setDesc(e.target.value)
+    const handleDescChange = (html) => {
+        setDesc(html)
     }
 
     const handlePicturesChange = (e) => {
@@ -92,7 +91,7 @@ const AddTicket = () => {
                 </div>
 
                 <p>Description</p>
-                <Textarea name="description" onChange={handleDescChange} />
+                <TextEditor onChange={handleDescChange} />
 
                 <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
                     <p>Image</p>

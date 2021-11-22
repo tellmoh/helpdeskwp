@@ -252,3 +252,24 @@ span.by-name {
 .helpdesk-submit textarea {
     width: 100%;
 }
+
+.helpdesk-editor .ProseMirror {
+    border: 1px solid #8fa3f1;
+    border-radius: 7px;
+    padding: 5px 20px;
+    color: hsl(0, 0%, 50%);
+    min-height: 180px;
+ }
+
+ .helpdesk-editor button {
+    border: unset;
+    color: #8fa3f1;
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: 4px 10px;
+}
+
+.helpdesk-editor button:hover {
+    background: transparent;
+    color: #8fa3f1;
+}
