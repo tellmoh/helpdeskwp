@@ -19,59 +19,85 @@ const MenuBar = ({ editor, onChange }) => {
     onChange(html)
   }, [html])
 
-
   return (
     <>
       <button
-        onClick={() => editor.chain().focus().toggleBold().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleBold().run()
+        }}
         className={editor.isActive('bold') ? 'is-active' : ''}
       >
         <img src={boldIcon} />
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleItalic().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleItalic().run()
+        }}
         className={editor.isActive('italic') ? 'is-active' : ''}
       >
         <img src={italicIcon} />
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleStrike().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleStrike().run()
+        }}
         className={editor.isActive('strike') ? 'is-active' : ''}
       >
         <img src={strikeIcon} />
       </button>
       <button
-        onClick={() => editor.chain().focus().setParagraph().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().setParagraph().run()
+        }}
         className={editor.isActive('paragraph') ? 'is-active' : ''}
       >
         <img src={paragraphIcon} />
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleHeading({ level: 1 }).run()
+        }}
         className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
       >
         H1
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleHeading({ level: 2 }).run()
+        }}
         className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
       >
         H2
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleBulletList().run()
+        }}
         className={editor.isActive('bulletList') ? 'is-active' : ''}
       >
         <img src={bulletListIcon} />
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleOrderedList().run()
+        }}
         className={editor.isActive('orderedList') ? 'is-active' : ''}
       >
         <img src={orderedListIcon} />
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+        onClick={(e) => {
+          e.preventDefault()
+          editor.chain().focus().toggleCodeBlock().run()
+        }}
         className={editor.isActive('codeBlock') ? 'is-active' : ''}
       >
         <img src={codeIcon} />
