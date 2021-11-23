@@ -30,5 +30,5 @@ if ( ! function_exists( 'helpdesk' ) ) {
 	function helpdesk() {
 		Helpdesk\Main::instance();
 	}
+	helpdesk();
 }
-helpdesk();

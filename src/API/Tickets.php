@@ -49,7 +49,7 @@ class Tickets {
         }
 
         $ticket = $this->add_ticket( $params['title'], $params['type'], $params['category'] );
-        $image  = $this->save_image( $files, $ticket->data );
+        $image  = $this->save_image( $files );
         $reply  = $this->add_reply( $params['description'], $ticket->data, $image->data );
 
         $res = array(
@@ -111,9 +111,9 @@ class Tickets {
         return new \WP_Error( 'cant-add-reply', __( 'Can\'t add the reply', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
-    public function save_image( array $image, string $ticket_id ) {
+    public function save_image( array $image ) {
         if ( empty( $image ) ) {
-            return new \WP_REST_Response( __( 'Empty Image', 'helpdesk' ), 200 );
+            return new \WP_REST_Response( 'empty-image', 200 );
         }
 
         $file     = file_get_contents( $image['media']['tmp_name'] );
@@ -127,7 +127,7 @@ class Tickets {
                     'post_mime_type' => $filetype['type'],
                 ),
                 $upload['file'],
-                $ticket_id
+                ''
             );
 
             if ( ! is_wp_error( $attachment_id ) ) {

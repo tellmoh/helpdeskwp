@@ -49,7 +49,7 @@ class Replies extends Tickets {
         }
 
         $ticket = $this->add_reply( $params['reply'], $params['parent'], '' );
-        // $image  = $this->save_image( $files, $ticket->data );
+        // $image  = $this->save_image( $files );
 
         $res = array(
             'ticket'  => $ticket,
@@ -88,11 +88,26 @@ class Replies extends Tickets {
             $reply['date'] = $post->post_date;
             $reply['reply'] = $post->post_content;
             $reply['author'] = $this->prepare_author_for_response( $post->post_author );
+            $reply['images'] = $this->get_image_link( $post->ID );
 
 			$replies[] = $reply;
 		}
 
         return $replies;
+    }
+
+    public function get_image_link( string $post_id ) {
+        $images = get_post_meta( $post_id, 'reply_images', '' );
+
+        if ( 'empty-image' == $images[0] ) {
+            return '';
+        }
+
+        $thumbnail = wp_get_attachment_image_src( $images[0], 'thumbnail' );
+
+        if ( isset( $thumbnail[0] ) ) {
+            return $thumbnail[0];
+        }
     }
 
     public function prepare_items_query( $post_id = '' ) {
