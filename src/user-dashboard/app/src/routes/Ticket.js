@@ -140,7 +140,7 @@ const Ticket = () => {
                             </label>
                         </div>
                         <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
-                        <div className="helpdesk-submit-btn">
+                            <div className="helpdesk-submit-btn">
                                 <input type="submit" value="Send" />
                             </div>
                         </div>
