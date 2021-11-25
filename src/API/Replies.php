@@ -48,12 +48,12 @@ class Replies extends Tickets {
             return array();
         }
 
-        $ticket = $this->add_reply( $params['reply'], $params['parent'], '' );
-        // $image  = $this->save_image( $files );
+        $image  = $this->save_image( $files );
+        $ticket = $this->add_reply( $params['reply'], $params['parent'], $image->data );
 
         $res = array(
-            'ticket'  => $ticket,
-            // 'media'   => $image,
+            'ticket' => $ticket,
+            'media'  => $image,
         );
 
         if ( $ticket->data ) {

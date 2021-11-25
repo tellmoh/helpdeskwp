@@ -7,11 +7,19 @@ import { Toaster } from 'react-hot-toast'
 import Properties from '../components/Properties';
 import PropertyContextProvider from '../contexts/PropertyContext'
 import TextEditor from '../components/editor/Editor';
+import { Image } from 'antd';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+const InputMedia = styled('input')({
+    display: 'none',
+});
 
 const Ticket = () => {
     const [singleTicket, setSingleTicket] = useState(null)
     const [replies, setReplies] = useState(null)
     const [reply, setReply] = useState('')
+    const [pictures, setPictures] = useState([])
 
     let params = useParams();
 
@@ -25,6 +33,10 @@ const Ticket = () => {
 
     const handleReplyChange = (reply) => {
         setReply(reply)
+    }
+
+    const handlePicturesChange = (e) => {
+        setPictures(e.target.files[0])
     }
 
     const takeTicket = async () => {
@@ -100,6 +112,7 @@ const Ticket = () => {
         let formData = new FormData();
         formData.append("reply", reply);
         formData.append("parent", params.ticketId);
+        formData.append("media", pictures);
 
         sendReply(formData)
         setReply('')
@@ -119,8 +132,17 @@ const Ticket = () => {
                 <div className="helpdesk-add-new-reply helpdesk-submit">
                     <form onSubmit={submitReply}>
                         <TextEditor onChange={handleReplyChange} />
+                        <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
+                            <p>Image</p>
+                            <label htmlFor="contained-button-file">
+                                <InputMedia accept="image/*" id="contained-button-file" multiple type="file" onChange={handlePicturesChange} />
+                                <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
+                            </label>
+                        </div>
+                        <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
                         <div className="helpdesk-submit-btn">
-                            <input type="submit" value="Send" />
+                                <input type="submit" value="Send" />
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -135,6 +157,14 @@ const Ticket = () => {
                                         <div dangerouslySetInnerHTML={{__html: reply.reply}} />
                                     }
                                 </div>
+                                {reply.images &&
+                                    <div className="ticket-reply-images">
+                                        <Image
+                                            width={100}
+                                            src={reply.images}
+                                        />
+                                    </div>
+                                }
                             </div>
                         )
                     })
