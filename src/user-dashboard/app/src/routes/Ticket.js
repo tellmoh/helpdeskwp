@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast'
 import Properties from '../components/Properties';
 import PropertyContextProvider from '../contexts/PropertyContext'
 import TextEditor from '../components/editor/Editor';
-import { Image } from 'antd';
+import Image from '../components/Image';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 

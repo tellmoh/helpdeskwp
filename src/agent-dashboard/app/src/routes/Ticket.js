@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { Toaster } from 'react-hot-toast'
 import Properties from '../components/Properties';
 import TextEditor from '../../../../user-dashboard/app/src/components/editor/Editor';
-import { Image } from 'antd';
+import Image from '../../../../user-dashboard/app/src/components/Image';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
