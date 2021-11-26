@@ -116,6 +116,8 @@ const Ticket = () => {
 
         sendReply(formData)
         setReply('')
+        setPictures([])
+        document.querySelector(".helpdesk-editor .ProseMirror").innerHTML = '';
     }
 
     return (

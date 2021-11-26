@@ -47,6 +47,10 @@ const AddTicket = () => {
         formData.append("media", pictures);
 
         createTicket(formData)
+        setTitle([])
+        setDesc([])
+        setPictures([])
+        document.querySelector(".helpdesk-editor .ProseMirror").innerHTML = '';
     }
 
     const handleTitleChange = (e) => {
@@ -78,7 +82,7 @@ const AddTicket = () => {
                 <h4>Submit a ticket</h4>
 
                 <p>Subject</p>
-                <Input name="title" type="text" onChange={handleTitleChange} />
+                <Input name="title" type="text" onChange={handleTitleChange} value={title} />
 
                 <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
                     <p>Category</p>
