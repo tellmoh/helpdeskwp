@@ -114,7 +114,8 @@ class Replies extends Tickets {
         $query_args = array(
             'post_type'  => 'reply',
             'post_parent' => $post_id,
-            'post_status' => 'publish'
+            'post_status' => 'publish',
+            'posts_per_page' => -1
         );
 
         $posts_query  = new \WP_Query();
