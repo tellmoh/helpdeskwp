@@ -52,6 +52,8 @@ class Tickets {
         $image  = $this->save_image( $files );
         $reply  = $this->add_reply( $params['description'], $ticket->data, $image->data );
 
+        $this->set_ticket_default( $ticket->data );
+
         $res = array(
             'ticket' => $ticket,
             'media'  => $image,
@@ -175,6 +177,11 @@ class Tickets {
         if ( isset( $properties['agent'] ) && ! empty( $properties['agent'] ) ) {
             wp_set_object_terms( $ticket, $properties['agent'], 'ticket_agent' );
         }
+    }
+
+    public function set_ticket_default( string $ticket_id ) {
+        wp_set_object_terms( $ticket_id, 'Low', 'ticket_priority' );
+        wp_set_object_terms( $ticket_id, 'Open', 'ticket_status' );
     }
 
     public function create_ticket_permissions_check() {
