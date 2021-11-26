@@ -1,7 +1,7 @@
 import Select from 'react-select';
 
 export function Input({ name, type, onChange, value }) {
-	return <input name={name} type={type} onChange={onChange} value={value} />
+	return <input name={name} type={type} onChange={onChange} value={value} required />
 }
 
 export function Textarea({ name, onChange }) {
