@@ -52,6 +52,7 @@ h4.ticket-title {
 .ticket-meta {
     margin-bottom: 3px;
     margin-top: 12px;
+    position: relative;
 }
 
 .ticket-meta div {
@@ -294,4 +295,23 @@ span.by-name {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     max-width: 100%;
+}
+
+.helpdesk-delete-ticket {
+    opacity: 0;
+    position: absolute !important;
+    top: -22px;
+    right: -15px;
+}
+
+.helpdesk-ticket:hover .helpdesk-delete-ticket {
+    opacity: 1;
+}
+
+.helpdesk-delete-ticket:hover {
+    background: inherit !important;
+}
+
+.helpdesk-delete-ticket:hover svg {
+    fill: #f39e9e;
 }

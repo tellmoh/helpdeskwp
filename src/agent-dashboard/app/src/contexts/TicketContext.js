@@ -43,6 +43,25 @@ const TicketContextProvider = (props) => {
         return data
     }
 
+    const deleteTicket = async (id) => {
+        const config = {
+            headers: {
+              'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
+              'Content-Type': 'application/json',
+            }
+        }
+
+        await axios.delete(`${helpdesk_agent_dashboard.url}wp/v2/ticket/${id}`, config)
+        .then(function (res) {
+            console.log(res.data.id)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+
+        takeTickets()
+    }
+
     const applyFilters = ( filters ) => {
         takeTickets(1, filters)
     }
@@ -84,7 +103,15 @@ const TicketContextProvider = (props) => {
     }
 
     return (
-        <TicketContext.Provider value={{ ticket, totalPages, takeTickets, applyFilters, updateProperties }}>
+        <TicketContext.Provider
+        value={{
+            ticket,
+            totalPages,
+            takeTickets,
+            applyFilters,
+            updateProperties,
+            deleteTicket
+        }}>
             {props.children}
         </TicketContext.Provider>
     )

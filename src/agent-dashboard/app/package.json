@@ -9,7 +9,9 @@
         "history": "5",
         "react-hot-toast": "^2.1.1",
         "react-router-dom": "6",
-        "react-select": "^5.2.1"
+        "react-select": "^5.2.1",
+        "sweetalert2": "^11.2.1",
+        "sweetalert2-react-content": "^4.2.0"
     },
     "devDependencies": {
         "@wordpress/scripts": "^18.0.1"
