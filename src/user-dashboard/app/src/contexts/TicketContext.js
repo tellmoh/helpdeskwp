@@ -103,6 +103,25 @@ const TicketContextProvider = (props) => {
         takeTickets()
     }
 
+    const deleteTicket = async (id) => {
+        const config = {
+            headers: {
+              'X-WP-Nonce': user_dashboard.nonce,
+              'Content-Type': 'application/json',
+            }
+        }
+
+        await axios.delete(`${user_dashboard.url}wp/v2/ticket/${id}`, config)
+        .then(function (res) {
+            console.log(res.data.id)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+
+        takeTickets()
+    }
+
     const updateProperties = async ( ticket, properties ) => {
         const config = {
             headers: {
@@ -148,7 +167,8 @@ const TicketContextProvider = (props) => {
             ticket,
             takeTickets,
             totalPages,
-            updateProperties
+            updateProperties,
+            deleteTicket
         }}>
             {props.children}
         </TicketContext.Provider>

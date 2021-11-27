@@ -40,6 +40,7 @@ button#new-ticket:hover {
     border-radius: 7px;
     border: 1px solid #dbe0f3;
     box-shadow: 0 0 20px -15px #344585;
+    position: relative;
 }
 
 h4.ticket-title {
@@ -50,6 +51,7 @@ h4.ticket-title {
 }
 
 .ticket-meta {
+    position: relative;
     margin-bottom: 3px;
 }
 
@@ -298,4 +300,23 @@ span.by-name {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     max-width: 100%;
+}
+
+.helpdesk-delete-ticket {
+    opacity: 0;
+    position: absolute !important;
+    top: -15px;
+    right: -15px;
+}
+
+.helpdesk-ticket:hover .helpdesk-delete-ticket {
+    opacity: 1;
+}
+
+.helpdesk-delete-ticket:hover {
+    background: inherit !important;
+}
+
+.helpdesk-delete-ticket:hover svg {
+    fill: #f39e9e;
 }
