@@ -240,6 +240,7 @@ ul.MuiPagination-ul button:focus {
     border-radius: 5px;
     margin: 15px 0;
     padding: 10px 15px;
+    position: relative;
 }
 
 span.by-name {
@@ -308,10 +309,21 @@ span.by-name {
     opacity: 1;
 }
 
-.helpdesk-delete-ticket:hover {
+.helpdesk-delete-ticket:hover, .helpdesk-delete-reply:hover button {
     background: inherit !important;
 }
 
-.helpdesk-delete-ticket:hover svg {
+.helpdesk-delete-ticket:hover svg, .helpdesk-delete-reply button:hover svg {
     fill: #f39e9e;
+}
+
+.helpdesk-delete-reply {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    opacity: 0;
+}
+
+.ticket-reply:hover .helpdesk-delete-reply {
+    opacity: 1;
 }

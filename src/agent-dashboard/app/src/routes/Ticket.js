@@ -9,6 +9,10 @@ import TextEditor from '../../../../user-dashboard/app/src/components/editor/Edi
 import Image from '../../../../user-dashboard/app/src/components/Image';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 const InputMedia = styled('input')({
     display: 'none',
@@ -119,6 +123,53 @@ const Ticket = () => {
         document.querySelector(".helpdesk-editor .ProseMirror").innerHTML = '';
     }
 
+    const deleteReply = async (id) => {
+        const config = {
+            headers: {
+                'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
+            }
+        }
+
+        await axios.delete(`${helpdesk_agent_dashboard.url}helpdesk/v1/replies/${id}`, config)
+        .then(function (res) {
+            console.log(res.statusText)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+
+        takeReplies()
+    }
+
+    const handleDelete = (id) => {
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteReply(id)
+                MySwal.fire(
+                    'Deleted',
+                    '',
+                    'success'
+                )
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+            MySwal.fire(
+                'Cancelled',
+                '',
+                'error'
+                )
+            }
+        })
+    }
+
     return (
         <>
             <div className="helpdesk-tickets">
@@ -169,6 +220,11 @@ const Ticket = () => {
                                         />
                                     </div>
                                 }
+                                <div className="helpdesk-delete-reply">
+                                    <Button onClick={(e) => handleDelete(reply.id)}>
+                                        <svg width="20" fill="#0051af" className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DeleteForeverOutlinedIcon"><path d="M14.12 10.47 12 12.59l-2.13-2.12-1.41 1.41L10.59 14l-2.12 2.12 1.41 1.41L12 15.41l2.12 2.12 1.41-1.41L13.41 14l2.12-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"></path></svg>
+                                    </Button>
+                                </div>
                             </div>
                         )
                     })

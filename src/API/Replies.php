@@ -38,6 +38,16 @@ class Replies extends Tickets {
                 'args'                => array(),
             ),
         ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/(?P<id>[\d]+)', array(
+            array(
+                'methods'             => \WP_REST_Server::DELETABLE,
+                'callback'            => array( $this, 'delete_replies' ),
+                'permission_callback' => array( $this, 'delete_replies_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
     }
 
     public function create_replies( $request ) {
@@ -61,6 +71,27 @@ class Replies extends Tickets {
         }
 
         return new \WP_Error( 'cant-create-reply', __( 'Can\'t create the reply', 'helpdesk' ), array( 'status' => 500 ) );
+    }
+
+    public function delete_replies( $request ) {
+        $reply_id = $request->get_param( 'id' );
+        $post     = get_post( $reply_id );
+
+        if ( ! $this->check_delete_permission( $post ) ) {
+			return new \WP_Error(
+				'rest_user_cannot_delete_post',
+				__( 'Sorry, you are not allowed to delete this post.' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
+		}
+
+        $result = wp_trash_post( $reply_id );
+
+        if ( $result ) {
+            return new \WP_REST_Response( __( 'The reply has been deleted', 'helpdesk' ), 200 );
+        }
+
+        return new \WP_Error( 'cant-delete-reply', __( 'Can\'t delete the reply', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
     public function get_replies( $request ) {
@@ -141,6 +172,14 @@ class Replies extends Tickets {
     public function create_replies_permissions_check() {
         return current_user_can( 'edit_posts' );
     }
+
+    public function delete_replies_permissions_check() {
+        return current_user_can( 'edit_posts' );
+    }
+
+	public function check_delete_permission( $post ) {
+		return current_user_can( 'delete_post', $post->ID );
+	}
 }
 
 function Replies_API() {
