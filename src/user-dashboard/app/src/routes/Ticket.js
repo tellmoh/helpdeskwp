@@ -146,7 +146,7 @@ const Ticket = () => {
                         <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
                             <p>Image</p>
                             <label htmlFor="contained-button-file">
-                                <InputMedia accept="image/*" id="contained-button-file" multiple type="file" onChange={handlePicturesChange} />
+                                <InputMedia accept="image/*" id="contained-button-file" type="file" onChange={handlePicturesChange} />
                                 <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
                             </label>
                         </div>
