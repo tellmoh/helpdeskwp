@@ -328,3 +328,16 @@ span.by-name {
 .ticket-reply:hover .helpdesk-delete-reply {
     opacity: 1;
 }
+
+.refresh-ticket {
+    display: inline-block;
+}
+
+.refresh-ticket button:hover {
+    background: transparent;
+}
+
+.refresh-ticket button:focus {
+    background: transparent;
+    outline: none;
+}

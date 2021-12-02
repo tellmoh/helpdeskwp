@@ -321,3 +321,16 @@ span.by-name {
 .helpdesk-delete-ticket:hover svg {
     fill: #f39e9e;
 }
+
+.refresh-ticket {
+    display: inline-block;
+}
+
+.refresh-ticket button:hover {
+    background: transparent;
+}
+
+.refresh-ticket button:focus {
+    background: transparent;
+    outline: none;
+}
