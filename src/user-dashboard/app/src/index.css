@@ -253,9 +253,14 @@ ul.MuiPagination-ul button:focus {
     padding: 10px 15px;
 }
 
-span.by-name {
+span.by-name, span.reply-date {
     color: hsl(0, 0%, 50%);
     font-size: 13px;
+}
+
+span.reply-date {
+    float: right;
+    margin-top: 5px;
 }
 
 .helpdesk-editor .ProseMirror {

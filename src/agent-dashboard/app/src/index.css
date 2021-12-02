@@ -244,9 +244,14 @@ ul.MuiPagination-ul button:focus {
     position: relative;
 }
 
-span.by-name {
+span.by-name, span.reply-date {
     color: hsl(0, 0%, 50%);
     font-size: 13px;
+}
+
+span.reply-date {
+    float: right;
+    margin-top: 5px;
 }
 
 .helpdesk-ticket a {
@@ -322,8 +327,8 @@ span.by-name {
 
 .helpdesk-delete-reply {
     position: absolute;
-    right: 0;
-    top: 10px;
+    right: -5px;
+    top: 34px;
     opacity: 0;
 }
 

@@ -216,6 +216,7 @@ const Ticket = () => {
                         return (
                             <div key={reply.id} className="ticket-reply">
                                 <span className="by-name">{reply.author}</span>
+                                <span className="reply-date">{reply.date}</span>
                                 <div className="ticket-reply-body">
                                     {reply.reply &&
                                         <div dangerouslySetInnerHTML={{__html: reply.reply}} />
