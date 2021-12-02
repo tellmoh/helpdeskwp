@@ -334,3 +334,7 @@ span.by-name {
     background: transparent;
     outline: none;
 }
+
+.helpdesk-ticket[data-ticket-status="Close"] {
+    opacity: 0.7;
+}
