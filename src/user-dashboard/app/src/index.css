@@ -117,6 +117,10 @@ ul.MuiPagination-ul button:focus {
     border-radius: 7px;
     padding: 10px 20px;
     color: hsl(0, 0%, 50%);
+    line-height: 1.5 !important;
+    font-size: 1rem;
+    width: 100%;
+    background: transparent;
 }
 
 #helpdesk-user-dashboard input[type="text"]:focus,
@@ -138,12 +142,8 @@ ul.MuiPagination-ul button:focus {
     background-color: #8fa3f1 !important;
 }
 
-#helpdesk-user-dashboard svg.css-tj5bde-Svg {
+#helpdesk-user-dashboard svg.css-8mmkcg {
     fill: #8fa3f1;
-}
-
-#helpdesk-user-dashboard .css-319lph-ValueContainer {
-    padding: 6px 17px;
 }
 
 #helpdesk-user-dashboard .css-1pahdxg-control {
@@ -175,7 +175,7 @@ ul.MuiPagination-ul button:focus {
 
 .helpdesk-submit input[type="submit"] {
     background: #0051af;
-    border-color: #0051af;
+    border: 1px solid #0051af;
     border-radius: 4px;
     color: #fff;
     display: inline-block;
@@ -185,6 +185,7 @@ ul.MuiPagination-ul button:focus {
     font-size: 1rem;
     transition: all .3s;
     cursor: pointer;
+    height: 42px;
 }
 
 .helpdesk-submit input[type="submit"]:hover {
@@ -272,11 +273,13 @@ span.reply-date {
 }
 
 .helpdesk-editor button {
+    cursor: pointer;
     border: unset;
     color: #8fa3f1;
     line-height: 1.5;
     font-size: 1rem;
     padding: 4px 10px;
+    background: transparent !important;
 }
 
 .helpdesk-editor button:hover {
@@ -342,4 +345,22 @@ span.reply-date {
 
 .helpdesk-ticket[data-ticket-status="Close"] {
     opacity: 0.7;
+}
+
+.form-ticket-select input {
+    height: 32px !important;
+}
+
+.form-ticket-title {
+    height: 46px !important;
+}
+
+.helpdesk-single-ticket h1, .helpdesk-properties h3 {
+    font-weight: 500;
+    color: inherit;
+    margin: 7px 0 !important;
+}
+
+.helpdesk-properties input {
+    height: 30px !important;
 }

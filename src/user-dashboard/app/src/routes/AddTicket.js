@@ -82,16 +82,18 @@ const AddTicket = () => {
                 <h4>Submit a ticket</h4>
 
                 <p>Subject</p>
-                <Input name="title" type="text" onChange={handleTitleChange} value={title} />
+                <Input name="title" type="text" onChange={handleTitleChange} value={title} inputClass={'form-ticket-title'} />
 
-                <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
-                    <p>Category</p>
-                    <SelectOptions options={catItems} onChange={handleCategoryChange} />
-                </div>
+                <div className="form-ticket-select">
+                    <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
+                        <p>Category</p>
+                        <SelectOptions options={catItems} onChange={handleCategoryChange} />
+                    </div>
 
-                <div className="helpdesk-w-50" style={{ paddingLeft: '10px' }}>
-                    <p>Type</p>
-                    <SelectOptions options={types} onChange={handleTypeChange} />
+                    <div className="helpdesk-w-50" style={{ paddingLeft: '10px' }}>
+                        <p>Type</p>
+                        <SelectOptions options={types} onChange={handleTypeChange} />
+                    </div>
                 </div>
 
                 <p>Description</p>
