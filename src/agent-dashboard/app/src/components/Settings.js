@@ -1,7 +1,13 @@
+import { useState, useEffect } from 'react';
 import TopBar from "./TopBar";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Select from 'react-select';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -10,7 +16,7 @@ const theme = createTheme({
             main: '#0051af'
         }
     }
-});
+})
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -29,22 +35,106 @@ function TabPanel(props) {
             </Box>
         )}
         </div>
-    );
+    )
   }
 
 function a11yProps(index) {
     return {
         id: `vertical-tab-${index}`,
         'aria-controls': `vertical-tabpanel-${index}`,
-    };
+    }
 }
 
 const Settings = () => {
-    const [value, setValue] = React.useState(0);
+    const [pages, setPages] = useState(null)
+    const [setting, setSetting] = useState(null)
+    const [value, setValue] = useState(0);
+
+    let config = {
+        headers: {
+            'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
+            'Content-Type': 'application/json',
+        }
+    }
+
+    useEffect(() => {
+        takePages();
+    }, [])
+
+    useEffect(() => {
+        takeSettings();
+    }, [])
+
+    const takePages = async () => {
+        const pages = await fetchPages();
+        setPages(pages);
+    }
+
+    const fetchPages = async () => {
+        const url = `${helpdesk_agent_dashboard.url}wp/v2/pages/?per_page=100`
+
+        let data
+        await axios.get(url)
+            .then( (res) => {
+                data = res.data
+            })
+
+        return data
+    }
+
+    const takeSettings = async () => {
+        const settings = await fetchSettings();
+        setSetting(settings);
+    }
+
+    const fetchSettings = async () => {
+        const url = `${helpdesk_agent_dashboard.url}helpdesk/v1/settings`
+
+        let data
+        await axios.get(url, config)
+            .then( (res) => {
+                data = res.data
+            })
+
+        return data
+    }
+
+    const handleSave = async () => {
+        const data = { pageID: setting.value, pageName: setting.label }
+
+        await axios.post(`${helpdesk_agent_dashboard.url}helpdesk/v1/settings`, JSON.stringify(data), config)
+        .then(function () {
+            toast('Saved.', {
+                duration: 2000,
+                style: {
+                    marginTop: 50
+                },
+            })
+        })
+        .catch(function (err) {
+            toast('Couldn\'t save.', {
+                duration: 2000,
+                icon: '❌',
+                style: {
+                    marginTop: 50
+                },
+            })
+            console.log(err)
+        })
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-    };
+    }
+
+    const onPageChange = (page) => {
+        setSetting(page);
+    }
+
+    let pagesList = []
+    pages && pages.map((page) => {
+        pagesList.push({ value: page.id, label: page.title.rendered })
+    })
 
     return (
         <ThemeProvider theme={theme}>
@@ -67,7 +157,20 @@ const Settings = () => {
                         <Tab label="Agent" {...a11yProps(5)} />
                     </Tabs>
                     <TabPanel value={value} index={0}>
-                        Portal Page
+                        <p style={{ margin: '5px 0'}}>Select the support portal page</p>
+                        <div style={{ marginBottom: '10px' }}>
+                            <small>This page will set as the support portal page</small>
+                        </div>
+                        {setting &&
+                            <Select
+                                options={pagesList}
+                                onChange={onPageChange}
+                                defaultValue={{ value: setting.pageID, label: setting.pageName }}
+                            />
+                        }
+                        <div style={{ marginTop: '16px' }}>
+                            <Button variant="contained" onClick={handleSave}>Save</Button>
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         Category
@@ -86,6 +189,7 @@ const Settings = () => {
                     </TabPanel>
                 </Box>
             </div>
+            <Toaster />
         </ThemeProvider>
     )
 }
