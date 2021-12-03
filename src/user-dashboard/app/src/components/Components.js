@@ -11,7 +11,6 @@ export function Textarea({ name, onChange }) {
 export function SelectOptions({ options, onChange }) {
 	return (
 		<Select
-			// defaultValue={local}
 			onChange={onChange}
 			options={options}
 		/>
