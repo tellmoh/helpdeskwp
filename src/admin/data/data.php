@@ -21,7 +21,7 @@ class Data {
     }
 
     public static function insert_ticket_status_data() {
-        wp_create_term( 'Oepn', 'ticket_status' );
+        wp_create_term( 'Open', 'ticket_status' );
         wp_create_term( 'Close', 'ticket_status' );
         wp_create_term( 'Pending', 'ticket_status' );
         wp_create_term( 'Resolved', 'ticket_status' );
