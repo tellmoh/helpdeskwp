@@ -56,11 +56,11 @@ const FiltersContextProvider = (props) => {
     }
 
     const filters = {
-        category: localFilters.category.value ? localFilters.category.value : filterCategory.value,
-        priority: localFilters.priority.value ? localFilters.priority.value : filterPriority.value,
-        status: localFilters.status.value ? localFilters.status.value : filterStatus.value,
-        type: localFilters.type.value ? localFilters.type.value : filterType.value,
-        agent: localFilters.agent.value ? localFilters.agent.value : filterAgent.value
+        category: localFilters.category ? localFilters.category.value : filterCategory.value,
+        priority: localFilters.priority ? localFilters.priority.value : filterPriority.value,
+        status: localFilters.status ? localFilters.status.value : filterStatus.value,
+        type: localFilters.type ? localFilters.type.value : filterType.value,
+        agent: localFilters.agent ? localFilters.agent.value : filterAgent.value
     }
 
     useEffect(() => {
