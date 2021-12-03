@@ -70,20 +70,27 @@ class Tickets {
     public function add_ticket( string $title, string $type, string $category ) {
         $current_user = get_current_user_id();
 
-        $ticket_id = wp_insert_post(
-            array(
-                'post_title'  => $title,
-                'post_type'   => 'ticket',
-                'post_status' => 'publish',
-                'post_author' => $current_user
-            )
-        );
+        if ( $title ) {
+            $ticket_id = wp_insert_post(
+                array(
+                    'post_title'  => $title,
+                    'post_type'   => 'ticket',
+                    'post_status' => 'publish',
+                    'post_author' => $current_user
+                )
+            );
 
-        if ( ! is_wp_error( $ticket_id ) ) {
-            wp_set_object_terms( $ticket_id, $type, 'ticket_type' );
-            wp_set_object_terms( $ticket_id, $category, 'ticket_category' );
+            if ( ! is_wp_error( $ticket_id ) ) {
+                if ( $type !== 'undefined' ) {
+                    wp_set_object_terms( $ticket_id, $type, 'ticket_type' );
+                }
 
-            return new \WP_REST_Response( $ticket_id, 201 );
+                if ( $category !== 'undefined' ) {
+                    wp_set_object_terms( $ticket_id, $category, 'ticket_category' );
+                }
+
+                return new \WP_REST_Response( $ticket_id, 201 );
+            }
         }
 
         return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdesk' ), array( 'status' => 500 ) );
