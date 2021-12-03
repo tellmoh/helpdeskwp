@@ -323,57 +323,12 @@ class AgentDashboard {
     public function dashboard_menu() {
         add_menu_page(
 			__( 'Helpdesk Dashboard', 'helpdesk' ),
-			'Tickets',
+			'Help Desk WP',
 			'manage_options',
 			'helpdesk',
 			array( $this, 'helpdesk_agent_dashboard' ),
 			'dashicons-tickets-alt',
 			10
-		);
-
-		add_submenu_page(
-			'helpdesk',
-			__( 'Category', 'helpdesk' ),
-			__( 'Category', 'helpdesk' ),
-			'manage_options',
-			'edit-tags.php?taxonomy=ticket_category&post_type=ticket',
-			array()
-		);
-
-        add_submenu_page(
-			'helpdesk',
-			__( 'Type', 'helpdesk' ),
-			__( 'Type', 'helpdesk' ),
-			'manage_options',
-			'edit-tags.php?taxonomy=ticket_type&post_type=ticket',
-			array()
-		);
-
-		add_submenu_page(
-			'helpdesk',
-			__( 'Priority', 'helpdesk' ),
-			__( 'Priority', 'helpdesk' ),
-			'manage_options',
-			'edit-tags.php?taxonomy=ticket_priority&post_type=ticket',
-			array()
-		);
-
-		add_submenu_page(
-			'helpdesk',
-			__( 'Status', 'helpdesk' ),
-			__( 'Status', 'helpdesk' ),
-			'manage_options',
-			'edit-tags.php?taxonomy=ticket_status&post_type=ticket',
-			array()
-		);
-
-		add_submenu_page(
-			'helpdesk',
-			__( 'Agent', 'helpdesk' ),
-			__( 'Agent', 'helpdesk' ),
-			'manage_options',
-			'edit-tags.php?taxonomy=ticket_agent&post_type=ticket',
-			array()
 		);
     }
 

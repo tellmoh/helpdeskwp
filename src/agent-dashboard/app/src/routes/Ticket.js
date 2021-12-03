@@ -11,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import TopBar from '../components/TopBar';
 
 const MySwal = withReactContent(Swal)
 
@@ -176,74 +177,77 @@ const Ticket = () => {
 
     return (
         <>
-            <div className="helpdesk-tickets">
-                <Link to="/?page=helpdesk">
-                    <span className="helpdesk-back primary">Back</span>
-                </Link>
-                <div className="refresh-ticket">
-                    <Button onClick={refreshTicket}>
-                        <svg data-testid="RefreshIcon" fill="#0051af" width="23px" aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
-                    </Button>
-                </div>
-                {singleTicket &&
-                    <div className="helpdesk-single-ticket ticket-meta">
-                        <h1>{singleTicket.title.rendered}</h1>
-                        <div>By: {singleTicket.user}</div>
-                        <div>In: {singleTicket.category}</div>
-                        <div>Type: {singleTicket.type}</div>
+            <TopBar />
+            <div className="helpdesk-main">
+                <div className="helpdesk-tickets">
+                    <Link to="/?page=helpdesk">
+                        <span className="helpdesk-back primary">Back</span>
+                    </Link>
+                    <div className="refresh-ticket">
+                        <Button onClick={refreshTicket}>
+                            <svg data-testid="RefreshIcon" fill="#0051af" width="23px" aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
+                        </Button>
                     </div>
-                }
-                <div className="helpdesk-add-new-reply helpdesk-submit">
-                    <form onSubmit={submitReply}>
-                        <TextEditor onChange={handleReplyChange} />
-                        <div className="helpdesk-w-50">
-                            <p>Image</p>
-                            <label htmlFor="contained-button-file">
-                                <InputMedia accept="image/*" id="contained-button-file" type="file" onChange={handlePicturesChange} />
-                                <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
-                            </label>
+                    {singleTicket &&
+                        <div className="helpdesk-single-ticket ticket-meta">
+                            <h1>{singleTicket.title.rendered}</h1>
+                            <div>By: {singleTicket.user}</div>
+                            <div>In: {singleTicket.category}</div>
+                            <div>Type: {singleTicket.type}</div>
                         </div>
-                        <div className="helpdesk-w-50">
-                            <div className="helpdesk-submit-btn">
-                                <input type="submit" value="Send" />
+                    }
+                    <div className="helpdesk-add-new-reply helpdesk-submit">
+                        <form onSubmit={submitReply}>
+                            <TextEditor onChange={handleReplyChange} />
+                            <div className="helpdesk-w-50">
+                                <p>Image</p>
+                                <label htmlFor="contained-button-file">
+                                    <InputMedia accept="image/*" id="contained-button-file" type="file" onChange={handlePicturesChange} />
+                                    <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
+                                </label>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div className="helpdesk-ticket-replies">
-                {replies &&
-                    replies.map((reply) => {
-                        return (
-                            <div key={reply.id} className="ticket-reply">
-                                <span className="by-name">{reply.author}</span>
-                                <span className="reply-date">{reply.date}</span>
-                                <div className="ticket-reply-body">
-                                    {reply.reply &&
-                                        <div dangerouslySetInnerHTML={{__html: reply.reply}} />
-                                    }
+                            <div className="helpdesk-w-50">
+                                <div className="helpdesk-submit-btn">
+                                    <input type="submit" value="Send" />
                                 </div>
-                                {reply.images &&
-                                    <div className="ticket-reply-images">
-                                        <Image
-                                            width={100}
-                                            src={reply.images}
-                                        />
+                            </div>
+                        </form>
+                    </div>
+                    <div className="helpdesk-ticket-replies">
+                    {replies &&
+                        replies.map((reply) => {
+                            return (
+                                <div key={reply.id} className="ticket-reply">
+                                    <span className="by-name">{reply.author}</span>
+                                    <span className="reply-date">{reply.date}</span>
+                                    <div className="ticket-reply-body">
+                                        {reply.reply &&
+                                            <div dangerouslySetInnerHTML={{__html: reply.reply}} />
+                                        }
                                     </div>
-                                }
-                                <div className="helpdesk-delete-reply">
-                                    <Button onClick={(e) => handleDelete(reply.id)}>
-                                        <svg width="20" fill="#0051af" className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DeleteForeverOutlinedIcon"><path d="M14.12 10.47 12 12.59l-2.13-2.12-1.41 1.41L10.59 14l-2.12 2.12 1.41 1.41L12 15.41l2.12 2.12 1.41-1.41L13.41 14l2.12-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"></path></svg>
-                                    </Button>
+                                    {reply.images &&
+                                        <div className="ticket-reply-images">
+                                            <Image
+                                                width={100}
+                                                src={reply.images}
+                                            />
+                                        </div>
+                                    }
+                                    <div className="helpdesk-delete-reply">
+                                        <Button onClick={(e) => handleDelete(reply.id)}>
+                                            <svg width="20" fill="#0051af" className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DeleteForeverOutlinedIcon"><path d="M14.12 10.47 12 12.59l-2.13-2.12-1.41 1.41L10.59 14l-2.12 2.12 1.41 1.41L12 15.41l2.12 2.12 1.41-1.41L13.41 14l2.12-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"></path></svg>
+                                        </Button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                    </div>
+                    <Outlet />
+                    <Toaster />
                 </div>
-                <Outlet />
-                <Toaster />
+                <Properties ticket={params.ticketId} ticketContent={singleTicket} />
             </div>
-            <Properties ticket={params.ticketId} ticketContent={singleTicket} />
         </>
     )
 }

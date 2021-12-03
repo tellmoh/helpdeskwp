@@ -3,12 +3,16 @@ body {
 }
 
 #helpdesk-agent-dashboard {
-    max-width: 960px;
-    margin: 60px auto;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
 }
 
-#helpdesk-agent-dashboard .primary {
+.helpdesk-main {
+    max-width: 960px;
+    margin: 60px auto;
+}
+
+#helpdesk-agent-dashboard .primary,
+.helpdesk-top-bar h2 {
     color: #0051af;
 }
 
@@ -16,6 +20,48 @@ button#new-ticket {
     text-transform: capitalize;
     padding-right: 33px;
     padding-left: 12px;
+}
+
+div#wpcontent {
+    padding: 0;
+}
+
+.helpdesk-top-bar {
+    background: #fff;
+    padding: 20px 30px;
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px #344585;
+}
+
+.helpdesk-top-bar h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.helpdesk-menu li {
+    display: inline-block;
+    padding-left: 16px;
+}
+
+.helpdesk-menu li a {
+    color: #000;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.helpdesk-menu li a:hover {
+    color: #0051af;
+}
+
+.helpdesk-name, .helpdesk-menu {
+    display: inline-block;
+}
+
+.helpdesk-settings button {
+    text-transform: capitalize;
+    text-align: left !important;
+    display: block;
+    flex-direction: row;
 }
 
 button#new-ticket:after {
@@ -244,7 +290,8 @@ ul.MuiPagination-ul button:focus {
     position: relative;
 }
 
-span.by-name, span.reply-date {
+span.by-name,
+span.reply-date {
     color: hsl(0, 0%, 50%);
     font-size: 13px;
 }
