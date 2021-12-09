@@ -23,9 +23,9 @@ class Settings {
         register_rest_route(
             $this->namespace . '/' . $this->version, '/' . $this->base, array(
             array(
-                'methods'             => \WP_REST_Server::READABLE,
-                'callback'            => array( $this, 'get_options' ),
-                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'methods'             => \WP_REST_Server::EDITABLE,
+                'callback'            => array( $this, 'create_item' ),
+                'permission_callback' => array( $this, 'create_item_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -33,8 +33,8 @@ class Settings {
         register_rest_route(
             $this->namespace . '/' . $this->version, '/' . $this->base, array(
             array(
-                'methods'             => \WP_REST_Server::EDITABLE,
-                'callback'            => array( $this, 'update_options' ),
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_options' ),
                 'permission_callback' => array( $this, 'options_permissions_check' ),
                 'args'                => array(),
             ),
@@ -51,17 +51,55 @@ class Settings {
         return array();
     }
 
-    public function update_options( $request ) {
-        $options = $request->get_params();
+    public function create_item( $request ) {
+        $params = $request->get_params();
+        $type   = $request->get_param( 'type' );
 
-        if ( ! is_array( $options ) ) {
+        if ( ! is_array( $params ) ) {
             return array();
         }
 
-        update_option( $this->option, $options );
+        if ( 'saveSettings' === $type ) {
+            return $this->update_options( $params );
+        }
+
+        if ( 'addTerm' === $type ) {
+            return $this->add_term( $params );
+        }
+
+        return new \WP_Error( 'cant-create-item', __( 'Can\'t create an item', 'helpdesk' ), array( 'status' => 500 ) );
+    }
+
+    public function add_term( $params ) {
+
+        $term             = array();
+        $term['name']     = sanitize_text_field( $params['termName'] );
+        $term['taxonomy'] = sanitize_text_field( $params['taxonomy'] );
+
+        if ( ! empty( $term['name'] ) && ! empty( $term['taxonomy'] ) ) {
+
+            require_once( ABSPATH . 'wp-admin/includes/taxonomy.php' );
+
+            wp_create_term( $term['name'], $term['taxonomy'] );
+        }
+    }
+
+    public function update_options( $params ) {
+
+        $options             = array();
+        $options['pageID']   = sanitize_text_field( $params['pageID'] );
+        $options['pageName'] = sanitize_text_field( $params['pageName'] );
+
+        if ( ! empty( $options['pageID'] ) && ! empty( $options['pageName'] ) ) {
+            update_option( $this->option, $options );
+        }
     }
 
     public function options_permissions_check() {
+        return current_user_can( 'manage_options' );
+    }
+
+    public function create_item_permissions_check() {
         return current_user_can( 'manage_options' );
     }
 }

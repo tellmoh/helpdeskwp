@@ -399,3 +399,13 @@ span.reply-date {
 .helpdesk-ticket[data-ticket-status="Close"] {
     opacity: 0.7;
 }
+
+.add-new-btn {
+    display: inline-block !important;
+    margin: -5px 10px 0 !important;
+    padding: 12px 20px !important;
+}
+
+.MuiTabs-vertical {
+    flex-basis: 15%;
+}

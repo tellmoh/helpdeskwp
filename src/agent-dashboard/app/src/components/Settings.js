@@ -49,6 +49,11 @@ const Settings = () => {
     const [pages, setPages] = useState(null)
     const [setting, setSetting] = useState(null)
     const [value, setValue] = useState(0);
+    const [category, setCategory] = useState('');
+    const [type, setType] = useState('');
+    const [priority, setPriority] = useState('');
+    const [status, setStatus] = useState('');
+    const [agent, setAgent] = useState('');
 
     let config = {
         headers: {
@@ -100,7 +105,11 @@ const Settings = () => {
     }
 
     const handleSave = async () => {
-        const data = { pageID: setting.value, pageName: setting.label }
+        const data = {
+            type: 'saveSettings',
+            pageID: setting.value,
+            pageName: setting.label
+        }
 
         await axios.post(`${helpdesk_agent_dashboard.url}helpdesk/v1/settings`, JSON.stringify(data), config)
         .then(function () {
@@ -125,6 +134,59 @@ const Settings = () => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    }
+
+    const addNewTerm = async (taxonomy, name) => {
+        const data = {
+            type: 'addTerm',
+            taxonomy: taxonomy,
+            termName: name
+        }
+
+        await axios.post(`${helpdesk_agent_dashboard.url}helpdesk/v1/settings`, JSON.stringify(data), config)
+        .then(function () {
+            toast('Added.', {
+                duration: 2000,
+                style: {
+                    marginTop: 50
+                },
+            })
+        })
+        .catch(function (err) {
+            toast('Couldn\'t add.', {
+                duration: 2000,
+                icon: '❌',
+                style: {
+                    marginTop: 50
+                },
+            })
+            console.log(err)
+        })
+    }
+
+    const addNewCategory = () => {
+        addNewTerm( 'ticket_category', category )
+        setCategory('')
+    }
+
+    const addNewType = () => {
+        addNewTerm( 'ticket_type', type )
+        setType('')
+    }
+
+    const addNewPriority = () => {
+        addNewTerm( 'ticket_priority', priority )
+        setPriority('')
+    }
+
+    const addNewStatus = () => {
+        addNewTerm( 'ticket_status', status )
+        setStatus('')
+    }
+
+    const addNewAgent = () => {
+        addNewTerm( 'ticket_agent', agent )
+        setAgent('')
     }
 
     const onPageChange = (page) => {
@@ -173,19 +235,24 @@ const Settings = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        Category
+                        <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewCategory}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Type
+                        <input type="text" placeholder="Type" value={type} onChange={(e) => setType(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewType}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        Priority
+                        <input type="text" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewPriority}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        Status
+                        <input type="text" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewStatus}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={5}>
-                        Agent
+                        <input type="text" placeholder="Agent" value={agent} onChange={(e) => setAgent(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewAgent}>Add</Button>
                     </TabPanel>
                 </Box>
             </div>
