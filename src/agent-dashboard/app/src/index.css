@@ -409,3 +409,12 @@ span.reply-date {
 .MuiTabs-vertical {
     flex-basis: 15%;
 }
+
+.helpdesk-term {
+    border-bottom: 1px solid #ebe6e6;
+    padding: 15px 5px;
+}
+
+.helpdesk-term:last-child {
+    border-color: transparent;
+}

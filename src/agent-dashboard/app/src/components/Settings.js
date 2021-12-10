@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import TopBar from "./TopBar";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Select from 'react-select';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { FiltersContext } from '../contexts/FiltersContext';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -54,6 +55,19 @@ const Settings = () => {
     const [priorityTerm, setPriority] = useState('');
     const [statusTerm, setStatus] = useState('');
     const [agentTerm, setAgent] = useState('');
+
+    const {
+        category,
+        type,
+        agents,
+        status,
+        priority,
+        takeCategory,
+        takeType,
+        takeAgents,
+        takeStatus,
+        takePriority,
+    } = useContext(FiltersContext)
 
     let config = {
         headers: {
@@ -164,29 +178,34 @@ const Settings = () => {
         })
     }
 
-    const addNewCategory = () => {
-        addNewTerm( 'ticket_category', categoryTerm )
+    const addNewCategory = async () => {
+        await addNewTerm( 'ticket_category', categoryTerm )
         setCategory('')
+        takeCategory()
     }
 
-    const addNewType = () => {
-        addNewTerm( 'ticket_type', typeTerm )
+    const addNewType = async () => {
+        await addNewTerm( 'ticket_type', typeTerm )
         setType('')
+        takeType()
     }
 
-    const addNewPriority = () => {
-        addNewTerm( 'ticket_priority', priorityTerm )
+    const addNewPriority = async () => {
+        await addNewTerm( 'ticket_priority', priorityTerm )
         setPriority('')
+        takePriority()
     }
 
-    const addNewStatus = () => {
-        addNewTerm( 'ticket_status', statusTerm )
+    const addNewStatus = async () => {
+        await addNewTerm( 'ticket_status', statusTerm )
         setStatus('')
+        takeStatus()
     }
 
-    const addNewAgent = () => {
-        addNewTerm( 'ticket_agent', agentTerm )
+    const addNewAgent = async () => {
+        await addNewTerm( 'ticket_agent', agentTerm )
         setAgent('')
+        takeAgents()
     }
 
     const onPageChange = (page) => {
@@ -237,22 +256,67 @@ const Settings = () => {
                     <TabPanel value={value} index={1}>
                         <input type="text" placeholder="Category" value={categoryTerm} onChange={(e) => setCategory(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewCategory}>Add</Button>
+                        <div className="helpdesk-terms-list">
+                            {category && category.map((category) => {
+                                return(
+                                    <div key={category.id} className="helpdesk-term">
+                                        <span>{category.name}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
                         <input type="text" placeholder="Type" value={typeTerm} onChange={(e) => setType(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewType}>Add</Button>
+                        <div className="helpdesk-terms-list">
+                            {type && type.map((type) => {
+                                return(
+                                    <div key={type.id} className="helpdesk-term">
+                                        <span>{type.name}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
                         <input type="text" placeholder="Priority" value={priorityTerm} onChange={(e) => setPriority(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewPriority}>Add</Button>
+                        <div className="helpdesk-terms-list">
+                            {priority && priority.map((priority) => {
+                                return(
+                                    <div key={priority.id} className="helpdesk-term">
+                                        <span>{priority.name}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
                         <input type="text" placeholder="Status" value={statusTerm} onChange={(e) => setStatus(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewStatus}>Add</Button>
+                        <div className="helpdesk-terms-list">
+                            {status && status.map((status) => {
+                                return(
+                                    <div key={status.id} className="helpdesk-term">
+                                        <span>{status.name}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={5}>
                         <input type="text" placeholder="Agent" value={agentTerm} onChange={(e) => setAgent(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewAgent}>Add</Button>
+                        <div className="helpdesk-terms-list">
+                            {agents && agents.map((agents) => {
+                                return(
+                                    <div key={agents.id} className="helpdesk-term">
+                                        <span>{agents.name}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </TabPanel>
                 </Box>
             </div>

@@ -166,6 +166,11 @@ const FiltersContextProvider = (props) => {
             handleStatusChange,
             handleTypeChange,
             handleAgentChange,
+            takeCategory,
+            takeType,
+            takeAgents,
+            takeStatus,
+            takePriority,
             filters
         }}>
             {props.children}
