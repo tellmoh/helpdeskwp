@@ -49,11 +49,11 @@ const Settings = () => {
     const [pages, setPages] = useState(null)
     const [setting, setSetting] = useState(null)
     const [value, setValue] = useState(0);
-    const [category, setCategory] = useState('');
-    const [type, setType] = useState('');
-    const [priority, setPriority] = useState('');
-    const [status, setStatus] = useState('');
-    const [agent, setAgent] = useState('');
+    const [categoryTerm, setCategory] = useState('');
+    const [typeTerm, setType] = useState('');
+    const [priorityTerm, setPriority] = useState('');
+    const [statusTerm, setStatus] = useState('');
+    const [agentTerm, setAgent] = useState('');
 
     let config = {
         headers: {
@@ -165,27 +165,27 @@ const Settings = () => {
     }
 
     const addNewCategory = () => {
-        addNewTerm( 'ticket_category', category )
+        addNewTerm( 'ticket_category', categoryTerm )
         setCategory('')
     }
 
     const addNewType = () => {
-        addNewTerm( 'ticket_type', type )
+        addNewTerm( 'ticket_type', typeTerm )
         setType('')
     }
 
     const addNewPriority = () => {
-        addNewTerm( 'ticket_priority', priority )
+        addNewTerm( 'ticket_priority', priorityTerm )
         setPriority('')
     }
 
     const addNewStatus = () => {
-        addNewTerm( 'ticket_status', status )
+        addNewTerm( 'ticket_status', statusTerm )
         setStatus('')
     }
 
     const addNewAgent = () => {
-        addNewTerm( 'ticket_agent', agent )
+        addNewTerm( 'ticket_agent', agentTerm )
         setAgent('')
     }
 
@@ -235,23 +235,23 @@ const Settings = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                        <input type="text" placeholder="Category" value={categoryTerm} onChange={(e) => setCategory(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewCategory}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <input type="text" placeholder="Type" value={type} onChange={(e) => setType(e.target.value)} />
+                        <input type="text" placeholder="Type" value={typeTerm} onChange={(e) => setType(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewType}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <input type="text" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)} />
+                        <input type="text" placeholder="Priority" value={priorityTerm} onChange={(e) => setPriority(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewPriority}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        <input type="text" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)} />
+                        <input type="text" placeholder="Status" value={statusTerm} onChange={(e) => setStatus(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewStatus}>Add</Button>
                     </TabPanel>
                     <TabPanel value={value} index={5}>
-                        <input type="text" placeholder="Agent" value={agent} onChange={(e) => setAgent(e.target.value)} />
+                        <input type="text" placeholder="Agent" value={agentTerm} onChange={(e) => setAgent(e.target.value)} />
                         <Button variant="contained" className="add-new-btn" onClick={addNewAgent}>Add</Button>
                     </TabPanel>
                 </Box>
