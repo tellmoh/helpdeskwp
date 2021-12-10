@@ -16,7 +16,6 @@ const FiltersContextProvider = (props) => {
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
 
-
     const handleCategoryChange = (category) => {
         setFilterCategory(category);
         const local = JSON.stringify({ value: category.value, label: category.label })
@@ -153,6 +152,24 @@ const FiltersContextProvider = (props) => {
         return data
     }
 
+    const deleteTerms = async (id, taxonomy) => {
+        await axios.delete(`${helpdesk_agent_dashboard.url}helpdesk/v1/settings/${id}`, {
+            headers: {
+                'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
+                'Content-Type': 'application/json',
+            },
+            data: {
+                taxonomy: taxonomy
+            }
+        })
+        .then(function (res) {
+            console.log(res.data)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+    }
+
     return (
         <FiltersContext.Provider
         value={{
@@ -171,6 +188,7 @@ const FiltersContextProvider = (props) => {
             takeAgents,
             takeStatus,
             takePriority,
+            deleteTerms,
             filters
         }}>
             {props.children}

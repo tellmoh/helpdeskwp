@@ -411,10 +411,29 @@ span.reply-date {
 }
 
 .helpdesk-term {
+    position: relative;
     border-bottom: 1px solid #ebe6e6;
     padding: 15px 5px;
 }
 
 .helpdesk-term:last-child {
     border-color: transparent;
+}
+
+.helpdesk-terms-list {
+    margin-top: 15px;
+}
+
+.helpdesk-delete-term {
+    position: absolute;
+    right: 0;
+    top: 9px;
+}
+
+.helpdesk-delete-term button:hover {
+    background: inherit;
+}
+
+.helpdesk-delete-term button:hover svg {
+    fill: #f39e9e;
 }

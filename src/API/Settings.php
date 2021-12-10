@@ -39,6 +39,16 @@ class Settings {
                 'args'                => array(),
             ),
         ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/(?P<id>[\d]+)', array(
+            array(
+                'methods'             => \WP_REST_Server::DELETABLE,
+                'callback'            => array( $this, 'delete_item' ),
+                'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
     }
 
     public function get_options() {
@@ -95,11 +105,28 @@ class Settings {
         }
     }
 
+    public function delete_item( $request ) {
+        $term_id  = $request->get_param( 'id' );
+        $taxonomy = $request->get_param( 'taxonomy' );
+
+        $result = wp_delete_term( $term_id, $taxonomy );
+
+        if ( $result ) {
+            return new \WP_REST_Response( __( 'The term has been deleted', 'helpdesk' ), 200 );
+        }
+
+        return new \WP_Error( 'cant-delete-term', __( 'Can\'t delete the term', 'helpdesk' ), array( 'status' => 500 ) );
+    }
+
     public function options_permissions_check() {
         return current_user_can( 'manage_options' );
     }
 
     public function create_item_permissions_check() {
+        return current_user_can( 'manage_options' );
+    }
+
+    public function delete_item_permissions_check() {
         return current_user_can( 'manage_options' );
     }
 }

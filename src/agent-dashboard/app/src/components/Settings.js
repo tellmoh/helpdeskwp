@@ -67,6 +67,7 @@ const Settings = () => {
         takeAgents,
         takeStatus,
         takePriority,
+        deleteTerms
     } = useContext(FiltersContext)
 
     let config = {
@@ -208,8 +209,33 @@ const Settings = () => {
         takeAgents()
     }
 
+    const deleteCategory = async (id, taxonomy) => {
+        await deleteTerms(id, taxonomy)
+        takeCategory()
+    }
+
+    const deleteType = async (id, taxonomy) => {
+        await deleteTerms(id, taxonomy)
+        takeType()
+    }
+
+    const deletePriority = async (id, taxonomy) => {
+        await deleteTerms(id, taxonomy)
+        takePriority()
+    }
+
+    const deleteStatus = async (id, taxonomy) => {
+        await deleteTerms(id, taxonomy)
+        takeStatus()
+    }
+
+    const deleteAgent = async (id, taxonomy) => {
+        await deleteTerms(id, taxonomy)
+        takeAgents()
+    }
+
     const onPageChange = (page) => {
-        setSetting(page);
+        setSetting(page)
     }
 
     let pagesList = []
@@ -261,6 +287,11 @@ const Settings = () => {
                                 return(
                                     <div key={category.id} className="helpdesk-term">
                                         <span>{category.name}</span>
+                                        <div className="helpdesk-delete-term">
+                                            <Button onClick={() => deleteCategory(category.id, 'ticket_category')}>
+                                                <svg width="20" fill="#bfbdbd" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                            </Button>
+                                        </div>
                                     </div>
                                 )
                             })}
@@ -274,6 +305,11 @@ const Settings = () => {
                                 return(
                                     <div key={type.id} className="helpdesk-term">
                                         <span>{type.name}</span>
+                                        <div className="helpdesk-delete-term">
+                                            <Button onClick={() => deleteType(type.id, 'ticket_type')}>
+                                                <svg width="20" fill="#bfbdbd" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                            </Button>
+                                        </div>
                                     </div>
                                 )
                             })}
@@ -287,6 +323,11 @@ const Settings = () => {
                                 return(
                                     <div key={priority.id} className="helpdesk-term">
                                         <span>{priority.name}</span>
+                                        <div className="helpdesk-delete-term">
+                                            <Button onClick={() => deletePriority(priority.id, 'ticket_priority')}>
+                                                <svg width="20" fill="#bfbdbd" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                            </Button>
+                                        </div>
                                     </div>
                                 )
                             })}
@@ -300,6 +341,11 @@ const Settings = () => {
                                 return(
                                     <div key={status.id} className="helpdesk-term">
                                         <span>{status.name}</span>
+                                        <div className="helpdesk-delete-term">
+                                            <Button onClick={() => deleteStatus(status.id, 'ticket_status')}>
+                                                <svg width="20" fill="#bfbdbd" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                            </Button>
+                                        </div>
                                     </div>
                                 )
                             })}
@@ -313,6 +359,11 @@ const Settings = () => {
                                 return(
                                     <div key={agents.id} className="helpdesk-term">
                                         <span>{agents.name}</span>
+                                        <div className="helpdesk-delete-term">
+                                            <Button onClick={() => deleteAgent(agents.id, 'ticket_agent')}>
+                                                <svg width="20" fill="#bfbdbd" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                            </Button>
+                                        </div>
                                     </div>
                                 )
                             })}
