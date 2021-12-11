@@ -9,6 +9,9 @@ namespace Helpdesk;
 
 defined( 'ABSPATH' ) || exit;
 
+use Helpdesk\Login;
+use Helpdesk\Register;
+
 /**
  * Class UserDashboard
  */
@@ -66,7 +69,12 @@ class UserDashboard {
 	 * @access public
 	 */
 	public function user_dashboard() {
-		return '<div id="helpdesk-user-dashboard"></div>';
+		if ( is_user_logged_in() ) {
+			return '<div id="helpdesk-user-dashboard"></div>';
+		} else {
+			Login::view();
+			Register::view();
+		}
 	}
 
 	/**
@@ -121,6 +129,22 @@ class UserDashboard {
 				array(),
 				HELPDESK,
 				'all'
+			);
+
+			wp_enqueue_style(
+				'user-dashboard-login',
+				HELPDESK_URL . 'src/assets/css/login.css',
+				array(),
+				HELPDESK,
+				'all'
+			);
+
+			wp_enqueue_script(
+				'user-dashboard-login',
+				HELPDESK_URL . 'src/assets/js/login.js',
+				array( '' ),
+				HELPDESK,
+				true
 			);
 		}
 	}

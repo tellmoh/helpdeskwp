@@ -57,6 +57,8 @@ class Main {
 		require_once HELPDESK_PATH . 'src/API/Tickets.php';
         require_once HELPDESK_PATH . 'src/API/Replies.php';
         require_once HELPDESK_PATH . 'src/API/Settings.php';
+        require_once HELPDESK_PATH . 'src/user-dashboard/login.php';
+        require_once HELPDESK_PATH . 'src/user-dashboard/register.php';
         require_once HELPDESK_PATH . 'src/user-dashboard/user-dashboard.php';
         require_once HELPDESK_PATH . 'src/agent-dashboard/agent-dashboard.php';
         require_once HELPDESK_PATH . 'src/admin/post-type/post-type.php';

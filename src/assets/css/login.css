@@ -1,0 +1,62 @@
+.helpdeskwp-register,
+.helpdeskwp-login {
+    width: 48%;
+    float: left;
+    background: #fff;
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px #344585;
+}
+
+.helpdeskwp-login {
+    margin-right: 3%;
+}
+
+.helpdeskwp-register input[type="text"],
+.helpdeskwp-login input[type="text"],
+.helpdeskwp-register input[type="email"],
+.helpdeskwp-login input[type="email"],
+.helpdeskwp-register input[type="password"],
+.helpdeskwp-login input[type="password"] {
+    border: 1px solid #8fa3f1;
+    border-radius: 7px;
+    padding: 10px 20px;
+    color: hsl(0, 0%, 50%);
+    line-height: 1.5 !important;
+    font-size: 1rem;
+    width: 100%;
+    background: transparent;
+}
+
+.helpdeskwp-register [type="submit"],
+.helpdeskwp-login [type="submit"] {
+    margin: 18px 0;
+    background: #0051af;
+    border: 1px solid #0051af;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: all .3s;
+    cursor: pointer;
+    height: 42px;
+}
+
+.helpdeskwp-register [type="submit"]:hover,
+.helpdeskwp-login [type="submit"]:hover {
+    background: #fff;
+    color: #0051af;
+}
+
+.helpdeskwp-login p {
+    margin: 0;
+}
+
+body label {
+    margin: 14px 0 8px;
+    color: hsl(0, 0%, 50%);
+    font-size: 14px;
+}

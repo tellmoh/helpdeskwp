@@ -1,0 +1,34 @@
+<?php
+/**
+ * @since   1.0.0
+ *
+ * @package Helpdesk
+ */
+
+namespace Helpdesk;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class Login
+ */
+class Login {
+    /**
+	 * Login form view
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+    public static function view() {
+        ?>
+        <div class="helpdeskwp-login">
+            <?php wp_login_form(
+                array(
+                    'redirect' => 'http://localhost:8888/dev/user-dashboard/',
+                )
+            ); ?>
+        </div>
+        <?php
+    }
+}
