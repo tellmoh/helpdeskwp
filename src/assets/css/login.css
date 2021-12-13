@@ -51,6 +51,12 @@
     color: #0051af;
 }
 
+.helpdeskwp-register [type="submit"]:focus,
+.helpdeskwp-login [type="submit"]:focus {
+    background: #0051af;
+    color: #fff;
+}
+
 .helpdeskwp-login p {
     margin: 0;
 }
@@ -59,4 +65,9 @@ body label {
     margin: 14px 0 8px;
     color: hsl(0, 0%, 50%);
     font-size: 14px;
+}
+
+#helpdesk-err-msg {
+    color: #f39e9e;
+    margin: 10px 0;
 }

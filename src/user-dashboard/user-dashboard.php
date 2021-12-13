@@ -117,9 +117,10 @@ class UserDashboard {
 				'user-dashboard',
 				'user_dashboard',
 				array(
-					'url'   => esc_url_raw( rest_url() ),
-					'nonce' => wp_create_nonce( 'wp_rest' ),
-					'user'  => $this->user(),
+					'url'     => esc_url_raw( rest_url() ),
+					'ajaxurl' => esc_url_raw( admin_url( 'admin-ajax.php' ) ),
+					'nonce'   => wp_create_nonce( 'wp_rest' ),
+					'user'    => $this->user(),
 				)
 			);
 
@@ -142,7 +143,7 @@ class UserDashboard {
 			wp_enqueue_script(
 				'user-dashboard-login',
 				HELPDESK_URL . 'src/assets/js/login.js',
-				array( '' ),
+				array( 'jquery' ),
 				HELPDESK,
 				true
 			);
