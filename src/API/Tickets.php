@@ -38,6 +38,16 @@ class Tickets {
                 'args'                => array(),
             ),
         ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/(?P<id>[\d]+)', array(
+            array(
+                'methods'             => \WP_REST_Server::DELETABLE,
+                'callback'            => array( $this, 'delete_ticket' ),
+                'permission_callback' => array( $this, 'delete_ticket_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
     }
 
     public function create_ticket( $request ) {
@@ -164,6 +174,18 @@ class Tickets {
         return new \WP_Error( 'cant-update-ticket', __( 'Can\'t update the ticket', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
+    public function delete_ticket( $request ) {
+        $ticket_id = $request->get_param( 'id' );
+
+        $result = wp_trash_post( $ticket_id );
+
+        if ( $result ) {
+            return new \WP_REST_Response( __( 'The ticket has been deleted', 'helpdesk' ), 200 );
+        }
+
+        return new \WP_Error( 'cant-delete-ticket', __( 'Can\'t delete the ticket', 'helpdesk' ), array( 'status' => 500 ) );
+    }
+
     public function prepare_update_ticket( string $ticket, array $properties ) {
         if ( isset( $properties['category'] ) && ! empty( $properties['category'] ) ) {
             wp_set_object_terms( $ticket, $properties['category'], 'ticket_category' );
@@ -196,6 +218,10 @@ class Tickets {
     }
 
     public function update_ticket_permissions_check() {
+        return current_user_can( 'edit_posts' );
+    }
+
+    public function delete_ticket_permissions_check() {
         return current_user_can( 'edit_posts' );
     }
 }

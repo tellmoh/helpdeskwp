@@ -111,7 +111,7 @@ const TicketContextProvider = (props) => {
             }
         }
 
-        await axios.delete(`${user_dashboard.url}wp/v2/ticket/${id}`, config)
+        await axios.delete(`${user_dashboard.url}helpdesk/v1/tickets/${id}`, config)
         .then(function (res) {
             console.log(res.data.id)
         })

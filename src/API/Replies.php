@@ -75,15 +75,6 @@ class Replies extends Tickets {
 
     public function delete_replies( $request ) {
         $reply_id = $request->get_param( 'id' );
-        $post     = get_post( $reply_id );
-
-        if ( ! $this->check_delete_permission( $post ) ) {
-			return new \WP_Error(
-				'rest_user_cannot_delete_post',
-				__( 'Sorry, you are not allowed to delete this post.' ),
-				array( 'status' => rest_authorization_required_code() )
-			);
-		}
 
         $result = wp_trash_post( $reply_id );
 
@@ -176,10 +167,6 @@ class Replies extends Tickets {
     public function delete_replies_permissions_check() {
         return current_user_can( 'edit_posts' );
     }
-
-	public function check_delete_permission( $post ) {
-		return current_user_can( 'delete_post', $post->ID );
-	}
 }
 
 function Replies_API() {
