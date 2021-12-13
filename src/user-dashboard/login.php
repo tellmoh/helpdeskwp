@@ -23,11 +23,7 @@ class Login {
     public static function view() {
         ?>
         <div class="helpdeskwp-login">
-            <?php wp_login_form(
-                array(
-                    'redirect' => 'http://localhost:8888/dev/user-dashboard/',
-                )
-            ); ?>
+            <?php wp_login_form(); ?>
         </div>
         <?php
     }
