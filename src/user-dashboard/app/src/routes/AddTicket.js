@@ -18,7 +18,6 @@ const AddTicket = () => {
     const [cat, setCat] = useState([])
     const [typ, setType] = useState([])
     const [desc, setDesc] = useState([])
-    const [pictures, setPictures] = useState([])
 
     const {
         createTicket,
@@ -39,17 +38,23 @@ const AddTicket = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        const pictures = document.getElementById("helpdesk-pictures")
+        const fileLength = pictures.files.length
+        const files = pictures
+
         let formData = new FormData();
         formData.append("title", title);
         formData.append("category", cat.label);
         formData.append("type", typ.label);
         formData.append("description", desc);
-        formData.append("media", pictures);
+
+        for ( let i = 0; i < fileLength; i++ ) {
+            formData.append("pictures[]", pictures.files[i]);
+        }
 
         createTicket(formData)
         setTitle([])
         setDesc([])
-        setPictures([])
         document.querySelector(".helpdesk-editor .ProseMirror").innerHTML = '';
     }
 
@@ -67,10 +72,6 @@ const AddTicket = () => {
 
     const handleDescChange = (html) => {
         setDesc(html)
-    }
-
-    const handlePicturesChange = (e) => {
-        setPictures(e.target.files[0])
     }
 
     return (
@@ -101,8 +102,8 @@ const AddTicket = () => {
 
                 <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
                     <p>Image</p>
-                    <label htmlFor="contained-button-file">
-                        <InputMedia accept="image/*" id="contained-button-file" type="file" onChange={handlePicturesChange} />
+                    <label htmlFor="helpdesk-pictures">
+                        <InputMedia accept="image/*" id="helpdesk-pictures" type="file" multiple />
                         <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
                     </label>
                 </div>

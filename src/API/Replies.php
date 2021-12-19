@@ -119,16 +119,21 @@ class Replies extends Tickets {
     }
 
     public function get_image_link( string $post_id ) {
-        $images = get_post_meta( $post_id, 'reply_images', '' );
+        $images     = get_post_meta( $post_id, 'reply_images', '' );
+        $thumbnails = array();
 
-        if ( 'empty-image' == $images[0] ) {
+        if ( isset( $images[0]['msg'] ) && 'empty-image' == $images[0]['msg'] ) {
             return '';
         }
 
-        $thumbnail = wp_get_attachment_image_src( $images[0], 'thumbnail' );
+        if ( $images[0] ) {
+            foreach ( $images[0] as $image ) {
+                $thumbnails[] = wp_get_attachment_image_src( $image, 'thumbnail' )[0];
+            }
+        }
 
-        if ( isset( $thumbnail[0] ) ) {
-            return $thumbnail[0];
+        if ( $thumbnails ) {
+            return $thumbnails;
         }
     }
 

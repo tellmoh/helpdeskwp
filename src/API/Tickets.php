@@ -106,7 +106,7 @@ class Tickets {
         return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
-    public function add_reply( string $reply, string $ticket_id, string $images ) {
+    public function add_reply( string $reply, string $ticket_id, array $images ) {
         $current_user = get_current_user_id();
 
         $reply_id = wp_insert_post(
@@ -130,27 +130,43 @@ class Tickets {
         return new \WP_Error( 'cant-add-reply', __( 'Can\'t add the reply', 'helpdesk' ), array( 'status' => 500 ) );
     }
 
-    public function save_image( array $image ) {
-        if ( empty( $image ) ) {
-            return new \WP_REST_Response( 'empty-image', 200 );
+    public function save_image( array $images ) {
+        if ( empty( $images ) ) {
+            $data = array(
+                'msg' => 'empty-image'
+            );
+            return new \WP_REST_Response( $data, 200 );
         }
 
-        $file     = file_get_contents( $image['media']['tmp_name'] );
-        $filetype = wp_check_filetype( $image['media']['name'], '' );
-        $upload   = wp_upload_bits( $image['media']['name'], '', $file );
+        $names     = $images['pictures']['name'];
+        $tmp_names = $images['pictures']['tmp_name'];
+        $images_id = array();
 
-        if ( ! $upload['error'] ) {
-            $attachment_id = wp_insert_attachment(
-                array(
-                    'guid'           => $upload['url'],
-                    'post_mime_type' => $filetype['type'],
-                ),
-                $upload['file'],
-                ''
-            );
+        if ( $names && $tmp_names ) {
+            for ( $i = 0; $i < count( $names ); $i++ ) {
+                $file     = file_get_contents( $tmp_names[$i] );
+                $filetype = wp_check_filetype( $names[$i], '' );
+                $upload   = wp_upload_bits( $names[$i], '', $file );
 
-            if ( ! is_wp_error( $attachment_id ) ) {
-                return new \WP_REST_Response( $attachment_id, 201 );
+                if ( ! $upload['error'] ) {
+                    $attachment_id = wp_insert_attachment(
+                        array(
+                            'guid'           => $upload['url'],
+                            'post_mime_type' => $filetype['type'],
+                            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $names[$i] ) ),
+                        ),
+                        $upload['file'],
+                        ''
+                    );
+
+                    if ( ! is_wp_error( $attachment_id ) ) {
+                        $images_id[] = $attachment_id;
+                    }
+                }
+            }
+
+            if ( $images_id ) {
+                return new \WP_REST_Response( $images_id, 201 );
             }
         }
 

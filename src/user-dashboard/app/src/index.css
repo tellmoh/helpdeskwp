@@ -364,3 +364,12 @@ span.reply-date {
 .helpdesk-properties input {
     height: 30px !important;
 }
+
+.helpdesk-image {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.helpdesk-image img {
+    border-radius: 7px;
+}

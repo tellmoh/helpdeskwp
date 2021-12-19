@@ -23,7 +23,6 @@ const Ticket = () => {
     const [singleTicket, setSingleTicket] = useState(null)
     const [replies, setReplies] = useState(null)
     const [reply, setReply] = useState('')
-    const [pictures, setPictures] = useState([])
 
     let params = useParams();
 
@@ -37,10 +36,6 @@ const Ticket = () => {
 
     const handleReplyChange = (reply) => {
         setReply(reply)
-    }
-
-    const handlePicturesChange = (e) => {
-        setPictures(e.target.files[0])
     }
 
     const takeTicket = async () => {
@@ -113,14 +108,20 @@ const Ticket = () => {
     const submitReply = (event) => {
         event.preventDefault()
 
+        const pictures = document.getElementById("helpdesk-pictures")
+        const fileLength = pictures.files.length
+        const files = pictures
+
         let formData = new FormData();
         formData.append("reply", reply);
         formData.append("parent", params.ticketId);
-        formData.append("media", pictures);
+
+        for ( let i = 0; i < fileLength; i++ ) {
+            formData.append("pictures[]", pictures.files[i]);
+        }
 
         sendReply(formData)
         setReply('')
-        setPictures([])
         document.querySelector(".helpdesk-editor .ProseMirror").innerHTML = '';
     }
 
@@ -201,8 +202,8 @@ const Ticket = () => {
                             <TextEditor onChange={handleReplyChange} />
                             <div className="helpdesk-w-50">
                                 <p>Image</p>
-                                <label htmlFor="contained-button-file">
-                                    <InputMedia accept="image/*" id="contained-button-file" type="file" onChange={handlePicturesChange} />
+                                <label htmlFor="helpdesk-pictures">
+                                    <InputMedia accept="image/*" id="helpdesk-pictures" type="file" multiple />
                                     <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
                                 </label>
                             </div>
@@ -227,10 +228,15 @@ const Ticket = () => {
                                     </div>
                                     {reply.images &&
                                         <div className="ticket-reply-images">
-                                            <Image
-                                                width={100}
-                                                src={reply.images}
-                                            />
+                                            {reply.images.map((img, index) => {
+                                                return (
+                                                    <Image
+                                                        key={index}
+                                                        width={100}
+                                                        src={img}
+                                                    />
+                                                )
+                                            })}
                                         </div>
                                     }
                                     <div className="helpdesk-delete-reply">

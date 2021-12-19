@@ -437,3 +437,12 @@ span.reply-date {
 .helpdesk-delete-term button:hover svg {
     fill: #f39e9e;
 }
+
+.helpdesk-image {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.helpdesk-image img {
+    border-radius: 7px;
+}
