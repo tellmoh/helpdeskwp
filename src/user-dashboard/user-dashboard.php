@@ -69,11 +69,13 @@ class UserDashboard {
 	 * @access public
 	 */
 	public function user_dashboard() {
-		if ( is_user_logged_in() ) {
-			return '<div id="helpdesk-user-dashboard"></div>';
-		} else {
-			Login::view();
-			Register::view();
+		if ( is_page() ) {
+			if ( is_user_logged_in() ) {
+				return '<div id="helpdesk-user-dashboard"></div>';
+			} else {
+				Login::view();
+				Register::view();
+			}
 		}
 	}
 
