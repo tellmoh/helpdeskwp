@@ -62,6 +62,28 @@ class UserDashboard {
 	}
 
 	/**
+	 * Returns the settings
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access private
+	 */
+	private function settings( string $option ) {
+		return $setting = isset( get_option( 'helpdeskwp_settings' )[$option] ) ? get_option( 'helpdeskwp_settings' )[$option] : array();
+	}
+
+	/**
+	 * Returns support portal page ID
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function portal_page() {
+		return $this->settings( 'pageID' );
+	}
+
+	/**
 	 * Shortcode output
 	 *
 	 * @since 1.0.0
@@ -104,9 +126,7 @@ class UserDashboard {
 	 */
 	public function enqueue_scripts() {
 
-		global $post;
-
-		if ( has_shortcode( $post->post_content, 'helpdesk_user_dashboard' ) ) {
+		if ( $this->portal_page() && is_page( $this->portal_page() ) ) {
 			wp_enqueue_script(
 				'user-dashboard',
 				HELPDESK_URL . 'src/user-dashboard/app/build/index.js',
