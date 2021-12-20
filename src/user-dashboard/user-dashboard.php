@@ -57,7 +57,7 @@ class UserDashboard {
 	 * @access private
 	 */
 	private function hooks() {
-		add_shortcode( 'helpdesk_user_dashboard', array( $this, 'user_dashboard' ) );
+		add_shortcode( 'helpdesk_support_portal', array( $this, 'user_dashboard' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
