@@ -1,4 +1,5 @@
-import { useState, useContext, useEffect } from 'react'
+import { __ } from '@wordpress/i18n';
+import { useContext, useEffect } from 'react'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { TicketContext } from '../contexts/TicketContext'
@@ -40,7 +41,7 @@ const Filters = () => {
 
     return (
         <div className="helpdesk-filters helpdesk-properties">
-            <h3>Filters</h3>
+            <h3>{ __( 'Filters', 'helpdeskwp' ) }</h3>
             <Category onChange={handleCategoryChange} category={category} parent="filter"/>
             <Priority onChange={handlePriorityChange} priority={priority} parent="filter" />
             <Status onChange={handleStatusChange} status={status} parent="filter" />
@@ -48,7 +49,7 @@ const Filters = () => {
             <Agent onChange={handleAgentChange} agents={agents} parent="filter" />
 
             <Stack direction="column">
-                <Button variant="contained" onClick={apply}>Apply</Button>
+                <Button variant="contained" onClick={apply}>{ __( 'Apply', 'helpdeskwp' ) }</Button>
             </Stack>
         </div>
     )

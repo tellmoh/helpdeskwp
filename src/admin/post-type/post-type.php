@@ -16,7 +16,7 @@ class PostType {
 
     public static function tickets() {
         $labels = array(
-            'name' => __( 'Tickets', 'helpdesk' ),
+            'name' => __( 'Tickets', 'helpdeskwp' ),
         );
         $args = array(
             'labels'             => $labels,
@@ -35,7 +35,7 @@ class PostType {
 
     public static function reply() {
         $labels = array(
-            'name' => __( 'Reply', 'helpdesk' ),
+            'name' => __( 'Reply', 'helpdeskwp' ),
         );
         $args = array(
             'labels'             => $labels,

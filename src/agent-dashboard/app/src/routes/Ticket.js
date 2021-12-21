@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { Outlet, Link } from "react-router-dom";
@@ -182,34 +183,34 @@ const Ticket = () => {
             <div className="helpdesk-main">
                 <div className="helpdesk-tickets">
                     <Link to="/?page=helpdesk">
-                        <span className="helpdesk-back primary">Back</span>
+                        <span className="helpdesk-back primary">{ __( 'Back', 'helpdeskwp' ) }</span>
                     </Link>
                     <div className="refresh-ticket">
                         <Button onClick={refreshTicket}>
-                            <svg data-testid="RefreshIcon" fill="#0051af" width="23px" aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
+                            <svg fill="#0051af" width="23px" aria-hidden="true" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
                         </Button>
                     </div>
                     {singleTicket &&
                         <div className="helpdesk-single-ticket ticket-meta">
                             <h1>{singleTicket.title.rendered}</h1>
-                            <div>By: {singleTicket.user}</div>
-                            <div>In: {singleTicket.category}</div>
-                            <div>Type: {singleTicket.type}</div>
+                            <div>{ __( 'By', 'helpdeskwp' ) }: {singleTicket.user}</div>
+                            <div>{ __( 'In', 'helpdeskwp' ) }: {singleTicket.category}</div>
+                            <div>{ __( 'Type', 'helpdeskwp' ) }: {singleTicket.type}</div>
                         </div>
                     }
                     <div className="helpdesk-add-new-reply helpdesk-submit">
                         <form onSubmit={submitReply}>
                             <TextEditor onChange={handleReplyChange} />
                             <div className="helpdesk-w-50">
-                                <p>Image</p>
+                                <p>{ __( 'Image', 'helpdeskwp' ) }</p>
                                 <label htmlFor="helpdesk-pictures">
                                     <InputMedia accept="image/*" id="helpdesk-pictures" type="file" multiple />
-                                    <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
+                                    <Button variant="contained" component="span" className="helpdesk-upload">{ __( 'Upload', 'helpdeskwp' ) }</Button>
                                 </label>
                             </div>
                             <div className="helpdesk-w-50">
                                 <div className="helpdesk-submit-btn">
-                                    <input type="submit" value="Send" />
+                                    <input type="submit" value={ __( 'Send', 'helpdeskwp' ) } />
                                 </div>
                             </div>
                         </form>
@@ -241,7 +242,7 @@ const Ticket = () => {
                                     }
                                     <div className="helpdesk-delete-reply">
                                         <Button onClick={(e) => handleDelete(reply.id)}>
-                                            <svg width="20" fill="#0051af" className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DeleteForeverOutlinedIcon"><path d="M14.12 10.47 12 12.59l-2.13-2.12-1.41 1.41L10.59 14l-2.12 2.12 1.41 1.41L12 15.41l2.12 2.12 1.41-1.41L13.41 14l2.12-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"></path></svg>
+                                            <svg width="20" fill="#0051af" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.12 10.47 12 12.59l-2.13-2.12-1.41 1.41L10.59 14l-2.12 2.12 1.41 1.41L12 15.41l2.12 2.12 1.41-1.41L13.41 14l2.12-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"></path></svg>
                                         </Button>
                                     </div>
                                 </div>

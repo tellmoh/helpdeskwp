@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import Select from 'react-select';
 
 export function Category({ onChange, category, value }) {
@@ -10,7 +11,7 @@ export function Category({ onChange, category, value }) {
     const content = { value: value.ticket_category[0], label: value.category };
     return(
         <div>
-            <p>Category</p>
+            <p>{ __( 'Category', 'helpdeskwp' ) }</p>
             <Select
                 defaultValue={content}
                 onChange={onChange}
@@ -30,7 +31,7 @@ export function Status({ onChange, status, value }) {
     const content = { value: value.ticket_status[0], label: value.status };
     return(
         <div>
-            <p>Status</p>
+            <p>{ __( 'Status', 'helpdeskwp' ) }</p>
             <Select
                 defaultValue={content}
                 onChange={onChange}
@@ -50,7 +51,7 @@ export function Type({ onChange, type, value }) {
     const content = { value: value.ticket_type[0], label: value.type };
     return(
         <div>
-            <p>Type</p>
+            <p>{ __( 'Type', 'helpdeskwp' ) }</p>
             <Select
                 defaultValue={content}
                 onChange={onChange}

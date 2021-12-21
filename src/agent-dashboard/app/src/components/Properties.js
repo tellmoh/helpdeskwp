@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useState, useContext } from 'react'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -57,7 +58,7 @@ const Properties = ({ ticket, ticketContent }) => {
         <>
         {ticketContent &&
             <div className="helpdesk-properties">
-                <h3>Properties</h3>
+                <h3>{ __( 'Properties', 'helpdeskwp' ) }</h3>
                 <Category onChange={handleCategoryChange} category={category} parent="properties" value={ticketContent} />
                 <Priority onChange={handlePriorityChange} priority={priority} parent="properties" value={ticketContent} />
                 <Status onChange={handleStatusChange} status={status} parent="properties" value={ticketContent} />
@@ -65,7 +66,7 @@ const Properties = ({ ticket, ticketContent }) => {
                 <Agent onChange={handleAgentChange} agents={agents} parent="properties" value={ticketContent} />
 
                 <Stack direction="column">
-                    <Button variant="contained" onClick={updateTicket}>Update</Button>
+                    <Button variant="contained" onClick={updateTicket}>{ __( 'Update', 'helpdeskwp' ) }</Button>
                 </Stack>
             </div>
         }

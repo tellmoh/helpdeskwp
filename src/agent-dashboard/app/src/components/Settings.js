@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useContext } from 'react';
 import TopBar from "./TopBar";
 import Tabs from '@mui/material/Tabs';
@@ -256,17 +257,17 @@ const Settings = () => {
                         onChange={handleChange}
                         sx={{ borderRight: 1, borderColor: 'divider' }}
                     >
-                        <Tab label="Portal Page" {...a11yProps(0)} />
-                        <Tab label="Category" {...a11yProps(1)} />
-                        <Tab label="Type" {...a11yProps(2)} />
-                        <Tab label="Priority" {...a11yProps(3)} />
-                        <Tab label="Status" {...a11yProps(4)} />
-                        <Tab label="Agent" {...a11yProps(5)} />
+                        <Tab label={ __( 'Portal Page', 'helpdeskwp' ) } {...a11yProps(0)} />
+                        <Tab label={ __( 'Category', 'helpdeskwp' ) } {...a11yProps(1)} />
+                        <Tab label={ __( 'Type', 'helpdeskwp' ) } {...a11yProps(2)} />
+                        <Tab label={ __( 'Priority', 'helpdeskwp' ) } {...a11yProps(3)} />
+                        <Tab label={ __( 'Status', 'helpdeskwp' ) } {...a11yProps(4)} />
+                        <Tab label={ __( 'Agent', 'helpdeskwp' ) } {...a11yProps(5)} />
                     </Tabs>
                     <TabPanel value={value} index={0}>
-                        <p style={{ margin: '5px 0'}}>Select the support portal page</p>
+                        <p style={{ margin: '5px 0'}}>{ __( 'Select the support portal page', 'helpdeskwp' ) }</p>
                         <div style={{ marginBottom: '10px' }}>
-                            <small>This page will set as the support portal page</small>
+                            <small>{ __( 'This page will set as the support portal page', 'helpdeskwp' ) }</small>
                         </div>
                         {setting &&
                             <Select
@@ -276,12 +277,12 @@ const Settings = () => {
                             />
                         }
                         <div style={{ marginTop: '16px' }}>
-                            <Button variant="contained" onClick={handleSave}>Save</Button>
+                            <Button variant="contained" onClick={handleSave}>{ __( 'Save', 'helpdeskwp' ) }</Button>
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <input type="text" placeholder="Category" value={categoryTerm} onChange={(e) => setCategory(e.target.value)} />
-                        <Button variant="contained" className="add-new-btn" onClick={addNewCategory}>Add</Button>
+                        <input type="text" placeholder={ __( 'Category', 'helpdeskwp' ) } value={categoryTerm} onChange={(e) => setCategory(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewCategory}>{ __( 'Add', 'helpdeskwp' ) }</Button>
                         <div className="helpdesk-terms-list">
                             {category && category.map((category) => {
                                 return(
@@ -298,8 +299,8 @@ const Settings = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <input type="text" placeholder="Type" value={typeTerm} onChange={(e) => setType(e.target.value)} />
-                        <Button variant="contained" className="add-new-btn" onClick={addNewType}>Add</Button>
+                        <input type="text" placeholder={ __( 'Type', 'helpdeskwp' ) } value={typeTerm} onChange={(e) => setType(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewType}>{ __( 'Add', 'helpdeskwp' ) }</Button>
                         <div className="helpdesk-terms-list">
                             {type && type.map((type) => {
                                 return(
@@ -316,8 +317,8 @@ const Settings = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <input type="text" placeholder="Priority" value={priorityTerm} onChange={(e) => setPriority(e.target.value)} />
-                        <Button variant="contained" className="add-new-btn" onClick={addNewPriority}>Add</Button>
+                        <input type="text" placeholder={ __( 'Priority', 'helpdeskwp' ) } value={priorityTerm} onChange={(e) => setPriority(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewPriority}>{ __( 'Add', 'helpdeskwp' ) }</Button>
                         <div className="helpdesk-terms-list">
                             {priority && priority.map((priority) => {
                                 return(
@@ -334,8 +335,8 @@ const Settings = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        <input type="text" placeholder="Status" value={statusTerm} onChange={(e) => setStatus(e.target.value)} />
-                        <Button variant="contained" className="add-new-btn" onClick={addNewStatus}>Add</Button>
+                        <input type="text" placeholder={ __( 'Status', 'helpdeskwp' ) } value={statusTerm} onChange={(e) => setStatus(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewStatus}>{ __( 'Add', 'helpdeskwp' ) }</Button>
                         <div className="helpdesk-terms-list">
                             {status && status.map((status) => {
                                 return(
@@ -352,8 +353,8 @@ const Settings = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={5}>
-                        <input type="text" placeholder="Agent" value={agentTerm} onChange={(e) => setAgent(e.target.value)} />
-                        <Button variant="contained" className="add-new-btn" onClick={addNewAgent}>Add</Button>
+                        <input type="text" placeholder={ __( 'Agent', 'helpdeskwp' ) } value={agentTerm} onChange={(e) => setAgent(e.target.value)} />
+                        <Button variant="contained" className="add-new-btn" onClick={addNewAgent}>{ __( 'Add', 'helpdeskwp' ) }</Button>
                         <div className="helpdesk-terms-list">
                             {agents && agents.map((agents) => {
                                 return(

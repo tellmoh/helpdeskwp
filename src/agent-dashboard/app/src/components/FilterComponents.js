@@ -1,7 +1,8 @@
+import { __ } from '@wordpress/i18n';
 import Select from 'react-select';
 
 export function Category({ onChange, category, parent, value }) {
-    let cat = [{ value: '', label: 'None' }];
+    let cat = [{ value: '', label: __( 'None', 'helpdeskwp' ) }];
 
     {category && category.map((category) => {
         cat.push({ value: category.id, label: category.name });
@@ -12,7 +13,7 @@ export function Category({ onChange, category, parent, value }) {
 
         return(
             <div>
-                <p>Category</p>
+                <p>{ __( 'Category', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -26,7 +27,7 @@ export function Category({ onChange, category, parent, value }) {
         const content = { value: value.ticket_category[0], label: value.category };
         return(
             <div>
-                <p>Category</p>
+                <p>{ __( 'Category', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
@@ -38,7 +39,7 @@ export function Category({ onChange, category, parent, value }) {
 }
 
 export function Priority({ onChange, priority, parent, value }) {
-    let pri = [{ value: '', label: 'None' }];
+    let pri = [{ value: '', label: __( 'None', 'helpdeskwp' ) }];
 
     {priority && priority.map((priority) => {
         pri.push({ value: priority.id, label: priority.name });
@@ -48,7 +49,7 @@ export function Priority({ onChange, priority, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Priority'))
         return(
             <div>
-                <p>Priority</p>
+                <p>{ __( 'Priority', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -62,7 +63,7 @@ export function Priority({ onChange, priority, parent, value }) {
         const content = { value: value.ticket_priority[0], label: value.priority };
         return(
             <div>
-                <p>Priority</p>
+                <p>{ __( 'Priority', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
@@ -74,7 +75,7 @@ export function Priority({ onChange, priority, parent, value }) {
 }
 
 export function Status({ onChange, status, parent, value }) {
-    let sta = [{ value: '', label: 'None' }];
+    let sta = [{ value: '', label: __( 'None', 'helpdeskwp' ) }];
 
     {status && status.map((status) => {
         sta.push({ value: status.id, label: status.name });
@@ -84,7 +85,7 @@ export function Status({ onChange, status, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Status'))
         return(
             <div>
-                <p>Status</p>
+                <p>{ __( 'Priority', 'Status' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -98,7 +99,7 @@ export function Status({ onChange, status, parent, value }) {
         const content = { value: value.ticket_status[0], label: value.status };
         return(
             <div>
-                <p>Status</p>
+                <p>{ __( 'Priority', 'Status' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
@@ -110,7 +111,7 @@ export function Status({ onChange, status, parent, value }) {
 }
 
 export function Type({ onChange, type, parent, value }) {
-    let typ = [{ value: '', label: 'None' }];
+    let typ = [{ value: '', label: __( 'None', 'helpdeskwp' ) }];
 
     {type && type.map((type) => {
         typ.push({ value: type.id, label: type.name });
@@ -120,7 +121,7 @@ export function Type({ onChange, type, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Type'))
         return(
             <div>
-                <p>Type</p>
+                <p>{ __( 'Type', 'Status' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -134,7 +135,7 @@ export function Type({ onChange, type, parent, value }) {
         const content = { value: value.ticket_type[0], label: value.type };
         return(
             <div>
-                <p>Type</p>
+                <p>{ __( 'Type', 'Status' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
@@ -146,7 +147,7 @@ export function Type({ onChange, type, parent, value }) {
 }
 
 export function Agent({ onChange, agents, parent, value }) {
-    let agent = [{ value: '', label: 'None' }];
+    let agent = [{ value: '', label: __( 'None', 'helpdeskwp' ) }];
 
     {agents && agents.map((agents) => {
         agent.push({ value: agents.id, label: agents.name });
@@ -156,7 +157,7 @@ export function Agent({ onChange, agents, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Agent'))
         return(
             <div>
-                <p>Agent</p>
+                <p>{ __( 'Agent', 'Status' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -170,7 +171,7 @@ export function Agent({ onChange, agents, parent, value }) {
         const content = { value: value.ticket_agent[0], label: value.agent };
         return(
             <div>
-                <p>Agent</p>
+                <p>{ __( 'Agent', 'Status' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}

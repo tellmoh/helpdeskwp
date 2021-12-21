@@ -130,7 +130,7 @@ class UserDashboard {
 			wp_enqueue_script(
 				'user-dashboard',
 				HELPDESK_URL . 'src/user-dashboard/app/build/index.js',
-				array( 'wp-element' ),
+				array( 'wp-element', 'wp-i18n' ),
 				HELPDESK,
 				true
 			);

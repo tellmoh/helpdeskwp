@@ -25,27 +25,27 @@ class Register {
         <div class="helpdeskwp-register">
             <form class="helpdeskwp-register-form">
                 <div class="helpdesk-reegister-name">
-                    <label for="help-first">First Name</label>
+                    <label for="help-first"><?php esc_html_e( 'First Name', 'helpdeskwp' ); ?></label>
                     <input type="text" name="first-name" id="help-first" required>
                 </div>
                 <div class="helpdesk-register-last-name">
-                    <label for="help-last">Last Name</label>
+                    <label for="help-last"><?php esc_html_e( 'Last Name', 'helpdeskwp' ); ?></label>
                     <input type="text" name="last-name" id="help-last" required>
                 </div>
                 <div class="helpdesk-register-email">
-                    <label for="help-email">Email</label>
+                    <label for="help-email"><?php esc_html_e( 'Email', 'helpdeskwp' ); ?></label>
                     <input type="email" name="email" id="help-email" required>
                 </div>
                 <div class="helpdesk-register-username">
-                    <label for="help-username">Username</label>
+                    <label for="help-username"><?php esc_html_e( 'Username', 'helpdeskwp' ); ?></label>
                     <input type="text" name="username" id="help-username" required>
                 </div>
                 <div class="helpdesk-register-password">
-                    <label for="help-password">Password</label>
+                    <label for="help-password"><?php esc_html_e( 'Password', 'helpdeskwp' ); ?></label>
                     <input type="password" name="password" id="help-password" required>
                 </div>
                 <div class="helpdesk-register-submit">
-                    <input type="submit" value="Sign up">
+                    <input type="submit" value="<?php esc_html_e( 'Sign up', 'helpdeskwp' ); ?>">
                 </div>
             </form>
             <div id="helpdesk-err-msg"></div>

@@ -322,7 +322,7 @@ class AgentDashboard {
 	 */
     public function dashboard_menu() {
         add_menu_page(
-			__( 'Helpdesk Dashboard', 'helpdesk' ),
+			__( 'Helpdesk Dashboard', 'helpdeskwp' ),
 			'Help Desk WP',
 			'manage_options',
 			'helpdesk',
@@ -345,7 +345,7 @@ class AgentDashboard {
 			wp_enqueue_script(
 				'helpdesk-agent-dashboard',
 				HELPDESK_URL . 'src/agent-dashboard/app/build/index.js',
-				array( 'wp-element' ),
+				array( 'wp-element', 'wp-i18n' ),
 				HELPDESK,
 				true
 			);

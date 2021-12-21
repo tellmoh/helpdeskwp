@@ -70,7 +70,7 @@ class Replies extends Tickets {
             return new \WP_REST_Response( $res, 201 );
         }
 
-        return new \WP_Error( 'cant-create-reply', __( 'Can\'t create the reply', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-create-reply', __( 'Can\'t create the reply', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function delete_replies( $request ) {
@@ -79,10 +79,10 @@ class Replies extends Tickets {
         $result = wp_trash_post( $reply_id );
 
         if ( $result ) {
-            return new \WP_REST_Response( __( 'The reply has been deleted', 'helpdesk' ), 200 );
+            return new \WP_REST_Response( __( 'The reply has been deleted', 'helpdeskwp' ), 200 );
         }
 
-        return new \WP_Error( 'cant-delete-reply', __( 'Can\'t delete the reply', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-delete-reply', __( 'Can\'t delete the reply', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function get_replies( $request ) {

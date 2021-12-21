@@ -4,7 +4,7 @@ Plugin Name: Helpdesk
 Description: Helpdesk and ticketing system
 Version:     1.0.0
 Author:      mhmdmu
-Text Domain: helpdesk
+Text Domain: helpdeskwp
 License:     GNU Affero General Public License v3.0
 License URI: https://www.gnu.org/licenses/agpl-3.0.en.html
 */

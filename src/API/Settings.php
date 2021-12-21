@@ -77,7 +77,7 @@ class Settings {
             return $this->add_term( $params );
         }
 
-        return new \WP_Error( 'cant-create-item', __( 'Can\'t create an item', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-create-item', __( 'Can\'t create an item', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function add_term( $params ) {
@@ -112,10 +112,10 @@ class Settings {
         $result = wp_delete_term( $term_id, $taxonomy );
 
         if ( $result ) {
-            return new \WP_REST_Response( __( 'The term has been deleted', 'helpdesk' ), 200 );
+            return new \WP_REST_Response( __( 'The term has been deleted', 'helpdeskwp' ), 200 );
         }
 
-        return new \WP_Error( 'cant-delete-term', __( 'Can\'t delete the term', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-delete-term', __( 'Can\'t delete the term', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function options_permissions_check() {

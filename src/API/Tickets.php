@@ -74,7 +74,7 @@ class Tickets {
             return new \WP_REST_Response( $res, 201 );
         }
 
-        return new \WP_Error( 'cant-create-ticket', __( 'Can\'t create a ticket', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-create-ticket', __( 'Can\'t create a ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function add_ticket( string $title, string $type, string $category ) {
@@ -103,7 +103,7 @@ class Tickets {
             }
         }
 
-        return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function add_reply( string $reply, string $ticket_id, array $images ) {
@@ -127,7 +127,7 @@ class Tickets {
             return new \WP_REST_Response( $reply_id, 201 );
         }
 
-        return new \WP_Error( 'cant-add-reply', __( 'Can\'t add the reply', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-add-reply', __( 'Can\'t add the reply', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function save_image( array $images ) {
@@ -170,7 +170,7 @@ class Tickets {
             }
         }
 
-        return new \WP_Error( 'cant-save-image', __( 'Can\'t save the image', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-save-image', __( 'Can\'t save the image', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function update_ticket( $request ) {
@@ -187,7 +187,7 @@ class Tickets {
             return new \WP_REST_Response( $updated_ticket, 201 );
         }
 
-        return new \WP_Error( 'cant-update-ticket', __( 'Can\'t update the ticket', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-update-ticket', __( 'Can\'t update the ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function delete_ticket( $request ) {
@@ -196,10 +196,10 @@ class Tickets {
         $result = wp_trash_post( $ticket_id );
 
         if ( $result ) {
-            return new \WP_REST_Response( __( 'The ticket has been deleted', 'helpdesk' ), 200 );
+            return new \WP_REST_Response( __( 'The ticket has been deleted', 'helpdeskwp' ), 200 );
         }
 
-        return new \WP_Error( 'cant-delete-ticket', __( 'Can\'t delete the ticket', 'helpdesk' ), array( 'status' => 500 ) );
+        return new \WP_Error( 'cant-delete-ticket', __( 'Can\'t delete the ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function prepare_update_ticket( string $ticket, array $properties ) {

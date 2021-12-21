@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useContext, useState } from 'react'
 import { TicketContext } from '../contexts/TicketContext'
 import { Outlet, Link } from "react-router-dom";
@@ -77,34 +78,34 @@ const AddTicket = () => {
     return (
         <>
             <Link to="/">
-                <span className="helpdesk-back primary">Back</span>
+                <span className="helpdesk-back primary">{ __( 'Back', 'helpdeskwp' ) }</span>
             </Link>
             <form className="helpdesk-add-ticket" onSubmit={handleSubmit}>
-                <h4>Submit a ticket</h4>
+                <h4>{ __( 'Submit a ticket', 'helpdeskwp' ) }</h4>
 
-                <p>Subject</p>
+                <p>{ __( 'Subject', 'helpdeskwp' ) }</p>
                 <Input name="title" type="text" onChange={handleTitleChange} value={title} inputClass={'form-ticket-title'} />
 
                 <div className="form-ticket-select">
                     <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
-                        <p>Category</p>
+                        <p>{ __( 'Category', 'helpdeskwp' ) }</p>
                         <SelectOptions options={catItems} onChange={handleCategoryChange} />
                     </div>
 
                     <div className="helpdesk-w-50" style={{ paddingLeft: '10px' }}>
-                        <p>Type</p>
+                        <p>{ __( 'Type', 'helpdeskwp' ) }</p>
                         <SelectOptions options={types} onChange={handleTypeChange} />
                     </div>
                 </div>
 
-                <p>Description</p>
+                <p>{ __( 'Description', 'helpdeskwp' ) }</p>
                 <TextEditor onChange={handleDescChange} />
 
                 <div className="helpdesk-w-50" style={{ paddingRight: '10px' }}>
-                    <p>Image</p>
+                    <p>{ __( 'Image', 'helpdeskwp' ) }</p>
                     <label htmlFor="helpdesk-pictures">
                         <InputMedia accept="image/*" id="helpdesk-pictures" type="file" multiple />
-                        <Button variant="contained" component="span" className="helpdesk-upload">Upload</Button>
+                        <Button variant="contained" component="span" className="helpdesk-upload">{ __( 'Upload', 'helpdeskwp' ) }</Button>
                     </label>
                 </div>
 
