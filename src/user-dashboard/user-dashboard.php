@@ -68,7 +68,7 @@ class UserDashboard {
 	 *
 	 * @access private
 	 */
-	private function settings( string $option ) {
+	private static function settings( string $option ) {
 		return $setting = isset( get_option( 'helpdeskwp_settings' )[$option] ) ? get_option( 'helpdeskwp_settings' )[$option] : array();
 	}
 
@@ -79,8 +79,8 @@ class UserDashboard {
 	 *
 	 * @access public
 	 */
-	public function portal_page() {
-		return $this->settings( 'pageID' );
+	public static function portal_page() {
+		return self::settings( 'pageID' );
 	}
 
 	/**
@@ -126,7 +126,7 @@ class UserDashboard {
 	 */
 	public function enqueue_scripts() {
 
-		if ( $this->portal_page() && is_page( $this->portal_page() ) ) {
+		if ( self::portal_page() && is_page( self::portal_page() ) ) {
 			wp_enqueue_script(
 				'user-dashboard',
 				HELPDESK_URL . 'src/user-dashboard/app/build/index.js',

@@ -64,5 +64,6 @@ class Main {
         require_once HELPDESK_PATH . 'src/admin/post-type/post-type.php';
         require_once HELPDESK_PATH . 'src/admin/taxonomy/taxonomy.php';
         require_once HELPDESK_PATH . 'src/admin/data/data.php';
+        require_once HELPDESK_PATH . 'src/template/template.php';
     }
 }
