@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk\API;
+namespace HelpDeskWP\API;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -178,4 +178,4 @@ function Replies_API() {
     $replies = new Replies;
     $register_routes = $replies->register_routes();
 }
-add_action( 'rest_api_init', 'Helpdesk\API\Replies_API' );
+add_action( 'rest_api_init', 'HelpDeskWP\API\Replies_API' );

@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk;
+namespace HelpDeskWP;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -344,9 +344,9 @@ class AgentDashboard {
 		if ( isset( $_GET['page'] ) && $_GET['page'] === 'helpdesk'  ) {
 			wp_enqueue_script(
 				'helpdesk-agent-dashboard',
-				HELPDESK_URL . 'src/agent-dashboard/app/build/index.js',
+				HELPDESK_WP_URL . 'src/agent-dashboard/app/build/index.js',
 				array( 'wp-element', 'wp-i18n' ),
-				HELPDESK,
+				HELPDESKWP,
 				true
 			);
 
@@ -361,9 +361,9 @@ class AgentDashboard {
 
 			wp_enqueue_style(
 				'helpdesk-agent-dashboard',
-				HELPDESK_URL . 'src/agent-dashboard/app/build/index.css',
+				HELPDESK_WP_URL . 'src/agent-dashboard/app/build/index.css',
 				array(),
-				HELPDESK,
+				HELPDESKWP,
 				'all'
 			);
 		}

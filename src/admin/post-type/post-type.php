@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk\Admin;
+namespace HelpDeskWP\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -53,5 +53,5 @@ class PostType {
     }
 }
 
-add_action( 'init', array( 'Helpdesk\Admin\PostType', 'tickets' ) );
-add_action( 'init', array( 'Helpdesk\Admin\PostType', 'reply' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'tickets' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'reply' ) );

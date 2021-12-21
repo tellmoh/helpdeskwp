@@ -2,15 +2,15 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk;
+namespace HelpDeskWP;
 
 defined( 'ABSPATH' ) || exit;
 
-use Helpdesk\Login;
-use Helpdesk\Register;
+use HelpDeskWP\Login;
+use HelpDeskWP\Register;
 
 /**
  * Class UserDashboard
@@ -129,9 +129,9 @@ class UserDashboard {
 		if ( self::portal_page() && is_page( self::portal_page() ) ) {
 			wp_enqueue_script(
 				'user-dashboard',
-				HELPDESK_URL . 'src/user-dashboard/app/build/index.js',
+				HELPDESK_WP_URL . 'src/user-dashboard/app/build/index.js',
 				array( 'wp-element', 'wp-i18n' ),
-				HELPDESK,
+				HELPDESKWP,
 				true
 			);
 
@@ -148,25 +148,25 @@ class UserDashboard {
 
 			wp_enqueue_style(
 				'user-dashboard',
-				HELPDESK_URL . 'src/user-dashboard/app/build/index.css',
+				HELPDESK_WP_URL . 'src/user-dashboard/app/build/index.css',
 				array(),
-				HELPDESK,
+				HELPDESKWP,
 				'all'
 			);
 
 			wp_enqueue_style(
 				'user-dashboard-login',
-				HELPDESK_URL . 'src/assets/css/login.css',
+				HELPDESK_WP_URL . 'src/assets/css/login.css',
 				array(),
-				HELPDESK,
+				HELPDESKWP,
 				'all'
 			);
 
 			wp_enqueue_script(
 				'user-dashboard-login',
-				HELPDESK_URL . 'src/assets/js/login.js',
+				HELPDESK_WP_URL . 'src/assets/js/login.js',
 				array( 'jquery' ),
-				HELPDESK,
+				HELPDESKWP,
 				true
 			);
 		}

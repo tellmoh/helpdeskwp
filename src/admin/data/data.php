@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk\Admin;
+namespace HelpDeskWP\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -35,6 +35,6 @@ class Data {
     }
 }
 
-add_action( 'admin_init', array( 'Helpdesk\Admin\Data', 'insert_ticket_type_data' ) );
-add_action( 'admin_init', array( 'Helpdesk\Admin\Data', 'insert_ticket_status_data' ) );
-add_action( 'admin_init', array( 'Helpdesk\Admin\Data', 'insert_ticket_priority_data' ) );
+add_action( 'admin_init', array( 'HelpDeskWP\Admin\Data', 'insert_ticket_type_data' ) );
+add_action( 'admin_init', array( 'HelpDeskWP\Admin\Data', 'insert_ticket_status_data' ) );
+add_action( 'admin_init', array( 'HelpDeskWP\Admin\Data', 'insert_ticket_priority_data' ) );

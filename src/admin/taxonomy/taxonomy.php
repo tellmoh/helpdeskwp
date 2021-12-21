@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk\Admin;
+namespace HelpDeskWP\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -155,8 +155,8 @@ class Taxonomy {
     }
 }
 
-add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'category' ) );
-add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'types' ) );
-add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'priority' ) );
-add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'status' ) );
-add_action( 'init', array( 'Helpdesk\Admin\Taxonomy', 'agent' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'category' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'types' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'priority' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'status' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'agent' ) );

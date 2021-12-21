@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk\API;
+namespace HelpDeskWP\API;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -135,4 +135,4 @@ function Settings_API() {
     $settings = new Settings;
     $register_routes = $settings->register_routes();
 }
-add_action( 'rest_api_init', 'Helpdesk\API\Settings_API' );
+add_action( 'rest_api_init', 'HelpDeskWP\API\Settings_API' );

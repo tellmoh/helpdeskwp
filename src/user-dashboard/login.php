@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk;
+namespace HelpDeskWP;
 
 defined( 'ABSPATH' ) || exit;
 

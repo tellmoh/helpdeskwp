@@ -2,14 +2,14 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk;
+namespace HelpDeskWP;
 
 defined( 'ABSPATH' ) || exit;
 
-use Helpdesk\UserDashboard;
+use HelpDeskWP\UserDashboard;
 
 /**
  * Class Template
@@ -24,11 +24,11 @@ class Template {
 	 */
     public static function custom_template( $template ) {
         if ( UserDashboard::portal_page() && is_page( UserDashboard::portal_page() ) ) {
-            $template = HELPDESK_PATH  . 'src/template/portal.php';
+            $template = HELPDESK_WP_PATH  . 'src/template/portal.php';
         }
 
         return $template;
     }
 }
 
-add_action( 'template_include', array( 'Helpdesk\Template', 'custom_template' ) );
+add_action( 'template_include', array( 'HelpDeskWP\Template', 'custom_template' ) );

@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk\API;
+namespace HelpDeskWP\API;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -246,4 +246,4 @@ function Tickets_API() {
     $tickets = new Tickets;
     $register_routes = $tickets->register_routes();
 }
-add_action( 'rest_api_init', 'Helpdesk\API\Tickets_API' );
+add_action( 'rest_api_init', 'HelpDeskWP\API\Tickets_API' );

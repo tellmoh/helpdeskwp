@@ -2,10 +2,10 @@
 /**
  * @since   1.0.0
  *
- * @package Helpdesk
+ * @package HelpDeskWP
  */
 
-namespace Helpdesk;
+namespace HelpDeskWP;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -103,5 +103,5 @@ class Register {
     }
 }
 
-add_action( 'wp_ajax_helpdesk_register', array( 'Helpdesk\Register', 'helpdesk_register' ) );
-add_action( 'wp_ajax_nopriv_helpdesk_register', array( 'Helpdesk\Register', 'helpdesk_register' ) );
+add_action( 'wp_ajax_helpdesk_register', array( 'HelpDeskWP\Register', 'helpdesk_register' ) );
+add_action( 'wp_ajax_nopriv_helpdesk_register', array( 'HelpDeskWP\Register', 'helpdesk_register' ) );
