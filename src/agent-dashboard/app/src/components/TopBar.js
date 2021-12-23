@@ -9,7 +9,7 @@ const TopBar = () => {
             </div>
             <div className="helpdesk-menu" style={{ marginLeft: '30px' }}>
                 <ul style={{ margin: 0 }}>
-                    <li><a href="#"></a>
+                    <li>
                         <Link to="/">
                             { __( 'Tickets', 'helpdeskwp' ) }
                         </Link>
@@ -18,6 +18,9 @@ const TopBar = () => {
                         <Link to="/settings">
                             { __( 'Settings', 'helpdeskwp' ) }
                         </Link>
+                    </li>
+                    <li>
+                        <a href="https://helpdeskwp.github.io/" target="_blank">Help</a>
                     </li>
                 </ul>
             </div>
