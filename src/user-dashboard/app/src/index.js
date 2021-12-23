@@ -5,14 +5,16 @@ import AddTicket from './routes/AddTicket';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
 import {
-  BrowserRouter,
+  MemoryRouter,
   Routes,
   Route
 } from "react-router-dom";
 
+const pageSlug = window.location.pathname
+
 ReactDOM.render(
   <TicketContextProvider>
-    <BrowserRouter basename="/dev/user-dashboard/">
+    <MemoryRouter basename={pageSlug} initialEntries={[pageSlug]}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="add-new-ticket" element={<AddTicket />} />
@@ -20,7 +22,7 @@ ReactDOM.render(
           <Route path=":ticketId" element={<Ticket />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </MemoryRouter>
     <Toaster />
   </TicketContextProvider>,
   document.getElementById('helpdesk-user-dashboard')
