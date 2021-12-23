@@ -1,7 +1,8 @@
 <?php
 /*
 Plugin Name: Help Desk WP
-Description: Help Desk and ticketing system
+Plugin URI:  https://helpdeskwp.github.io/
+Description: Help Desk and customer support
 Version:     1.0.0
 Author:      helpdeskwp
 Text Domain: helpdeskwp
