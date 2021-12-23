@@ -85,7 +85,7 @@ export function Status({ onChange, status, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Status'))
         return(
             <div>
-                <p>{ __( 'Priority', 'Status' ) }</p>
+                <p>{ __( 'Status', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -99,7 +99,7 @@ export function Status({ onChange, status, parent, value }) {
         const content = { value: value.ticket_status[0], label: value.status };
         return(
             <div>
-                <p>{ __( 'Priority', 'Status' ) }</p>
+                <p>{ __( 'Status', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
@@ -121,7 +121,7 @@ export function Type({ onChange, type, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Type'))
         return(
             <div>
-                <p>{ __( 'Type', 'Status' ) }</p>
+                <p>{ __( 'Type', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -135,7 +135,7 @@ export function Type({ onChange, type, parent, value }) {
         const content = { value: value.ticket_type[0], label: value.type };
         return(
             <div>
-                <p>{ __( 'Type', 'Status' ) }</p>
+                <p>{ __( 'Type', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
@@ -157,7 +157,7 @@ export function Agent({ onChange, agents, parent, value }) {
         const local = JSON.parse(localStorage.getItem('Agent'))
         return(
             <div>
-                <p>{ __( 'Agent', 'Status' ) }</p>
+                <p>{ __( 'Agent', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={local}
                     onChange={onChange}
@@ -171,7 +171,7 @@ export function Agent({ onChange, agents, parent, value }) {
         const content = { value: value.ticket_agent[0], label: value.agent };
         return(
             <div>
-                <p>{ __( 'Agent', 'Status' ) }</p>
+                <p>{ __( 'Agent', 'helpdeskwp' ) }</p>
                 <Select
                     defaultValue={content}
                     onChange={onChange}
