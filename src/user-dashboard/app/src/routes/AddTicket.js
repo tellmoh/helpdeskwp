@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useContext, useState } from 'react'
 import { TicketContext } from '../contexts/TicketContext'
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import TextEditor from '../components/editor/Editor';
@@ -36,6 +36,8 @@ const AddTicket = () => {
         types.push({ value: type.id, label: type.name });
     })
 
+    let navigate = useNavigate()
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -57,6 +59,7 @@ const AddTicket = () => {
         setTitle([])
         setDesc([])
         document.querySelector(".helpdesk-editor .ProseMirror").innerHTML = '';
+        navigate("/", { replace: true })
     }
 
     const handleTitleChange = (e) => {
