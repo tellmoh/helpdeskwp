@@ -115,7 +115,7 @@ class Replies extends Tickets {
         $title     = get_the_title( $ticket );
         $subject   = $title ? $title : '';
 
-		return wp_mail( $email, $subject, $message, $headers );
+		wp_mail( $email, $subject, $message, $headers );
     }
 
     public function prepare_item_for_response( $query = array() ) {
