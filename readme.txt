@@ -35,6 +35,7 @@ https://www.youtube.com/watch?v=MqKqwe0fgqA
 * Custom Type
 * Custom Priority
 * Custom Status
+* Email Notification
 
 == Screenshots ==
 screenshot-1.png

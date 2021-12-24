@@ -61,6 +61,10 @@ class Replies extends Tickets {
         $image  = $this->save_image( $files );
         $ticket = $this->add_reply( $params['reply'], $params['parent'], $image->data );
 
+        if ( $ticket ) {
+            $this->send_email( $params['parent'] );
+        }
+
         $res = array(
             'ticket' => $ticket,
             'media'  => $image,
@@ -98,6 +102,20 @@ class Replies extends Tickets {
         $response = rest_ensure_response( $replies );
 
         return $response;
+    }
+
+    public function send_email( string $ticket ) {
+        $user_id   = get_post_field( 'post_author', $ticket );
+        $user      = get_userdata( $user_id );
+        $name      = $user->display_name;
+        $email     = $user->user_email;
+        $site_name = get_bloginfo( 'name' );
+        $message   = __( 'You have received a new reply.', 'helpdeskwp' );
+        $headers   = 'From: ' . $site_name . '';
+        $title     = get_the_title( $ticket );
+        $subject   = $title ? $title : '';
+
+		return wp_mail( $email, $subject, $message, $headers );
     }
 
     public function prepare_item_for_response( $query = array() ) {
