@@ -22,6 +22,34 @@ class AgentDashboard {
 	private static $instance = null;
 
 	/**
+	 * Count of open tickets
+	 *
+	 * @var string
+	 */
+	private $open_tickets;
+
+	/**
+	 * Count of close tickets
+	 *
+	 * @var string
+	 */
+	private $close_tickets;
+
+	/**
+	 * Count of pending tickets
+	 *
+	 * @var string
+	 */
+	private $pending_tickets;
+
+	/**
+	 * Count of resolved tickets
+	 *
+	 * @var string
+	 */
+	private $resolved_tickets;
+
+	/**
 	 * Instance of the class.
 	 *
 	 * @since 1.0.0
@@ -62,6 +90,10 @@ class AgentDashboard {
         add_action( 'rest_api_init', array( $this, 'register_status_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_agent_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'init', array( $this, 'get_open_tickets' ), 99 );
+		add_action( 'init', array( $this, 'get_close_tickets' ), 99 );
+		add_action( 'init', array( $this, 'get_pending_tickets' ), 99 );
+		add_action( 'init', array( $this, 'get_resolved_tickets' ), 99 );
 	}
 
 	/**
@@ -333,6 +365,62 @@ class AgentDashboard {
     }
 
 	/**
+	 * Returns the number of open tickets
+	 *
+	 * @since 1.0.1
+	 *
+	 * @access public
+	 */
+	public function get_open_tickets() {
+
+		$terms = get_term_by( 'slug', 'open', 'ticket_status' );
+
+		$this->open_tickets = isset( $terms->count ) ? $terms->count : '';
+	}
+
+	/**
+	 * Returns the number of close tickets
+	 *
+	 * @since 1.0.1
+	 *
+	 * @access public
+	 */
+	public function get_close_tickets() {
+
+		$terms = get_term_by( 'slug', 'close', 'ticket_status' );
+
+		$this->close_tickets = isset( $terms->count ) ? $terms->count : '';
+	}
+
+	/**
+	 * Returns the number of pending tickets
+	 *
+	 * @since 1.0.1
+	 *
+	 * @access public
+	 */
+	public function get_pending_tickets() {
+
+		$terms = get_term_by( 'slug', 'pending', 'ticket_status' );
+
+		$this->pending_tickets = isset( $terms->count ) ? $terms->count : '';
+	}
+
+	/**
+	 * Returns the number of resolved tickets
+	 *
+	 * @since 1.0.1
+	 *
+	 * @access public
+	 */
+	public function get_resolved_tickets() {
+
+		$terms = get_term_by( 'slug', 'resolved', 'ticket_status' );
+
+		$this->resolved_tickets = isset( $terms->count ) ? $terms->count : '';
+	}
+
+	/**
 	 * enqueue scripts
 	 *
 	 * @since 1.0.0
@@ -354,8 +442,12 @@ class AgentDashboard {
 				'helpdesk-agent-dashboard',
 				'helpdesk_agent_dashboard',
 				array(
-					'url'   => esc_url_raw( rest_url() ),
-					'nonce' => wp_create_nonce( 'wp_rest' ),
+					'url'              => esc_url_raw( rest_url() ),
+					'nonce'            => wp_create_nonce( 'wp_rest' ),
+					'open_tickets'     => esc_attr( $this->open_tickets ),
+					'close_tickets'    => esc_attr( $this->close_tickets ),
+					'pending_tickets'  => esc_attr( $this->pending_tickets ),
+					'resolved_tickets' => esc_attr( $this->resolved_tickets ),
 				)
 			);
 

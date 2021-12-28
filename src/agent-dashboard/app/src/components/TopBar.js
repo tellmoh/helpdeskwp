@@ -20,6 +20,11 @@ const TopBar = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/overview">
+                            { __( 'Overview', 'helpdeskwp' ) }
+                        </Link>
+                    </li>
+                    <li>
                         <a href="https://helpdeskwp.github.io/" target="_blank">Help</a>
                     </li>
                 </ul>

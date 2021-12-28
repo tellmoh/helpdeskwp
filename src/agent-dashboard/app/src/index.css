@@ -446,3 +446,26 @@ span.reply-date {
 .helpdesk-image img {
     border-radius: 7px;
 }
+
+.helpdesk-overview {
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px #344585;
+    border-radius: 7px;
+    background: #fff;
+    padding: 35px;
+}
+
+.helpdesk-overview.hdw-box {
+    display: inline-block;
+    width: 100%;
+    max-width: 16%;
+    margin: 0 7px;
+}
+
+.helpdesk-overview {
+    margin: 14px 7px;
+}
+
+.hdw-box-in {
+    font-size: 20px;
+}
