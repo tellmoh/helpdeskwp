@@ -27,8 +27,6 @@ const Overview = () => {
                         Resolved { data.resolved_tickets }
                     </div>
                 </div>
-                <div className="helpdesk-overview">
-                </div>
             </div>
         </div>
     )
