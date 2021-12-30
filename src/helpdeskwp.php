@@ -61,6 +61,7 @@ class Main {
         require_once HELPDESK_WP_PATH . 'src/user-dashboard/register.php';
         require_once HELPDESK_WP_PATH . 'src/user-dashboard/user-dashboard.php';
         require_once HELPDESK_WP_PATH . 'src/agent-dashboard/agent-dashboard.php';
+        require_once HELPDESK_WP_PATH . 'src/agent-dashboard/overview.php';
         require_once HELPDESK_WP_PATH . 'src/admin/post-type/post-type.php';
         require_once HELPDESK_WP_PATH . 'src/admin/taxonomy/taxonomy.php';
         require_once HELPDESK_WP_PATH . 'src/admin/data/data.php';

@@ -9,6 +9,8 @@ namespace HelpDeskWP\API;
 
 defined( 'ABSPATH' ) || exit;
 
+use HelpDeskWP\OverView;
+
 /**
  * Class Settings API
  */
@@ -46,6 +48,16 @@ class Settings {
                 'methods'             => \WP_REST_Server::DELETABLE,
                 'callback'            => array( $this, 'delete_item' ),
                 'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/overview', array(
+            array(
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_overview' ),
+                'permission_callback' => array( $this, 'options_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -116,6 +128,18 @@ class Settings {
         }
 
         return new \WP_Error( 'cant-delete-term', __( 'Can\'t delete the term', 'helpdeskwp' ), array( 'status' => 500 ) );
+    }
+
+    public function get_overview() {
+
+        $times = OverView::instance()->time();
+        $res   = array();
+
+        foreach ( $times as $time ) {
+            $res[] = $time;
+        }
+
+        return new \WP_REST_Response( $res, 200 );
     }
 
     public function options_permissions_check() {
