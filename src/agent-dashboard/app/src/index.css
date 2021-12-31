@@ -469,3 +469,48 @@ span.reply-date {
 .hdw-box-in {
     font-size: 20px;
 }
+
+.helpdesk-search {
+    position: relative;
+    float: right;
+    margin-top: -7px;
+}
+
+#helpdesk-agent-dashboard .helpdesk-search input[type="text"] {
+    padding: 5px 15px;
+}
+
+.helpdesk-search .helpdesk-search-btn {
+    text-transform: capitalize;
+    margin-left: 5px;
+    border-radius: 7px;
+    margin-top: -3px;
+}
+
+.helpdesk-search-toggle {
+    display: block;
+    position: absolute;
+    top: 45px;
+    background: #fff;
+    width: 275px;
+    min-height: 44px;
+    left: -300px;
+    padding: 20px 25px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px #344585;
+}
+
+.helpdesk-search-result a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #555;
+    margin: 15px 7px;
+    display: block;
+    transition: all 0.2s;
+}
+
+.helpdesk-search-result a:hover {
+    color: #0051af;
+}

@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { Link } from "react-router-dom";
+import Search from './Search';
 
 const TopBar = () => {
     return (
@@ -29,6 +30,7 @@ const TopBar = () => {
                     </li>
                 </ul>
             </div>
+            <Search />
         </div>
     )
 }
