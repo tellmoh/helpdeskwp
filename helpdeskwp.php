@@ -3,7 +3,7 @@
 Plugin Name: Help Desk WP
 Plugin URI:  https://helpdeskwp.github.io/
 Description: Help Desk and customer support
-Version:     1.0.0
+Version:     1.0.1
 Author:      helpdeskwp
 Text Domain: helpdeskwp
 License:     GPL v2 or later
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HELPDESKWP', '1.0.0' );
+define( 'HELPDESKWP', '1.0.1' );
 
 define( 'HELPDESK_WP_PATH', plugin_dir_path( __FILE__ ) . '/' );
 
