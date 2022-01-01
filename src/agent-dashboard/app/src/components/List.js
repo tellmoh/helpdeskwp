@@ -66,7 +66,7 @@ const List = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="helpdesk-tickets-list">
+            <div className="helpdesk-tickets">
                 {ticket && ticket.map((ticket) => {
                     return (
                         <div key={ticket.id} className="helpdesk-ticket" data-ticket-status={ticket.status}>

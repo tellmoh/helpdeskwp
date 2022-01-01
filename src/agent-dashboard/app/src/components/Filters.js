@@ -40,17 +40,19 @@ const Filters = () => {
     },[])
 
     return (
-        <div className="helpdesk-filters helpdesk-properties">
-            <h3>{ __( 'Filters', 'helpdeskwp' ) }</h3>
-            <Category onChange={handleCategoryChange} category={category} parent="filter"/>
-            <Priority onChange={handlePriorityChange} priority={priority} parent="filter" />
-            <Status onChange={handleStatusChange} status={status} parent="filter" />
-            <Type onChange={handleTypeChange} type={type} parent="filter" />
-            <Agent onChange={handleAgentChange} agents={agents} parent="filter" />
+        <div className="helpdesk-sidebar">
+            <div className="helpdesk-properties">
+                <h3>{ __( 'Filters', 'helpdeskwp' ) }</h3>
+                <Category onChange={handleCategoryChange} category={category} parent="filter"/>
+                <Priority onChange={handlePriorityChange} priority={priority} parent="filter" />
+                <Status onChange={handleStatusChange} status={status} parent="filter" />
+                <Type onChange={handleTypeChange} type={type} parent="filter" />
+                <Agent onChange={handleAgentChange} agents={agents} parent="filter" />
 
-            <Stack direction="column">
-                <Button variant="contained" onClick={apply}>{ __( 'Apply', 'helpdeskwp' ) }</Button>
-            </Stack>
+                <Stack direction="column">
+                    <Button variant="contained" onClick={apply}>{ __( 'Apply', 'helpdeskwp' ) }</Button>
+                </Stack>
+            </div>
         </div>
     )
 }
