@@ -253,7 +253,6 @@ const Settings = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <TopBar />
             <div className="helpdesk-main helpdesk-settings">
                 <Box
                     sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', border: '1px solid #dbe0f3', boxShadow: '0 0 20px -15px #344585', borderRadius: '7px' }}

@@ -90,32 +90,29 @@ const Overview = () => {
     }
 
     return (
-        <div>
-            <TopBar />
-            <div className="helpdesk-main">
-                <div className="helpdesk-overview hdw-box">
-                    <div className="hdw-box-in">
-                        Open { obj.open_tickets }
-                    </div>
+        <div className="helpdesk-main">
+            <div className="helpdesk-overview hdw-box">
+                <div className="hdw-box-in">
+                    Open { obj.open_tickets }
                 </div>
-                <div className="helpdesk-overview hdw-box">
-                    <div className="hdw-box-in">
-                        Closed { obj.close_tickets }
-                    </div>
+            </div>
+            <div className="helpdesk-overview hdw-box">
+                <div className="hdw-box-in">
+                    Closed { obj.close_tickets }
                 </div>
-                <div className="helpdesk-overview hdw-box">
-                    <div className="hdw-box-in">
-                        Pending { obj.pending_tickets }
-                    </div>
+            </div>
+            <div className="helpdesk-overview hdw-box">
+                <div className="hdw-box-in">
+                    Pending { obj.pending_tickets }
                 </div>
-                <div className="helpdesk-overview hdw-box">
-                    <div className="hdw-box-in">
-                        Resolved { obj.resolved_tickets }
-                    </div>
+            </div>
+            <div className="helpdesk-overview hdw-box">
+                <div className="hdw-box-in">
+                    Resolved { obj.resolved_tickets }
                 </div>
-                <div className="helpdesk-overview">
-                    { time && <Line options={options} data={data} /> }
-                </div>
+            </div>
+            <div className="helpdesk-overview">
+                { time && <Line options={options} data={data} /> }
             </div>
         </div>
     )

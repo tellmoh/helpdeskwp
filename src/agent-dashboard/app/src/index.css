@@ -511,3 +511,7 @@ span.reply-date {
 .helpdesk-search-result a:hover {
     color: #0051af;
 }
+
+.helpdesk-other-tickets {
+    margin-top: 16px;
+}
