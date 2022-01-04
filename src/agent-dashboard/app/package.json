@@ -1,22 +1,22 @@
 {
     "main": "src/index.js",
     "dependencies": {
-        "@emotion/react": "^11.4.1",
-        "@emotion/styled": "^11.3.0",
-        "@mui/material": "^5.0.4",
-        "@mui/styles": "^5.0.1",
-        "axios": "^0.21.1",
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
+        "@mui/material": "^5.2.7",
+        "@mui/styles": "^5.2.3",
+        "axios": "^0.24.0",
         "chart.js": "^3.7.0",
-        "history": "5",
+        "history": "^5.2.0",
         "react-chartjs-2": "^4.0.0",
         "react-hot-toast": "^2.1.1",
-        "react-router-dom": "6",
+        "react-router-dom": "^6.2.1",
         "react-select": "^5.2.1",
-        "sweetalert2": "^11.2.1",
+        "sweetalert2": "^11.3.3",
         "sweetalert2-react-content": "^4.2.0"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^18.0.1"
+        "@wordpress/scripts": "^19.2.2"
     },
     "scripts": {
         "build": "wp-scripts build",
