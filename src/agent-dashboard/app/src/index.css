@@ -463,6 +463,10 @@ span.reply-date {
     margin: 14px 7px;
 }
 
+.overview-wrap {
+    display: block;
+}
+
 .hdw-box-in {
     font-size: 20px;
 }

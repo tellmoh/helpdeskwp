@@ -90,7 +90,7 @@ const Overview = () => {
     }
 
     return (
-        <div className="helpdesk-main">
+        <div className="helpdesk-main overview-wrap">
             <div className="helpdesk-overview hdw-box">
                 <div className="hdw-box-in">
                     Open { obj.open_tickets }
