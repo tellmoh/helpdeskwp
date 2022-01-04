@@ -72,7 +72,7 @@ const Tickets = () => {
                     {ticket && ticket.map((ticket) => {
                         return (
                             <div key={ticket.id} className="helpdesk-ticket" data-ticket-status={ticket.status}>
-                                <Link to={`ticket/${ticket.id}`}>
+                                <Link to={`/ticket/${ticket.id}`}>
                                     <h4 className="ticket-title primary">{ticket.title.rendered}</h4>
                                 </Link>
                                 <div className="ticket-meta">
