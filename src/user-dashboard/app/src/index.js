@@ -3,7 +3,7 @@ import TicketContextProvider from './contexts/TicketContext';
 import Ticket from './routes/Ticket';
 import AddTicket from './routes/AddTicket';
 import { Toaster } from 'react-hot-toast';
-import './index.css';
+import './index.scss';
 import {
   MemoryRouter,
   Routes,

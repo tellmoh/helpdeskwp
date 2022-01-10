@@ -3,12 +3,14 @@ import Ticket from './routes/Ticket';
 import TopBar from './components/TopBar';
 import Settings from './components/Settings';
 import Overview from './components/Overview';
+import Customers from './components/Customers';
+import Customer from './routes/Customer';
 import {
   MemoryRouter,
   Routes,
   Route
 } from "react-router-dom";
-import './index.css';
+import './index.scss';
 
 const pageSlug = window.location.pathname
 
@@ -21,8 +23,12 @@ const App = () => {
                 <Route path="ticket">
                     <Route path=":ticketId" element={<Ticket />} />
                 </Route>
+                <Route path="customer">
+                    <Route path=":customerId" element={<Customer />} />
+                </Route>
                 <Route path="settings" element={<Settings />} />
                 <Route path="overview" element={<Overview />} />
+                <Route path="customers" element={<Customers />} />
             </Routes>
         </MemoryRouter>
     )

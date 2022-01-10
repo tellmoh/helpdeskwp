@@ -20,27 +20,26 @@ class Settings {
     protected $base      = 'settings';
     protected $version   = 'v1';
     protected $option    = 'helpdeskwp_settings';
+    protected $total_customers;
 
     public function register_routes() {
         register_rest_route(
-            $this->namespace . '/' . $this->version, '/' . $this->base, array(
+            $this->namespace . '/' . $this->version, '/' . $this->base,
             array(
-                'methods'             => \WP_REST_Server::EDITABLE,
-                'callback'            => array( $this, 'create_item' ),
-                'permission_callback' => array( $this, 'create_item_permissions_check' ),
-                'args'                => array(),
-            ),
-        ));
-
-        register_rest_route(
-            $this->namespace . '/' . $this->version, '/' . $this->base, array(
-            array(
-                'methods'             => \WP_REST_Server::READABLE,
-                'callback'            => array( $this, 'get_options' ),
-                'permission_callback' => array( $this, 'options_permissions_check' ),
-                'args'                => array(),
-            ),
-        ));
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => array( $this, 'get_options' ),
+                    'permission_callback' => array( $this, 'options_permissions_check' ),
+                    'args'                => array(),
+                ),
+                array(
+                    'methods'             => \WP_REST_Server::EDITABLE,
+                    'callback'            => array( $this, 'create_item' ),
+                    'permission_callback' => array( $this, 'create_item_permissions_check' ),
+                    'args'                => array(),
+                ),
+            )
+        );
 
         register_rest_route(
             $this->namespace . '/' . $this->version, '/' . $this->base . '/(?P<id>[\d]+)', array(
@@ -57,6 +56,26 @@ class Settings {
             array(
                 'methods'             => \WP_REST_Server::READABLE,
                 'callback'            => array( $this, 'get_overview' ),
+                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/customers', array(
+            array(
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_customers' ),
+                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/customer' . '/(?P<id>[\d]+)', array(
+            array(
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_customer' ),
                 'permission_callback' => array( $this, 'options_permissions_check' ),
                 'args'                => array(),
             ),
@@ -140,6 +159,75 @@ class Settings {
         }
 
         return new \WP_REST_Response( $res, 200 );
+    }
+
+    public function get_customers( $request ) {
+
+        $page = $request->get_param( 'page' );
+
+        $customers_query = $this->prepare_customer_query( '', $page );
+        $customers       = $this->prepare_customers_for_response( $customers_query );
+
+        $response = rest_ensure_response( $customers );
+
+        $per_page  = 20;
+        $max_pages = ceil( $this->total_customers / $per_page );
+
+        $response->header( 'hdw_totalpages', (int) $max_pages );
+
+        return $response;
+    }
+
+    public function prepare_customers_for_response( $query = array() ) {
+        $customers = array();
+
+        foreach ( $query as $post ) {
+            $customer = array();
+
+            $customer['id']    = $post->ID;
+            $customer['email'] = $post->user_email;
+            $customer['name']  = $post->display_name;
+
+			$customers[] = $customer;
+		}
+
+        return $customers;
+    }
+
+    public function prepare_customer_query( $id, $page ) {
+
+        $id = $id ? array( $id ) : array();
+
+        $args = array(
+            'number'  => '20',
+            'paged'   => $page ? $page : 1,
+            'role'    => 'contributor',
+            'include' => $id,
+            'meta_query' => array(
+                'relation' => 'OR',
+                    array(
+                        'key'     => '_hdw_user_type',
+                        'value'   => 'hdw_user',
+                        'compare' => '='
+                    ),
+            )
+        );
+        $user_query = new \WP_User_Query( $args );
+        $customers  = $user_query->get_results();
+
+        $this->total_customers = $user_query->get_total();
+
+        return $customers;
+    }
+
+    public function get_customer( $request ) {
+        $customer_id    = $request->get_param( 'id' );
+        $customer_query = $this->prepare_customer_query( $customer_id, '' );
+        $customer       = $this->prepare_customers_for_response( $customer_query );
+
+        $response = rest_ensure_response( $customer );
+
+        return $response;
     }
 
     public function options_permissions_check() {

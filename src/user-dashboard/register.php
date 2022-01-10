@@ -88,9 +88,12 @@ class Register {
             'role'                  => 'contributor',
         );
 
-        $user_id = wp_insert_user( $userdata ) ;
+        $user_id = wp_insert_user( $userdata );
 
         if ( ! is_wp_error( $user_id ) ) {
+
+            add_user_meta( $user_id, '_hdw_user_type', 'hdw_user' );
+
             $user = get_user_by( 'id', $user_id );
             if( $user ) {
                 wp_set_current_user( $user_id, $user->user_login );
