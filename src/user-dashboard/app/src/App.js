@@ -1,9 +1,7 @@
 import MyTickets from './components/MyTickets';
 
 const App = () => {
-    return (
-        <MyTickets />
-    )
-}
+	return <MyTickets />;
+};
 
-export default App
+export default App;
