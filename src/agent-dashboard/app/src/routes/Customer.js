@@ -31,7 +31,7 @@ const Customer = () => {
     });
 
     const fetchCustomer = async () => {
-        const url = `${helpdesk_agent_dashboard.url}helpdesk/v1/settings/customer/${params.customerId}`
+        const url = `${helpdesk_agent_dashboard.url}helpdesk/v1/settings/customer/${params.id}`
 
         const config = {
             headers: {
@@ -61,7 +61,7 @@ const Customer = () => {
     }
 
     const fetchTickets = async (page) => {
-        const url = `${helpdesk_agent_dashboard.url}wp/v2/ticket/?author=${params.customerId}&page=${page}`
+        const url = `${helpdesk_agent_dashboard.url}wp/v2/ticket/?author=${params.id}&page=${page}`
 
         let data
         await axios.get(url)
