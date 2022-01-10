@@ -187,17 +187,23 @@ ul.MuiPagination-ul button:focus {
     outline: none;
 }
 
-.helpdesk-back {
-    border: 1px solid $mainColor;
-    padding: 5px 15px;
-    border-radius: 5px;
-    display: inline-block;
+body .helpdesk-back {
+    padding: 0;
     margin: 10px 0;
-    font-size: 13px;
-}
+    letter-spacing: 0;
+    font-family: inherit;
+    font-weight: inherit;
+    text-transform: capitalize;
+    line-height: 1.6;
+    min-width: auto;
+    border: 1px solid $mainColor;
+    border-radius: 5px;
 
-.helpdesk-back:hover {
-    text-decoration: underline;
+    span {
+        display: inline-block;
+        padding: 5px 15px;
+        font-size: 13px;
+    }
 }
 
 .helpdesk-w-50 {
