@@ -46,7 +46,6 @@ class PostType {
             'capability_type'    => 'post',
             'has_archive'        => true,
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
-            'show_in_rest'       => true
         );
 
         register_post_type( 'Reply', $args );
