@@ -36,7 +36,7 @@ const Ticket = () => {
     }
 
     const takeTicket = async () => {
-        const ticket = await fetchSingleTicket(params.ticketId)
+        const ticket = await fetchSingleTicket(params.id)
         setSingleTicket(ticket)
     }
 
@@ -51,7 +51,7 @@ const Ticket = () => {
     }
 
     const takeReplies = async () => {
-        const replies = await fetchReplies(params.ticketId)
+        const replies = await fetchReplies(params.id)
         setReplies(replies)
     }
 
@@ -111,7 +111,7 @@ const Ticket = () => {
 
         let formData = new FormData();
         formData.append("reply", reply);
-        formData.append("parent", params.ticketId);
+        formData.append("parent", params.id);
 
         for ( let i = 0; i < fileLength; i++ ) {
             formData.append("pictures[]", pictures.files[i]);
@@ -193,7 +193,7 @@ const Ticket = () => {
                 <Toaster />
             </div>
             <PropertyContextProvider>
-                <Properties ticket={params.ticketId} ticketContent={singleTicket} />
+                <Properties ticket={params.id} ticketContent={singleTicket} />
             </PropertyContextProvider>
         </>
     )

@@ -18,9 +18,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="add-new-ticket" element={<AddTicket />} />
-        <Route path="ticket">
-          <Route path=":ticketId" element={<Ticket />} />
-        </Route>
+        <Route path="ticket/:id" element={<Ticket />} />
       </Routes>
     </MemoryRouter>
     <Toaster />

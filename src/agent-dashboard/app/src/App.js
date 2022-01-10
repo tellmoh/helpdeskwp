@@ -20,9 +20,7 @@ const App = () => {
         <TopBar />
             <Routes>
                 <Route path="/" element={<Tickets />} />
-                <Route path="ticket">
-                    <Route path=":ticketId" element={<Ticket />} />
-                </Route>
+                <Route path="ticket/:id" element={<Ticket />} />
                 <Route path="customer">
                     <Route path=":customerId" element={<Customer />} />
                 </Route>
