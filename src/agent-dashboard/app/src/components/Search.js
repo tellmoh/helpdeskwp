@@ -44,19 +44,21 @@ const Search = () => {
 						{ __( 'Search', 'helpdeskwp' ) }
 					</Button>
 					<div className="helpdesk-search-result">
+						<ul>
 						{ result &&
 							result.map( ( result ) => {
 								return (
-									<div
+									<li
 										key={ result.id }
 										className="helpdesk-search-result-item"
 									>
 										<Link to={ `/ticket/${ result.id }` }>
 											{ result.title }
 										</Link>
-									</div>
+									</li>
 								);
 							} ) }
+						</ul>
 					</div>
 				</div>
 			) }

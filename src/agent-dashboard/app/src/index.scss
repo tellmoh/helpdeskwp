@@ -41,19 +41,21 @@ div#wpcontent {
         font-size: 16px;
     }
 
-    li {
-        display: inline-block;
-        padding-left: 16px;
-    }
+    .helpdesk-menu {
+        li {
+            display: inline-block;
+            padding-left: 16px;
+        }
 
-    li a {
-        color: #000;
-        text-decoration: none;
-        transition: all 0.2s;
-    }
+        li a {
+            color: #000;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
 
-    li a:hover {
-        color: $mainColor;
+        li a:hover {
+            color: $mainColor;
+        }
     }
 
     .helpdesk-name, .helpdesk-menu {
@@ -286,6 +288,7 @@ body .helpdesk-back {
 
 .helpdesk-single-ticket h1 {
     font-size: 24px;
+    line-height: 1.2;
 }
 
 .helpdesk-single-ticket.ticket-meta {
@@ -488,17 +491,47 @@ span.reply-date {
     position: relative;
     float: right;
     margin-top: -7px;
+
+    .helpdesk-search-btn {
+        text-transform: capitalize;
+        margin-left: 5px;
+        border-radius: 7px;
+        margin-top: -3px;
+    }
+
+    li {
+        position: relative;
+        padding-left: 14px;
+    }
+
+    li:after {
+        position: absolute;
+        content: '';
+        background: $mainColor;
+        width: 6px;
+        height: 6px;
+        top: 12px;
+        left: 4px;
+        border-radius: 50px;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #343434;
+        margin: 15px 7px;
+        padding: 5px 0 !important;
+        display: block;
+        transition: all 0.3s;
+    }
+
+    a:hover {
+        color: $mainColor;
+    }
 }
 
 #helpdesk-agent-dashboard .helpdesk-search input[type="text"] {
     padding: 5px 15px;
-}
-
-.helpdesk-search .helpdesk-search-btn {
-    text-transform: capitalize;
-    margin-left: 5px;
-    border-radius: 7px;
-    margin-top: -3px;
 }
 
 .helpdesk-search-toggle {
@@ -514,23 +547,4 @@ span.reply-date {
     border-radius: 7px;
     border: 1px solid #dbe0f3;
     box-shadow: 0 0 20px -15px $boxShadowColor;
-}
-
-.helpdesk-search {
-    a {
-        text-decoration: none;
-        font-size: 14px;
-        color: #555;
-        margin: 15px 7px;
-        display: block;
-        transition: all 0.2s;
-    }
-
-    a:hover {
-        color: $mainColor;
-    }
-}
-
-.helpdesk-other-tickets {
-    margin-top: 16px;
 }

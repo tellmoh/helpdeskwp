@@ -1,8 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Search from './Search';
 
 const TopBar = () => {
+	let location = useLocation();
+
 	return (
 		<div className="helpdesk-top-bar">
 			<div className="helpdesk-name">
@@ -35,7 +37,7 @@ const TopBar = () => {
 					</li>
 				</ul>
 			</div>
-			<Search />
+			{ location.pathname === '/' && <Search /> }
 		</div>
 	);
 };
