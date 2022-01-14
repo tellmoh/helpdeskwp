@@ -45,19 +45,21 @@ const Search = () => {
 					</Button>
 					<div className="helpdesk-search-result">
 						<ul>
-						{ result &&
-							result.map( ( result ) => {
-								return (
-									<li
-										key={ result.id }
-										className="helpdesk-search-result-item"
-									>
-										<Link to={ `/ticket/${ result.id }` }>
-											{ result.title }
-										</Link>
-									</li>
-								);
-							} ) }
+							{ result &&
+								result.map( ( result ) => {
+									return (
+										<li
+											key={ result.id }
+											className="helpdesk-search-result-item"
+										>
+											<Link
+												to={ `/ticket/${ result.id }` }
+											>
+												{ result.title }
+											</Link>
+										</li>
+									);
+								} ) }
 						</ul>
 					</div>
 				</div>

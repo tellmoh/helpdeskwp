@@ -34,8 +34,10 @@ const CustomerInfo = ( { user } ) => {
 	};
 
 	return (
-		<div className="helpdesk-properties" style={{ marginTop: '18px' }}>
-			<h3 style={{ marginBottom: '15px' }}>{ __( 'Customer', 'helpdeskwp' ) }</h3>
+		<div className="helpdesk-properties" style={ { marginTop: '18px' } }>
+			<h3 style={ { marginBottom: '15px' } }>
+				{ __( 'Customer', 'helpdeskwp' ) }
+			</h3>
 			{ customer &&
 				customer.map( ( customer ) => {
 					return (

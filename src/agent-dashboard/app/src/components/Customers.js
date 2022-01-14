@@ -77,25 +77,25 @@ const Customers = () => {
 		<div className="helpdesk-main">
 			<div className="helpdesk-customers" style={ { width: '100%' } }>
 				<div className="helpdesk-customers-search">
-					<form onSubmit={handleSearch}>
+					<form onSubmit={ handleSearch }>
 						<input
 							type="text"
 							value={ key }
 							onChange={ ( e ) => setKey( e.target.value ) }
-							style={{
+							style={ {
 								width: '89%',
-								marginRight: '5px'
-							}}
+								marginRight: '5px',
+							} }
 						/>
 						<Button
 							type="submit"
 							variant="contained"
 							className="helpdesk-search-btn"
-							style={{
+							style={ {
 								padding: '11px 16px',
 								marginTop: '-3px',
-								marginLeft: '5px'
-							}}
+								marginLeft: '5px',
+							} }
 						>
 							{ __( 'Search', 'helpdeskwp' ) }
 						</Button>
