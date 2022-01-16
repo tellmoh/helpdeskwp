@@ -50,7 +50,27 @@ class PostType {
 
         register_post_type( 'Reply', $args );
     }
+
+    public static function documentations() {
+        $labels = array(
+            'name' => __( 'Documentations', 'helpdeskwp' ),
+        );
+        $args = array(
+            'labels'             => $labels,
+            'public'             => true,
+            'publicly_queryable' => true,
+            'show_ui'            => true,
+            'show_in_menu'       => false,
+            'capability_type'    => 'post',
+            'has_archive'        => true,
+            'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
+            'rewrite'            => array( 'slug' => 'docs' )
+        );
+
+        register_post_type( 'Documentation', $args );
+    }
 }
 
 add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'tickets' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'reply' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'documentations' ) );

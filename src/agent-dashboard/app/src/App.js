@@ -5,6 +5,7 @@ import Settings from './components/Settings';
 import Overview from './components/Overview';
 import Customers from './components/Customers';
 import Customer from './routes/Customer';
+import Docs from './components/docs';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import './index.scss';
 
@@ -21,6 +22,7 @@ const App = () => {
 				<Route path="settings" element={ <Settings /> } />
 				<Route path="overview" element={ <Overview /> } />
 				<Route path="customers" element={ <Customers /> } />
+				<Route path="docs" element={ <Docs /> } />
 			</Routes>
 		</MemoryRouter>
 	);
