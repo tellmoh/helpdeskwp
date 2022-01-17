@@ -63,6 +63,7 @@ class PostType {
             'show_in_menu'       => false,
             'capability_type'    => 'post',
             'has_archive'        => true,
+            'show_in_rest'       => true,
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
             'rewrite'            => array( 'slug' => 'docs' )
         );
