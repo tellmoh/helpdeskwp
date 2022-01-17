@@ -16,9 +16,7 @@ const TopBar = () => {
 						<Link to="/">{ __( 'Tickets', 'helpdeskwp' ) }</Link>
 					</li>
 					<li>
-						<Link to="/docs">
-							{ __( 'Docs', 'helpdeskwp' ) }
-						</Link>
+						<Link to="/docs">{ __( 'Docs', 'helpdeskwp' ) }</Link>
 					</li>
 					<li>
 						<Link to="/overview">

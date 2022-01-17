@@ -549,3 +549,25 @@ span.reply-date {
     box-shadow: 0 0 20px -15px $boxShadowColor;
     z-index: 99;
 }
+
+.helpdesk-docs {
+    div#vertical-tabpanel-0 {
+        flex-basis: 83%;
+    }
+
+    .MuiTabs-vertical {
+        flex-basis: 17%;
+    }
+
+    .helpdesk-term a {
+        margin-right: 15px;
+        color: $mainColor;
+        text-decoration: none;
+    }
+}
+
+.MuiPagination-root {
+    button {
+        display: flex;
+    }
+}
