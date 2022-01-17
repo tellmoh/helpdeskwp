@@ -421,6 +421,39 @@ class AgentDashboard {
 	}
 
 	/**
+	 * Returns the base edit link of the posts.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @access private
+	 */
+	private function get_posts_edit_link() {
+		return admin_url( 'post.php?post=' );
+	}
+
+	/**
+	 * Returns the base edit link of the categories.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @access private
+	 */
+	private function get_categories_link() {
+		return admin_url( 'term.php?taxonomy=docs_category&tag_ID=' );
+	}
+
+	/**
+	 * Returns the base edit link of the tags.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @access private
+	 */
+	private function get_tags_link() {
+		return admin_url( 'term.php?taxonomy=docs_tag&tag_ID=' );
+	}
+
+	/**
 	 * enqueue scripts
 	 *
 	 * @since 1.0.0
@@ -444,6 +477,9 @@ class AgentDashboard {
 				array(
 					'url'              => esc_url_raw( rest_url() ),
 					'nonce'            => wp_create_nonce( 'wp_rest' ),
+					'posts_edit_link'  => $this->get_posts_edit_link(),
+					'cat_edit_link'    => $this->get_categories_link(),
+					'tag_edit_link'    => $this->get_tags_link(),
 					'open_tickets'     => esc_attr( $this->open_tickets ),
 					'close_tickets'    => esc_attr( $this->close_tickets ),
 					'pending_tickets'  => esc_attr( $this->pending_tickets ),
