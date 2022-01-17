@@ -153,6 +153,62 @@ class Taxonomy {
 
         register_taxonomy( 'ticket_agent', array( 'ticket' ), $args );
     }
+
+    public static function docs_category() {
+        $labels = array(
+            'name'              => _x( 'Categories', 'taxonomy general name', 'helpdeskwp' ),
+            'singular_name'     => _x( 'Category', 'taxonomy singular name', 'helpdeskwp' ),
+            'search_items'      => __( 'Search Category', 'helpdeskwp' ),
+            'all_items'         => __( 'All Categories', 'helpdeskwp' ),
+            'parent_item'       => __( 'Parent Category', 'helpdeskwp' ),
+            'parent_item_colon' => __( 'Parent Category:', 'helpdeskwp' ),
+            'edit_item'         => __( 'Edit Category', 'helpdeskwp' ),
+            'update_item'       => __( 'Update Category', 'helpdeskwp' ),
+            'add_new_item'      => __( 'Add New Category', 'helpdeskwp' ),
+            'new_item_name'     => __( 'New Category Name', 'helpdeskwp' ),
+            'menu_name'         => __( 'Category', 'helpdeskwp' ),
+        );
+
+        $args = array(
+            'hierarchical'      => true,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_in_menu'      => false,
+            'query_var'         => true,
+            'show_in_rest'      => true,
+            'rewrite'           => array( 'slug' => 'category' ),
+        );
+
+        register_taxonomy( 'docs_category', array( 'documentation' ), $args );
+    }
+
+    public static function docs_tag() {
+        $labels = array(
+            'name'              => _x( 'Tags', 'taxonomy general name', 'helpdeskwp' ),
+            'singular_name'     => _x( 'Tag', 'taxonomy singular name', 'helpdeskwp' ),
+            'search_items'      => __( 'Search Tag', 'helpdeskwp' ),
+            'all_items'         => __( 'All Categories', 'helpdeskwp' ),
+            'parent_item'       => __( 'Parent Tag', 'helpdeskwp' ),
+            'parent_item_colon' => __( 'Parent Tag:', 'helpdeskwp' ),
+            'edit_item'         => __( 'Edit Tag', 'helpdeskwp' ),
+            'update_item'       => __( 'Update Tag', 'helpdeskwp' ),
+            'add_new_item'      => __( 'Add New Tag', 'helpdeskwp' ),
+            'new_item_name'     => __( 'New Tag Name', 'helpdeskwp' ),
+            'menu_name'         => __( 'Tag', 'helpdeskwp' ),
+        );
+
+        $args = array(
+            'hierarchical'      => true,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_in_menu'      => false,
+            'query_var'         => true,
+            'show_in_rest'      => true,
+            'rewrite'           => array( 'slug' => 'tag' ),
+        );
+
+        register_taxonomy( 'docs_tag', array( 'documentation' ), $args );
+    }
 }
 
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'category' ) );
@@ -160,3 +216,5 @@ add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'types' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'priority' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'status' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'agent' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'docs_category' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'docs_tag' ) );
