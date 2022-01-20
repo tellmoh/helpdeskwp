@@ -5,3 +5,5 @@ yarn-error.log
 build
 vendor
 composer.lock
+.sass-cache
+dist

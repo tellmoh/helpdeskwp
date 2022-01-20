@@ -1,0 +1,66 @@
+body .helpdeskwp-register,
+body .helpdeskwp-login {
+
+    width: 47%;
+    margin: 50px 0;
+    float: left;
+    background: #fff;
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px #344585;
+    margin-right: 3%;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        border: 1px solid #8fa3f1;
+        border-radius: 7px;
+        padding: 10px 20px;
+        color: hsl(0, 0%, 50%);
+        line-height: 1.5 !important;
+        font-size: 1rem;
+        width: 100%;
+        background: transparent;
+    }
+
+    [type="submit"] {
+        margin: 18px 0;
+        background: #0051af;
+        border: 1px solid #0051af;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: 400;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        transition: all .3s;
+        cursor: pointer;
+        height: 42px;
+    }
+
+    [type="submit"]:hover {
+        background: #fff;
+        color: #0051af;
+    }
+
+    [type="submit"]:focus {
+        background: #0051af;
+        color: #fff;
+    }
+
+    label {
+        margin: 14px 0 8px;
+        color: hsl(0, 0%, 50%);
+        font-size: 14px;
+    }
+}
+
+.helpdeskwp-login p {
+    margin: 0;
+}
+
+#helpdesk-err-msg {
+    color: #f39e9e;
+    margin: 10px 0;
+}
