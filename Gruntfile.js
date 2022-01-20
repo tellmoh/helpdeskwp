@@ -9,10 +9,18 @@ module.exports = function (grunt) {
                     'src/assets/dist/css/login.css': 'src/assets/src/css/login.scss',
                 }
             }
+        },
+        uglify: {
+            target: {
+                files: {
+                    'src/assets/dist/js/login.js': ['src/assets/src/js/login.js']
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['sass']);
+    grunt.registerTask('default', ['sass', 'uglify']);
 };

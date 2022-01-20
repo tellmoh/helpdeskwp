@@ -164,7 +164,7 @@ class UserDashboard {
 
 			wp_enqueue_script(
 				'user-dashboard-login',
-				HELPDESK_WP_URL . 'src/assets/js/login.js',
+				HELPDESK_WP_URL . 'src/assets/dist/js/login.js',
 				array( 'jquery' ),
 				HELPDESKWP,
 				true
