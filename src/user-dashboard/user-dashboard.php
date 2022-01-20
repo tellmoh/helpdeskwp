@@ -156,7 +156,7 @@ class UserDashboard {
 
 			wp_enqueue_style(
 				'user-dashboard-login',
-				HELPDESK_WP_URL . 'src/assets/css/login.css',
+				HELPDESK_WP_URL . 'src/assets/dist/css/login.css',
 				array(),
 				HELPDESKWP,
 				'all'
