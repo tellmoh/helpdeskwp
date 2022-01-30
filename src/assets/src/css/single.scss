@@ -1,0 +1,33 @@
+.helpdesk-docs-single {
+    width: 100%;
+    max-width: 860px;
+    margin: 30px auto;
+    color: #393f4c;
+    line-height: 1.6;
+
+    p {
+        font-size: 18px;
+    }
+
+    .docs-title {
+        font-size: 36px;
+        margin: 24px 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 16px 0;
+    }
+}
+
+.helpdesk-breadcrumbs {
+    a {
+        color: #6176a3;
+        text-decoration: none;
+        margin-right: 3px;
+    }
+}
