@@ -43,8 +43,6 @@ class Docs {
 	 * @access private
 	 */
 	private function __construct() {
-        add_shortcode( 'helpdesk_docs', array( $this, 'docs_output' ) );
-        add_shortcode( 'helpdesk_search_docs', array( $this, 'search_output' ) );
         add_action( 'helpdesk_docs_search', array( $this, 'search' ) );
         add_action( 'helpdesk_docs_categories', array( $this, 'categories' ) );
         add_action( 'helpdesk_before_archive_docs', array( $this, 'before_archive_docs' ) );
