@@ -176,7 +176,7 @@ class Taxonomy {
             'show_in_menu'      => false,
             'query_var'         => true,
             'show_in_rest'      => true,
-            'rewrite'           => array( 'slug' => 'category' ),
+            'rewrite'           => array( 'slug' => 'docs-category' ),
         );
 
         register_taxonomy( 'docs_category', array( 'documentation' ), $args );
@@ -204,7 +204,7 @@ class Taxonomy {
             'show_in_menu'      => false,
             'query_var'         => true,
             'show_in_rest'      => true,
-            'rewrite'           => array( 'slug' => 'tag' ),
+            'rewrite'           => array( 'slug' => 'docs-tag' ),
         );
 
         register_taxonomy( 'docs_tag', array( 'documentation' ), $args );
