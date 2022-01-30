@@ -16,7 +16,7 @@ use HelpDeskWP\UserDashboard;
  */
 class Template {
     /**
-	 * Loads custom template for support portal page.
+	 * Loads custom templates.
 	 *
 	 * @since 1.0.0
 	 *
@@ -25,6 +25,18 @@ class Template {
     public static function custom_template( $template ) {
         if ( UserDashboard::portal_page() && is_page( UserDashboard::portal_page() ) ) {
             $template = HELPDESK_WP_PATH  . 'src/template/portal.php';
+        }
+
+        if ( is_post_type_archive( 'documentation' ) ) {
+            $template = HELPDESK_WP_PATH  . 'src/template/docs-archive.php';
+        }
+
+        if ( is_tax( 'docs_category' ) ) {
+            $template = HELPDESK_WP_PATH  . 'src/template/docs-tax.php';
+        }
+
+        if ( is_singular( 'documentation' ) ) {
+            $template = HELPDESK_WP_PATH  . 'src/template/single-docs.php';
         }
 
         return $template;
