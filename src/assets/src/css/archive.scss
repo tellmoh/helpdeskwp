@@ -1,0 +1,158 @@
+.helpdesk-docs-archive {
+    width: 100%;
+    max-width: 1330px;
+    margin: 30px auto;
+}
+
+.helpdesk-search {
+    form {
+        position: relative;
+        text-align: center;
+    }
+
+    .helpdesk-search-icon {
+        position: absolute;
+        top: 18px;
+        padding-left: 15px;
+    }
+
+    input[type="text"] {
+        width: 40%;
+        border-radius: 7px;
+        background-color: #fff;
+        color: #222121;
+        padding: 15px 10px 15px 40px;
+        font-weight: 400;
+        font-size: 15px;
+        border: 2px solid #ddd;
+
+        &::placeholder {
+            color: #868686;
+        }
+    }
+}
+
+@mixin icon {
+    background-image: url("data:image/svg+xml,%3Csvg role='img' xmlns='http://www.w3.org/2000/svg' width='10' viewBox='0 0 384 512'%3E%3Cpath fill='%237e848b' d='M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    left: -20px;
+    top: 5px;
+}
+
+.helpdesk-cat-items {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 30px 0;
+
+    img {
+        max-width: 50%;
+    }
+
+    h3 {
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0 0 10px 20px;
+        font-weight: 500;
+        position: relative;
+
+        &:before {
+            @include icon;
+        }
+    }
+
+    a {
+        color: #7e848b;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.helpdesk-cat-title {
+    color: #6176a3;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 30px 0;
+}
+
+.helpdesk-cat-item,
+.helpdesk-docs-tax-item {
+    border: 1px solid #ddd;
+    background: #fff;
+    margin: 15px;
+    border-radius: 7px;
+    padding: 30px;
+    flex-basis: 18%;
+}
+
+.helpdesk-view-docs {
+    a {
+        font-size: 14px;
+    }
+}
+
+.helpdesk-docs-tax-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.helpdesk-docs-tax-item {
+    padding: 10px;
+
+    h3 {
+        font-size: 16px;
+        position: relative;
+        margin-left: 30px;
+
+        &:before {
+            @include icon;
+            top: 3px;
+        }
+
+        a {
+            color: #6176a3;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.helpdesk-search {
+    position: relative;
+}
+
+.helpdesk-search-result {
+    display: none;
+    max-width: 600px;
+    margin: 10px auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #f0f2f9;
+    padding: 26px;
+    border-radius: 7px;
+    max-height: 470px;
+    overflow: overlay;
+
+    a {
+        display: block;
+        text-align: left;
+        text-decoration: none;
+        color: #6176a3;
+        line-height: 1.6;
+        padding: 10px;
+        margin: 10px 0;
+        border-bottom: 1px solid;
+    }
+}
