@@ -1,3 +1,6 @@
+= v1.2.0 - 30 January 2022 =
+- Added Documentations
+
 = v1.1.0 - 14 January 2022 =
 - Added tickets search
 - Added customers dashboard
