@@ -127,13 +127,11 @@ class Settings {
 
     public function update_options( $params ) {
 
-        $options             = array();
-        $options['pageID']   = sanitize_text_field( $params['pageID'] );
-        $options['pageName'] = sanitize_text_field( $params['pageName'] );
-
-        if ( ! empty( $options['pageID'] ) && ! empty( $options['pageName'] ) ) {
-            update_option( $this->option, $options );
+        if ( ! is_array( $params ) && ! isset( $params['settings'] ) ) {
+            return;
         }
+
+        update_option( $this->option, $params['settings'] );
     }
 
     public function delete_item( $request ) {

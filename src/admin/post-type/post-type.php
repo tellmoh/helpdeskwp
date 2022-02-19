@@ -9,6 +9,8 @@ namespace HelpDeskWP\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
+use HelpDeskWP\Settings;
+
 /**
  * Class PostType
  */
@@ -52,6 +54,9 @@ class PostType {
     }
 
     public static function documentations() {
+        $slug      = Settings::get_setting( 'docsSlug' );
+        $docs_slug = $slug ? $slug : 'docs';
+
         $labels = array(
             'name' => __( 'Documentations', 'helpdeskwp' ),
         );
@@ -65,7 +70,7 @@ class PostType {
             'has_archive'        => true,
             'show_in_rest'       => true,
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
-            'rewrite'            => array( 'slug' => 'docs' )
+            'rewrite'            => array( 'slug' => $docs_slug )
         );
 
         register_post_type( 'Documentation', $args );
