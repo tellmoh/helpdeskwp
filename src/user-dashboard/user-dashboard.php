@@ -11,6 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 use HelpDeskWP\Login;
 use HelpDeskWP\Register;
+use HelpDeskWP\Settings;
 
 /**
  * Class UserDashboard
@@ -62,17 +63,6 @@ class UserDashboard {
 	}
 
 	/**
-	 * Returns the settings
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access private
-	 */
-	private static function settings( string $option ) {
-		return $setting = isset( get_option( 'helpdeskwp_settings' )[$option] ) ? get_option( 'helpdeskwp_settings' )[$option] : array();
-	}
-
-	/**
 	 * Returns support portal page ID
 	 *
 	 * @since 1.0.0
@@ -80,7 +70,7 @@ class UserDashboard {
 	 * @access public
 	 */
 	public static function portal_page() {
-		return self::settings( 'pageID' );
+		return Settings::get_setting( 'pageID' );
 	}
 
 	/**

@@ -65,6 +65,7 @@ class Main {
         require_once HELPDESK_WP_PATH . 'src/admin/post-type/post-type.php';
         require_once HELPDESK_WP_PATH . 'src/admin/taxonomy/taxonomy.php';
         require_once HELPDESK_WP_PATH . 'src/admin/data/data.php';
+        require_once HELPDESK_WP_PATH . 'src/admin/settings/settings.php';
         require_once HELPDESK_WP_PATH . 'src/docs/docs.php';
         require_once HELPDESK_WP_PATH . 'src/docs/image-meta/category-image-meta.php';
         require_once HELPDESK_WP_PATH . 'src/template/template.php';
