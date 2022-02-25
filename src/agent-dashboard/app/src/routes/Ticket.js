@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import CustomerInfo from '../components/CustomerInfo';
+import WooCommerce from '../components/modules/woocommerce';
 
 const MySwal = withReactContent( Swal );
 
@@ -324,7 +325,10 @@ const Ticket = () => {
 					ticketContent={ singleTicket }
 				/>
 				{ singleTicket && (
-					<CustomerInfo user={ singleTicket.author } />
+					<>
+						<CustomerInfo user={ singleTicket.author } />
+						<WooCommerce user={ singleTicket.author } />
+					</>
 				) }
 			</div>
 			<Outlet />
