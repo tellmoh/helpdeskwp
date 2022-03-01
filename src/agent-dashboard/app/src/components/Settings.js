@@ -8,6 +8,7 @@ import Select from 'react-select';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { FiltersContext } from '../contexts/FiltersContext';
+import { SettingsContext } from '../contexts/SettingsContext';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -44,7 +45,6 @@ function a11yProps( index ) {
 
 const Settings = () => {
 	const [ pages, setPages ] = useState( null );
-	const [ setting, setSetting ] = useState( null );
 	const [ value, setValue ] = useState( 0 );
 	const [ categoryTerm, setCategory ] = useState( '' );
 	const [ typeTerm, setType ] = useState( '' );
@@ -68,6 +68,13 @@ const Settings = () => {
 		deleteTerms,
 	} = useContext( FiltersContext );
 
+	const {
+		settings,
+		handleSave,
+		onSettingsChange,
+		onPageChange
+	} = useContext( SettingsContext )
+
 	let config = {
 		headers: {
 			'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
@@ -77,10 +84,6 @@ const Settings = () => {
 
 	useEffect( () => {
 		takePages();
-	}, [] );
-
-	useEffect( () => {
-		takeSettings();
 	}, [] );
 
 	const takePages = async () => {
@@ -97,54 +100,6 @@ const Settings = () => {
 		} );
 
 		return data;
-	};
-
-	const takeSettings = async () => {
-		const settings = await fetchSettings();
-		setSetting( settings );
-	};
-
-	const fetchSettings = async () => {
-		const url = `${ helpdesk_agent_dashboard.url }helpdesk/v1/settings`;
-
-		let data;
-		await axios.get( url, config ).then( ( res ) => {
-			data = res.data;
-		} );
-
-		return data;
-	};
-
-	const handleSave = async () => {
-		const data = {
-			type: 'saveSettings',
-			settings: setting,
-		};
-
-		await axios
-			.post(
-				`${ helpdesk_agent_dashboard.url }helpdesk/v1/settings`,
-				JSON.stringify( data ),
-				config
-			)
-			.then( function () {
-				toast( 'Saved.', {
-					duration: 2000,
-					style: {
-						marginTop: 50,
-					},
-				} );
-			} )
-			.catch( function ( err ) {
-				toast( "Couldn't save.", {
-					duration: 2000,
-					icon: '❌',
-					style: {
-						marginTop: 50,
-					},
-				} );
-				console.log( err );
-			} );
 	};
 
 	const handleChange = ( event, newValue ) => {
@@ -239,23 +194,6 @@ const Settings = () => {
 		takeAgents();
 	};
 
-	const onPageChange = ( page ) => {
-		setting.pageID   = page.value
-		setting.pageName = page.label
-
-		setSetting( setting );
-	};
-
-	const onSettingsChange = (event) => {
-		const target = event.target
-		const name   = target.name
-		const value  = target.value
-
-		setting[name] = value
-
-		setSetting( setting );
-	}
-
 	let pagesList = [];
 	pages &&
 		pages.map( ( page ) => {
@@ -286,28 +224,32 @@ const Settings = () => {
 							{ ...a11yProps( 0 ) }
 						/>
 						<Tab
-							label={ __( 'Docs', 'helpdeskwp' ) }
+							label={ __( 'Integrations', 'helpdeskwp' ) }
 							{ ...a11yProps( 1 ) }
 						/>
 						<Tab
-							label={ __( 'Category', 'helpdeskwp' ) }
+							label={ __( 'Docs', 'helpdeskwp' ) }
 							{ ...a11yProps( 2 ) }
 						/>
 						<Tab
-							label={ __( 'Type', 'helpdeskwp' ) }
+							label={ __( 'Category', 'helpdeskwp' ) }
 							{ ...a11yProps( 3 ) }
 						/>
 						<Tab
-							label={ __( 'Priority', 'helpdeskwp' ) }
+							label={ __( 'Type', 'helpdeskwp' ) }
 							{ ...a11yProps( 4 ) }
 						/>
 						<Tab
-							label={ __( 'Status', 'helpdeskwp' ) }
+							label={ __( 'Priority', 'helpdeskwp' ) }
 							{ ...a11yProps( 5 ) }
 						/>
 						<Tab
-							label={ __( 'Agent', 'helpdeskwp' ) }
+							label={ __( 'Status', 'helpdeskwp' ) }
 							{ ...a11yProps( 6 ) }
+						/>
+						<Tab
+							label={ __( 'Agent', 'helpdeskwp' ) }
+							{ ...a11yProps( 7 ) }
 						/>
 					</Tabs>
 					<TabPanel value={ value } index={ 0 }>
@@ -325,13 +267,13 @@ const Settings = () => {
 								) }
 							</small>
 						</div>
-						{ setting && (
+						{ settings && (
 							<Select
 								options={ pagesList }
 								onChange={ onPageChange }
 								defaultValue={ {
-									value: setting.pageID,
-									label: setting.pageName,
+									value: settings.pageID,
+									label: settings.pageName,
 								} }
 							/>
 						) }
@@ -342,6 +284,25 @@ const Settings = () => {
 						</div>
 					</TabPanel>
 					<TabPanel value={ value } index={ 1 }>
+						<p style={ { margin: '5px 0' } }>
+							{ __(
+								'WooCommerce',
+								'helpdeskwp'
+							) }
+						</p>
+						{ settings && <input
+							type="checkbox"
+							defaultChecked={settings.woo ? true : false}
+							name="woo"
+							onChange={onSettingsChange}
+						/> }
+						<div style={ { marginTop: '16px' } }>
+							<Button variant="contained" onClick={ handleSave }>
+								{ __( 'Save', 'helpdeskwp' ) }
+							</Button>
+						</div>
+					</TabPanel>
+					<TabPanel value={ value } index={ 2 }>
 						<p style={ { margin: '5px 0' } }>
 							{ __(
 								'Docs slug',
@@ -359,7 +320,7 @@ const Settings = () => {
 						<input
 							type="text"
 							name="docsSlug"
-							defaultValue={ setting && setting.docsSlug }
+							defaultValue={ settings && settings.docsSlug }
 							onChange={ onSettingsChange }
 						/>
 						<div style={ { marginTop: '16px' } }>
@@ -368,7 +329,7 @@ const Settings = () => {
 							</Button>
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 2 }>
+					<TabPanel value={ value } index={ 3 }>
 						<input
 							type="text"
 							placeholder={ __( 'Category', 'helpdeskwp' ) }
@@ -414,7 +375,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 3 }>
+					<TabPanel value={ value } index={ 4 }>
 						<input
 							type="text"
 							placeholder={ __( 'Type', 'helpdeskwp' ) }
@@ -460,7 +421,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 4 }>
+					<TabPanel value={ value } index={ 5 }>
 						<input
 							type="text"
 							placeholder={ __( 'Priority', 'helpdeskwp' ) }
@@ -506,7 +467,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 5 }>
+					<TabPanel value={ value } index={ 6 }>
 						<input
 							type="text"
 							placeholder={ __( 'Status', 'helpdeskwp' ) }
@@ -556,7 +517,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 6 }>
+					<TabPanel value={ value } index={ 7 }>
 						<input
 							type="text"
 							placeholder={ __( 'Agent', 'helpdeskwp' ) }
