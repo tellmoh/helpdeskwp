@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import CustomerInfo from '../components/CustomerInfo';
 import WooCommerce from '../components/modules/woocommerce';
+import { SettingsContext } from '../contexts/SettingsContext';
 
 const MySwal = withReactContent( Swal );
 
@@ -28,6 +29,10 @@ const Ticket = () => {
 
 	let params = useParams();
 	let navigate = useNavigate();
+
+	const {
+		settings,
+	} = useContext( SettingsContext )
 
 	useEffect( () => {
 		takeTicket();
@@ -327,7 +332,7 @@ const Ticket = () => {
 				{ singleTicket && (
 					<>
 						<CustomerInfo user={ singleTicket.author } />
-						<WooCommerce user={ singleTicket.author } />
+						{ settings && settings.woo && helpdesk_agent_dashboard.is_core ? <WooCommerce user={ singleTicket.author } /> : '' }
 					</>
 				) }
 			</div>

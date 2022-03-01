@@ -286,7 +286,7 @@ const Settings = () => {
 					<TabPanel value={ value } index={ 1 }>
 						<p style={ { margin: '5px 0' } }>
 							{ __(
-								'WooCommerce',
+								'WooCommerce (Pro)',
 								'helpdeskwp'
 							) }
 						</p>

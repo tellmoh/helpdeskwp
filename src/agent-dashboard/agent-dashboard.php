@@ -484,6 +484,7 @@ class AgentDashboard {
 					'close_tickets'    => esc_attr( $this->close_tickets ),
 					'pending_tickets'  => esc_attr( $this->pending_tickets ),
 					'resolved_tickets' => esc_attr( $this->resolved_tickets ),
+					'is_core'		   => function_exists( 'helpdeskwp_pro' ),
 				)
 			);
 
