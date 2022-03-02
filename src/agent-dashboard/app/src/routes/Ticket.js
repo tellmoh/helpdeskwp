@@ -15,6 +15,7 @@ import withReactContent from 'sweetalert2-react-content';
 import CustomerInfo from '../components/CustomerInfo';
 import WooCommerce from '../components/modules/woocommerce';
 import { SettingsContext } from '../contexts/SettingsContext';
+import EDD from '../components/modules/edd';
 
 const MySwal = withReactContent( Swal );
 
@@ -333,6 +334,7 @@ const Ticket = () => {
 					<>
 						<CustomerInfo user={ singleTicket.author } />
 						{ settings && settings.woo && helpdesk_agent_dashboard.is_core ? <WooCommerce user={ singleTicket.author } /> : '' }
+						{ settings && settings.edd && helpdesk_agent_dashboard.is_core ? <EDD user={ singleTicket.author } /> : '' }
 					</>
 				) }
 			</div>

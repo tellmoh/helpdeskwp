@@ -296,6 +296,20 @@ const Settings = () => {
 							name="woo"
 							onChange={onSettingsChange}
 						/> }
+
+						<p style={ { margin: '5px 0' } }>
+							{ __(
+								'Easy Digital Downloads (Pro)',
+								'helpdeskwp'
+							) }
+						</p>
+						{ settings && <input
+							type="checkbox"
+							defaultChecked={settings.edd ? true : false}
+							name="edd"
+							onChange={onSettingsChange}
+						/> }
+
 						<div style={ { marginTop: '16px' } }>
 							<Button variant="contained" onClick={ handleSave }>
 								{ __( 'Save', 'helpdeskwp' ) }
