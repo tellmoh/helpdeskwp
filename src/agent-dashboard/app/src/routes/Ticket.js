@@ -127,13 +127,15 @@ const Ticket = () => {
 	const submitReply = ( event ) => {
 		event.preventDefault();
 
-		const pictures = document.getElementById( 'helpdesk-pictures' );
+		const type       = event.nativeEvent.submitter.name;
+		const pictures   = document.getElementById( 'helpdesk-pictures' );
 		const fileLength = pictures.files.length;
-		const files = pictures;
+		const files      = pictures;
 
 		let formData = new FormData();
 		formData.append( 'reply', reply );
 		formData.append( 'parent', params.id );
+		formData.append( 'type', type );
 
 		for ( let i = 0; i < fileLength; i++ ) {
 			formData.append( 'pictures[]', pictures.files[ i ] );
@@ -142,7 +144,7 @@ const Ticket = () => {
 		sendReply( formData );
 		setReply( '' );
 		document.querySelector( '.helpdesk-editor .ProseMirror' ).innerHTML =
-			'';
+		'';
 	};
 
 	const deleteReply = async ( id ) => {
@@ -256,8 +258,15 @@ const Ticket = () => {
 							</div>
 							<div className="helpdesk-w-50">
 								<div className="helpdesk-submit-btn">
+									{ helpdesk_agent_dashboard.is_core &&
 									<input
 										type="submit"
+										name="private"
+										value={ __( 'Private', 'helpdeskwp' ) }
+									/> }
+									<input
+										type="submit"
+										name="publish"
 										value={ __( 'Send', 'helpdeskwp' ) }
 									/>
 								</div>
@@ -271,6 +280,7 @@ const Ticket = () => {
 									<div
 										key={ reply.id }
 										className="ticket-reply"
+										data-type={ reply.type }
 									>
 										<span className="by-name">
 											{ reply.author }

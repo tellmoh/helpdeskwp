@@ -106,7 +106,7 @@ class Tickets {
         return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
-    public function add_reply( string $reply, string $ticket_id, array $images ) {
+    public function add_reply( string $reply, string $ticket_id, array $images, string $type = '' ) {
         $current_user = get_current_user_id();
 
         $reply_id = wp_insert_post(
@@ -119,6 +119,7 @@ class Tickets {
                 'post_author'  => $current_user,
                 'meta_input'   => array(
                     'reply_images' => $images,
+                    'reply_type'   => $type,
                 ),
             )
         );

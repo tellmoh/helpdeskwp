@@ -304,6 +304,10 @@ body .helpdesk-back {
     position: relative;
 }
 
+.ticket-reply[data-type="private"] {
+    background: #f9e38e;
+}
+
 span.by-name,
 span.reply-date {
     color: hsl(0, 0%, 50%);

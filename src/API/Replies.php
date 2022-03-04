@@ -53,13 +53,14 @@ class Replies extends Tickets {
     public function create_replies( $request ) {
         $params = $request->get_params();
         $files  = $request->get_file_params();
+        $type   = 'private' === $params['type'] ? 'private' : '';
 
         if ( ! is_array( $params ) ) {
             return array();
         }
 
         $image  = $this->save_image( $files );
-        $ticket = $this->add_reply( $params['reply'], $params['parent'], $image->data );
+        $ticket = $this->add_reply( $params['reply'], $params['parent'], $image->data, $type );
 
         if ( $ticket ) {
             $this->send_email( $params['parent'] );
@@ -124,16 +125,32 @@ class Replies extends Tickets {
         foreach ( $query as $post ) {
             $reply = array();
 
+            if ( false === $this->check_reply_type( $post->ID ) ) {
+                continue;
+            }
+
             $reply['id'] = $post->ID;
             $reply['date'] = $post->post_date;
             $reply['reply'] = $post->post_content;
             $reply['author'] = $this->prepare_author_for_response( $post->post_author );
             $reply['images'] = $this->get_image_link( $post->ID );
+            $reply['type'] = get_post_meta( $post->ID, 'reply_type', true );
 
 			$replies[] = $reply;
 		}
 
         return $replies;
+    }
+
+    private function check_reply_type( string $reply_id ) {
+        $current_user = get_current_user_id();
+        $type         = get_post_meta( $reply_id, 'reply_type', true );
+
+        if ( user_can( $current_user, 'manage_options' ) ) {
+            return true;
+        } elseif ( 'private' === $type ) {
+            return false;
+        }
     }
 
     public function get_image_link( string $post_id ) {
