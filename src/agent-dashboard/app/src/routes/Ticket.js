@@ -262,7 +262,7 @@ const Ticket = () => {
 									<input
 										type="submit"
 										name="private"
-										value={ __( 'Private', 'helpdeskwp' ) }
+										value={ __( 'Private Note', 'helpdeskwp' ) }
 									/> }
 									<input
 										type="submit"
