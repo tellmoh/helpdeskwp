@@ -11,6 +11,7 @@ import { FiltersContext } from '../contexts/FiltersContext';
 import { SettingsContext } from '../contexts/SettingsContext';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CannedResponses from './CannedResponses';
 
 const theme = createTheme( {
 	palette: {
@@ -232,24 +233,28 @@ const Settings = () => {
 							{ ...a11yProps( 2 ) }
 						/>
 						<Tab
-							label={ __( 'Category', 'helpdeskwp' ) }
+							label={ __( 'Canned Responses', 'helpdeskwp' ) }
 							{ ...a11yProps( 3 ) }
 						/>
 						<Tab
-							label={ __( 'Type', 'helpdeskwp' ) }
+							label={ __( 'Category', 'helpdeskwp' ) }
 							{ ...a11yProps( 4 ) }
 						/>
 						<Tab
-							label={ __( 'Priority', 'helpdeskwp' ) }
+							label={ __( 'Type', 'helpdeskwp' ) }
 							{ ...a11yProps( 5 ) }
 						/>
 						<Tab
-							label={ __( 'Status', 'helpdeskwp' ) }
+							label={ __( 'Priority', 'helpdeskwp' ) }
 							{ ...a11yProps( 6 ) }
 						/>
 						<Tab
-							label={ __( 'Agent', 'helpdeskwp' ) }
+							label={ __( 'Status', 'helpdeskwp' ) }
 							{ ...a11yProps( 7 ) }
+						/>
+						<Tab
+							label={ __( 'Agent', 'helpdeskwp' ) }
+							{ ...a11yProps( 8 ) }
 						/>
 					</Tabs>
 					<TabPanel value={ value } index={ 0 }>
@@ -344,6 +349,9 @@ const Settings = () => {
 						</div>
 					</TabPanel>
 					<TabPanel value={ value } index={ 3 }>
+						<CannedResponses />
+					</TabPanel>
+					<TabPanel value={ value } index={ 4 }>
 						<input
 							type="text"
 							placeholder={ __( 'Category', 'helpdeskwp' ) }
@@ -389,7 +397,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 4 }>
+					<TabPanel value={ value } index={ 5 }>
 						<input
 							type="text"
 							placeholder={ __( 'Type', 'helpdeskwp' ) }
@@ -435,7 +443,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 5 }>
+					<TabPanel value={ value } index={ 6 }>
 						<input
 							type="text"
 							placeholder={ __( 'Priority', 'helpdeskwp' ) }
@@ -481,7 +489,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 6 }>
+					<TabPanel value={ value } index={ 7 }>
 						<input
 							type="text"
 							placeholder={ __( 'Status', 'helpdeskwp' ) }
@@ -531,7 +539,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 7 }>
+					<TabPanel value={ value } index={ 8 }>
 						<input
 							type="text"
 							placeholder={ __( 'Agent', 'helpdeskwp' ) }

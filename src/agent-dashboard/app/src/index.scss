@@ -58,7 +58,8 @@ div#wpcontent {
         }
     }
 
-    .helpdesk-name, .helpdesk-menu {
+    .helpdesk-name,
+    .helpdesk-menu {
         display: inline-block;
     }
 }
@@ -427,17 +428,23 @@ span.reply-date {
 }
 
 .MuiTabs-vertical {
-    flex-basis: 15%;
+    flex-basis: 18%;
 }
 
 .helpdesk-term {
     position: relative;
     border-bottom: 1px solid #ebe6e6;
     padding: 15px 5px;
-}
 
-.helpdesk-term:last-child {
-    border-color: transparent;
+    &:last-child {
+        border-color: transparent;
+    }
+
+    a {
+        margin-right: 15px;
+        color: $mainColor;
+        text-decoration: none;
+    }
 }
 
 .helpdesk-terms-list {
@@ -562,16 +569,41 @@ span.reply-date {
     .MuiTabs-vertical {
         flex-basis: 17%;
     }
-
-    .helpdesk-term a {
-        margin-right: 15px;
-        color: $mainColor;
-        text-decoration: none;
-    }
 }
 
 .MuiPagination-root {
     button {
         display: flex;
+    }
+}
+
+#canned-responses {
+    display: inline-block;
+    position: relative;
+
+    button {
+        margin-top: -5px;
+        text-align: left;
+        text-transform: none;
+    }
+}
+
+#helpdesk-responses {
+    position: absolute;
+    z-index: 99;
+    width: 250px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 7px;
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px $boxShadowColor;
+    left: -25px;
+
+    input {
+        width: 100%;
+    }
+
+    .helpdesk-search-result-item {
+        text-align: left;
     }
 }

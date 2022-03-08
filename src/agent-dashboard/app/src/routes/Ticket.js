@@ -16,6 +16,7 @@ import CustomerInfo from '../components/CustomerInfo';
 import WooCommerce from '../components/modules/woocommerce';
 import { SettingsContext } from '../contexts/SettingsContext';
 import EDD from '../components/modules/edd';
+import Responses from '../components/CannedResponses/Responses';
 
 const MySwal = withReactContent( Swal );
 
@@ -131,6 +132,7 @@ const Ticket = () => {
 		const pictures   = document.getElementById( 'helpdesk-pictures' );
 		const fileLength = pictures.files.length;
 		const files      = pictures;
+		const textarea   = document.querySelector( '.helpdesk-editor .ProseMirror' );
 
 		let formData = new FormData();
 		formData.append( 'reply', reply );
@@ -143,8 +145,7 @@ const Ticket = () => {
 
 		sendReply( formData );
 		setReply( '' );
-		document.querySelector( '.helpdesk-editor .ProseMirror' ).innerHTML =
-		'';
+		textarea.innerHTML = '';
 	};
 
 	const deleteReply = async ( id ) => {
@@ -258,12 +259,16 @@ const Ticket = () => {
 							</div>
 							<div className="helpdesk-w-50">
 								<div className="helpdesk-submit-btn">
-									{ helpdesk_agent_dashboard.is_core &&
-									<input
-										type="submit"
-										name="private"
-										value={ __( 'Private Note', 'helpdeskwp' ) }
-									/> }
+									{ helpdesk_agent_dashboard.is_core && (
+										<>
+											<Responses />
+											<input
+												type="submit"
+												name="private"
+												value={ __( 'Private Note', 'helpdeskwp' ) }
+											/>
+										</>
+									) }
 									<input
 										type="submit"
 										name="publish"

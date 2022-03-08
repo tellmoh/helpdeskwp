@@ -42,7 +42,7 @@ class PostType {
         $args = array(
             'labels'             => $labels,
             'public'             => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => false,
             'show_ui'            => true,
             'show_in_menu'       => false,
             'capability_type'    => 'post',
@@ -75,8 +75,27 @@ class PostType {
 
         register_post_type( 'Documentation', $args );
     }
+
+    public static function canned_responses() {
+        $labels = array(
+            'name' => __( 'Canned Responses', 'helpdeskwp' ),
+        );
+        $args = array(
+            'labels'             => $labels,
+            'public'             => true,
+            'publicly_queryable' => false,
+            'show_ui'            => true,
+            'show_in_menu'       => false,
+            'capability_type'    => 'post',
+            'show_in_rest'       => true,
+            'supports'           => array( 'title', 'editor' ),
+        );
+
+        register_post_type( 'Response', $args );
+    }
 }
 
 add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'tickets' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'reply' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'documentations' ) );
+add_action( 'init', array( 'HelpDeskWP\Admin\PostType', 'canned_responses' ) );
