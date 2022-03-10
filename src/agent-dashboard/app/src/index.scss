@@ -396,8 +396,9 @@ span.reply-date {
 .helpdesk-delete-reply {
     position: absolute;
     right: -5px;
-    top: 34px;
+    top: 36px;
     opacity: 0;
+    transition: all 0.2s;
 }
 
 .ticket-reply:hover .helpdesk-delete-reply {
@@ -605,5 +606,44 @@ span.reply-date {
 
     .helpdesk-search-result-item {
         text-align: left;
+    }
+}
+
+.reply-edit {
+    position: relative;
+    float: right;
+
+    .edit-reply-btn {
+        margin: -4px 4px 4px;
+        text-transform: inherit;
+    }
+}
+
+#reply-edit {
+    position: absolute;
+    width: 580px;
+    min-height: 250px;
+    z-index: 99;
+    background: #fff;
+    padding: 20px;
+    border-radius: 7px;
+    border: 1px solid #dbe0f3;
+    box-shadow: 0 0 20px -15px $boxShadowColor;
+    left: -525px;
+
+    input[type="submit"] {
+        float: right;
+        margin-top: 16px;
+    }
+
+    .edit-close-btn {
+        background: transparent;
+        border: transparent;
+        float: right;
+        cursor: pointer;
+
+        svg {
+            fill: #ee5454;
+        }
     }
 }

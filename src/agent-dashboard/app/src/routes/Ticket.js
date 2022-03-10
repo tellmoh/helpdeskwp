@@ -17,6 +17,7 @@ import WooCommerce from '../components/modules/woocommerce';
 import { SettingsContext } from '../contexts/SettingsContext';
 import EDD from '../components/modules/edd';
 import Responses from '../components/CannedResponses/Responses';
+import EditReply from '../components/EditReply';
 
 const MySwal = withReactContent( Swal );
 
@@ -286,10 +287,12 @@ const Ticket = () => {
 										key={ reply.id }
 										className="ticket-reply"
 										data-type={ reply.type }
+										data-id={ reply.id }
 									>
 										<span className="by-name">
 											{ reply.author }
 										</span>
+										{ helpdesk_agent_dashboard.is_core && <EditReply id={ reply.id } takeReplies={ takeReplies } /> }
 										<span className="reply-date">
 											{ reply.date }
 										</span>

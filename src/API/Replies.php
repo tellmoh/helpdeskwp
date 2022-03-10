@@ -48,6 +48,60 @@ class Replies extends Tickets {
                 'args'                => array(),
             ),
         ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/edit/(?P<id>[\d]+)',
+            array(
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => array( $this, 'get_reply' ),
+                    'permission_callback' => array( $this, 'get_replies_permissions_check' ),
+                    'args'                => array(),
+                ),
+                array(
+                    'methods'             => \WP_REST_Server::EDITABLE,
+                    'callback'            => array( $this, 'update_reply' ),
+                    'permission_callback' => array( $this, 'get_replies_permissions_check' ),
+                    'args'                => array(),
+                ),
+            )
+        );
+    }
+
+    public function get_reply( $request ) {
+        $reply_id = $request->get_param( 'id' );
+
+        $reply = get_post( $reply_id );
+
+        if ( $reply ) {
+            $content  = $reply->post_content;
+            $response = rest_ensure_response( $content );
+
+            return $response;
+        }
+
+        return new \WP_Error( 'cant-get-reply', __( 'Can\'t get the reply', 'helpdeskwp' ), array( 'status' => 500 ) );
+    }
+
+    public function update_reply( $request ) {
+        $reply_id = $request->get_param( 'id' );
+        $reply    = $request->get_param( 'reply' );
+
+        if ( '' !== $reply ) {
+            $data = array(
+                'ID'           => $reply_id,
+                'post_content' => wp_kses_post( $reply ),
+                'post_type'    => 'reply'
+            );
+
+            $update = wp_update_post( $data );
+
+            if ( ! is_wp_error( $update ) ) {
+                return new \WP_REST_Response( __( 'The reply has been updated', 'helpdeskwp' ), 200 );
+            }
+        }
+
+        return new \WP_Error( 'cant-update-reply', __( 'Can\'t update the reply', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
 
     public function create_replies( $request ) {
