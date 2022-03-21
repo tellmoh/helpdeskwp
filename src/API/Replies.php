@@ -189,6 +189,7 @@ class Replies extends Tickets {
             $reply['author'] = $this->prepare_author_for_response( $post->post_author );
             $reply['images'] = $this->get_image_link( $post->ID );
             $reply['type'] = get_post_meta( $post->ID, 'reply_type', true );
+            $reply['merge'] = get_post_meta( $post->ID, 'reply_merge', true );
 
 			$replies[] = $reply;
 		}

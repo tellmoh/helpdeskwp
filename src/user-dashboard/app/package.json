@@ -1,0 +1,37 @@
+{
+    "name": "helpdeskwp-user",
+    "license": "GPL-v2-or-later",
+    "dependencies": {
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
+        "@mui/material": "^5.2.7",
+        "@mui/styles": "^5.2.3",
+        "@tiptap/core": "^2.0.0-beta.160",
+        "@tiptap/react": "^2.0.0-beta.104",
+        "@tiptap/starter-kit": "^2.0.0-beta.168",
+        "axios": "^0.24.0",
+        "history": "^5.2.0",
+        "react-hot-toast": "^2.2.0",
+        "react-router-dom": "^6.2.1",
+        "react-select": "^5.2.1",
+        "sweetalert2": "^11.3.4",
+        "sweetalert2-react-content": "^4.2.0"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^22.2.1",
+        "grunt": "^1.4.1",
+        "grunt-contrib-sass": "^2.0.0",
+        "grunt-contrib-uglify": "^5.0.1",
+        "grunt-contrib-watch": "^1.1.0"
+    },
+    "scripts": {
+        "build": "wp-scripts build",
+        "start": "wp-scripts start",
+        "start:hot": "wp-scripts start --hot",
+        "lint:js": "wp-scripts lint-js",
+        "test:unit": "wp-scripts test-unit-js",
+        "format": "wp-scripts format",
+        "packages-update": "wp-scripts packages-update"
+    },
+    "prettier": "@wordpress/prettier-config"
+}

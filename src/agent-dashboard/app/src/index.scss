@@ -206,6 +206,7 @@ body .helpdesk-back {
         display: inline-block;
         padding: 5px 15px;
         font-size: 13px;
+        text-transform: none;
     }
 }
 
@@ -306,7 +307,7 @@ body .helpdesk-back {
 }
 
 .ticket-reply[data-type="private"] {
-    background: #f9e38e;
+    background: #f9e38e !important;
 }
 
 span.by-name,
@@ -646,4 +647,24 @@ span.reply-date {
             fill: #ee5454;
         }
     }
+}
+
+.MuiDrawer-modal {
+    z-index: 999999 !important;
+}
+
+.merge-drawer {
+    display: inline-block;
+}
+
+.merge-box input[type="text"] {
+    border: 1px solid #8fa3f1;
+    border-radius: 7px;
+    padding: 10px 20px;
+    color: hsl(0, 0%, 50%);
+    width: 100%;
+}
+
+.ticket-reply[data-merge="1"] {
+    background: #b8dffc;
 }

@@ -18,6 +18,7 @@ import { SettingsContext } from '../contexts/SettingsContext';
 import EDD from '../components/modules/edd';
 import Responses from '../components/CannedResponses/Responses';
 import EditReply from '../components/EditReply';
+import Merge from '../components/Merge';
 
 const MySwal = withReactContent( Swal );
 
@@ -33,9 +34,7 @@ const Ticket = () => {
 	let params = useParams();
 	let navigate = useNavigate();
 
-	const {
-		settings,
-	} = useContext( SettingsContext )
+	const { settings } = useContext( SettingsContext );
 
 	useEffect( () => {
 		takeTicket();
@@ -129,11 +128,13 @@ const Ticket = () => {
 	const submitReply = ( event ) => {
 		event.preventDefault();
 
-		const type       = event.nativeEvent.submitter.name;
-		const pictures   = document.getElementById( 'helpdesk-pictures' );
+		const type = event.nativeEvent.submitter.name;
+		const pictures = document.getElementById( 'helpdesk-pictures' );
 		const fileLength = pictures.files.length;
-		const files      = pictures;
-		const textarea   = document.querySelector( '.helpdesk-editor .ProseMirror' );
+		const files = pictures;
+		const textarea = document.querySelector(
+			'.helpdesk-editor .ProseMirror'
+		);
 
 		let formData = new FormData();
 		formData.append( 'reply', reply );
@@ -208,6 +209,9 @@ const Ticket = () => {
 							{ __( 'Back', 'helpdeskwp' ) }
 						</span>
 					</Button>
+					{ helpdesk_agent_dashboard.is_core && (
+						<Merge takeReplies={ takeReplies } />
+					) }
 					<div className="refresh-ticket">
 						<Button onClick={ refreshTicket }>
 							<svg
@@ -266,7 +270,10 @@ const Ticket = () => {
 											<input
 												type="submit"
 												name="private"
-												value={ __( 'Private Note', 'helpdeskwp' ) }
+												value={ __(
+													'Private Note',
+													'helpdeskwp'
+												) }
 											/>
 										</>
 									) }
@@ -288,11 +295,17 @@ const Ticket = () => {
 										className="ticket-reply"
 										data-type={ reply.type }
 										data-id={ reply.id }
+										data-merge={ reply.merge }
 									>
 										<span className="by-name">
 											{ reply.author }
 										</span>
-										{ helpdesk_agent_dashboard.is_core && <EditReply id={ reply.id } takeReplies={ takeReplies } /> }
+										{ helpdesk_agent_dashboard.is_core && (
+											<EditReply
+												id={ reply.id }
+												takeReplies={ takeReplies }
+											/>
+										) }
 										<span className="reply-date">
 											{ reply.date }
 										</span>
@@ -351,8 +364,20 @@ const Ticket = () => {
 				{ singleTicket && (
 					<>
 						<CustomerInfo user={ singleTicket.author } />
-						{ settings && settings.woo && helpdesk_agent_dashboard.is_core ? <WooCommerce user={ singleTicket.author } /> : '' }
-						{ settings && settings.edd && helpdesk_agent_dashboard.is_core ? <EDD user={ singleTicket.author } /> : '' }
+						{ settings &&
+						settings.woo &&
+						helpdesk_agent_dashboard.is_core ? (
+							<WooCommerce user={ singleTicket.author } />
+						) : (
+							''
+						) }
+						{ settings &&
+						settings.edd &&
+						helpdesk_agent_dashboard.is_core ? (
+							<EDD user={ singleTicket.author } />
+						) : (
+							''
+						) }
 					</>
 				) }
 			</div>
