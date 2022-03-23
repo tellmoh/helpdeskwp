@@ -1,6 +1,5 @@
 import App from './App';
 import FiltersContextProvider from './contexts/FiltersContext';
-import SettingsContextProvider from './contexts/SettingsContext';
 
 import { store } from './app/store';
 import { Provider } from 'react-redux';
@@ -8,9 +7,7 @@ import { Provider } from 'react-redux';
 ReactDOM.render(
 	<Provider store={ store }>
 		<FiltersContextProvider>
-			<SettingsContextProvider>
-				<App />
-			</SettingsContextProvider>
+			<App />
 		</FiltersContextProvider>
 	</Provider>,
 	document.getElementById( 'helpdesk-agent-dashboard' )

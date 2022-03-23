@@ -1,17 +1,23 @@
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+	saveSettings,
+	getPages,
+	getSettings,
+	setSetting,
+	setPage,
+} from '../features/settings/settingSlice';
+import axios from 'axios';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Select from 'react-select';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import { FiltersContext } from '../contexts/FiltersContext';
-import { SettingsContext } from '../contexts/SettingsContext';
-import { Toaster } from 'react-hot-toast';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CannedResponses from './CannedResponses';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const theme = createTheme( {
 	palette: {
@@ -45,7 +51,6 @@ function a11yProps( index ) {
 }
 
 const Settings = () => {
-	const [ pages, setPages ] = useState( null );
 	const [ value, setValue ] = useState( 0 );
 	const [ categoryTerm, setCategory ] = useState( '' );
 	const [ typeTerm, setType ] = useState( '' );
@@ -53,7 +58,22 @@ const Settings = () => {
 	const [ statusTerm, setStatus ] = useState( '' );
 	const [ agentTerm, setAgent ] = useState( '' );
 
+	const { settings, pages, isLoading, isError, message } = useSelector(
+		( state ) => state.setting
+	);
+
 	const defaultStatus = [ 'Open', 'Close', 'Pending', 'Resolved' ];
+
+	const dispatch = useDispatch();
+
+	useEffect( () => {
+		if ( isError ) {
+			console.log( message );
+		}
+
+		dispatch( getPages() );
+		dispatch( getSettings() );
+	}, [] );
 
 	const {
 		category,
@@ -69,38 +89,27 @@ const Settings = () => {
 		deleteTerms,
 	} = useContext( FiltersContext );
 
-	const {
-		settings,
-		handleSave,
-		onSettingsChange,
-		onPageChange
-	} = useContext( SettingsContext )
+	const onSettingsChange = ( event ) => {
+		const target = event.target;
+		const name = target.name;
+		const value =
+			target.type === 'checkbox' ? target.checked : target.value;
 
-	let config = {
-		headers: {
-			'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
-			'Content-Type': 'application/json',
-		},
+		const args = {
+			name,
+			value,
+		};
+
+		dispatch( setSetting( args ) );
 	};
 
-	useEffect( () => {
-		takePages();
-	}, [] );
+	const onPageChange = ( page ) => {
+		const args = {
+			pageID: page.value,
+			pageName: page.label,
+		};
 
-	const takePages = async () => {
-		const pages = await fetchPages();
-		setPages( pages );
-	};
-
-	const fetchPages = async () => {
-		const url = `${ helpdesk_agent_dashboard.url }wp/v2/pages/?per_page=100`;
-
-		let data;
-		await axios.get( url ).then( ( res ) => {
-			data = res.data;
-		} );
-
-		return data;
+		dispatch( setPage( args ) );
 	};
 
 	const handleChange = ( event, newValue ) => {
@@ -114,30 +123,18 @@ const Settings = () => {
 			termName: name,
 		};
 
-		await axios
-			.post(
-				`${ helpdesk_agent_dashboard.url }helpdesk/v1/settings`,
-				JSON.stringify( data ),
-				config
-			)
-			.then( function () {
-				toast( 'Added.', {
-					duration: 2000,
-					style: {
-						marginTop: 50,
-					},
-				} );
-			} )
-			.catch( function ( err ) {
-				toast( "Couldn't add.", {
-					duration: 2000,
-					icon: '❌',
-					style: {
-						marginTop: 50,
-					},
-				} );
-				console.log( err );
-			} );
+		const config = {
+			headers: {
+				'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
+				'Content-Type': 'application/json',
+			},
+		};
+
+		await axios.post(
+			`${ helpdesk_agent_dashboard.url }helpdesk/v1/settings`,
+			JSON.stringify( data ),
+			config
+		);
 	};
 
 	const addNewCategory = async () => {
@@ -200,6 +197,14 @@ const Settings = () => {
 		pages.map( ( page ) => {
 			pagesList.push( { value: page.id, label: page.title.rendered } );
 		} );
+
+	if ( isLoading ) {
+		return (
+			<div id="hdw-loading">
+				<CircularProgress />
+			</div>
+		);
+	}
 
 	return (
 		<ThemeProvider theme={ theme }>
@@ -283,24 +288,28 @@ const Settings = () => {
 							/>
 						) }
 						<div style={ { marginTop: '16px' } }>
-							<Button variant="contained" onClick={ handleSave }>
+							<Button
+								variant="contained"
+								onClick={ () =>
+									dispatch( saveSettings( settings ) )
+								}
+							>
 								{ __( 'Save', 'helpdeskwp' ) }
 							</Button>
 						</div>
 					</TabPanel>
 					<TabPanel value={ value } index={ 1 }>
 						<p style={ { margin: '5px 0' } }>
-							{ __(
-								'WooCommerce (Pro)',
-								'helpdeskwp'
-							) }
+							{ __( 'WooCommerce (Pro)', 'helpdeskwp' ) }
 						</p>
-						{ settings && <input
-							type="checkbox"
-							defaultChecked={settings.woo ? true : false}
-							name="woo"
-							onChange={onSettingsChange}
-						/> }
+						{ settings && (
+							<input
+								type="checkbox"
+								defaultChecked={ settings.woo ? true : false }
+								name="woo"
+								onChange={ onSettingsChange }
+							/>
+						) }
 
 						<p style={ { margin: '5px 0' } }>
 							{ __(
@@ -308,25 +317,29 @@ const Settings = () => {
 								'helpdeskwp'
 							) }
 						</p>
-						{ settings && <input
-							type="checkbox"
-							defaultChecked={settings.edd ? true : false}
-							name="edd"
-							onChange={onSettingsChange}
-						/> }
+						{ settings && (
+							<input
+								type="checkbox"
+								defaultChecked={ settings.edd ? true : false }
+								name="edd"
+								onChange={ onSettingsChange }
+							/>
+						) }
 
 						<div style={ { marginTop: '16px' } }>
-							<Button variant="contained" onClick={ handleSave }>
+							<Button
+								variant="contained"
+								onClick={ () =>
+									dispatch( saveSettings( settings ) )
+								}
+							>
 								{ __( 'Save', 'helpdeskwp' ) }
 							</Button>
 						</div>
 					</TabPanel>
 					<TabPanel value={ value } index={ 2 }>
 						<p style={ { margin: '5px 0' } }>
-							{ __(
-								'Docs slug',
-								'helpdeskwp'
-							) }
+							{ __( 'Docs slug', 'helpdeskwp' ) }
 						</p>
 						<div style={ { marginBottom: '10px' } }>
 							<small>
@@ -343,7 +356,12 @@ const Settings = () => {
 							onChange={ onSettingsChange }
 						/>
 						<div style={ { marginTop: '16px' } }>
-							<Button variant="contained" onClick={ handleSave }>
+							<Button
+								variant="contained"
+								onClick={ () =>
+									dispatch( saveSettings( settings ) )
+								}
+							>
 								{ __( 'Save', 'helpdeskwp' ) }
 							</Button>
 						</div>
@@ -587,7 +605,6 @@ const Settings = () => {
 					</TabPanel>
 				</Box>
 			</div>
-			<Toaster />
 		</ThemeProvider>
 	);
 };

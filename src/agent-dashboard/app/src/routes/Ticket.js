@@ -1,5 +1,7 @@
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSettings } from '../features/settings/settingSlice';
 import { useParams } from 'react-router-dom';
 import { Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -14,7 +16,6 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import CustomerInfo from '../components/CustomerInfo';
 import WooCommerce from '../components/modules/woocommerce';
-import { SettingsContext } from '../contexts/SettingsContext';
 import EDD from '../components/modules/edd';
 import Responses from '../components/CannedResponses/Responses';
 import EditReply from '../components/EditReply';
@@ -33,15 +34,14 @@ const Ticket = () => {
 
 	let params = useParams();
 	let navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	const { settings } = useContext( SettingsContext );
+	const { settings } = useSelector( ( state ) => state.setting );
 
 	useEffect( () => {
 		takeTicket();
-	}, [] );
-
-	useEffect( () => {
 		takeReplies();
+		dispatch( getSettings() );
 	}, [] );
 
 	const handleReplyChange = ( reply ) => {

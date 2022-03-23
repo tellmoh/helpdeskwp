@@ -101,7 +101,9 @@ class Settings {
         }
 
         if ( 'saveSettings' === $type ) {
-            return $this->update_options( $params );
+            $this->update_options( $params );
+
+            return $this->get_settings();
         }
 
         if ( 'addTerm' === $type ) {
@@ -132,6 +134,10 @@ class Settings {
         }
 
         update_option( $this->option, $params['settings'] );
+    }
+
+    private function get_settings() {
+        return get_option( $this->option );
     }
 
     public function delete_item( $request ) {
