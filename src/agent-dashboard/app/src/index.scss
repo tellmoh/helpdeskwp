@@ -668,3 +668,13 @@ span.reply-date {
 .ticket-reply[data-merge="1"] {
     background: #b8dffc;
 }
+
+#hdw-loading {
+    span {
+        margin: 0 auto;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 50%;
+    }
+}

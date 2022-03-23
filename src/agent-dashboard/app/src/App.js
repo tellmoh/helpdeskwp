@@ -1,4 +1,4 @@
-import Tickets from './components/Tickets';
+import TicketsList from './components/Tickets';
 import Ticket from './routes/Ticket';
 import TopBar from './components/TopBar';
 import Settings from './components/Settings';
@@ -16,7 +16,7 @@ const App = () => {
 		<MemoryRouter basename={ pageSlug } initialEntries={ [ pageSlug ] }>
 			<TopBar />
 			<Routes>
-				<Route path="/" element={ <Tickets /> } />
+				<Route path="/" element={ <TicketsList /> } />
 				<Route path="ticket/:id" element={ <Ticket /> } />
 				<Route path="customer/:id" element={ <Customer /> } />
 				<Route path="settings" element={ <Settings /> } />

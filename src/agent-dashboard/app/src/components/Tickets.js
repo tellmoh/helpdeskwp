@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useContext, useState } from 'react';
-import { TicketContext } from '../contexts/TicketContext';
+import { useContext, useState, useEffect } from 'react';
 import { FiltersContext } from '../contexts/FiltersContext';
 import Pagination from '@mui/material/Pagination';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -10,20 +9,44 @@ import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Filters from '../components/Filters';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTickets, deleteTicket } from '../features/tickets/ticketSlice';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MySwal = withReactContent( Swal );
 
-const Tickets = () => {
-	const { ticket, totalPages, takeTickets, deleteTicket } = useContext(
-		TicketContext
-	);
+const TicketsList = () => {
 	const { filters } = useContext( FiltersContext );
 	const [ page, setPage ] = useState( 1 );
 
+	const { tickets, isLoading, isError, message, totalPages } = useSelector(
+		( state ) => state.ticket
+	);
+
 	const handleChange = ( event, value ) => {
+		const args = {
+			page: value,
+			filters: filters,
+		};
+
 		setPage( value );
-		takeTickets( value, filters );
+		dispatch( getTickets( args ) );
 	};
+
+	const dispatch = useDispatch();
+
+	useEffect( () => {
+		if ( isError ) {
+			console.log( message );
+		}
+
+		const args = {
+			page: 1,
+			filters: filters,
+		};
+
+		dispatch( getTickets( args ) );
+	}, [] );
 
 	const theme = createTheme( {
 		palette: {
@@ -44,7 +67,7 @@ const Tickets = () => {
 			reverseButtons: true,
 		} ).then( ( result ) => {
 			if ( result.isConfirmed ) {
-				deleteTicket( id );
+				dispatch( deleteTicket( id ) );
 				MySwal.fire( 'Deleted', '', 'success' );
 			} else if ( result.dismiss === Swal.DismissReason.cancel ) {
 				MySwal.fire( 'Cancelled', '', 'error' );
@@ -52,12 +75,20 @@ const Tickets = () => {
 		} );
 	};
 
+	if ( isLoading ) {
+		return (
+			<div id="hdw-loading">
+				<CircularProgress />
+			</div>
+		);
+	}
+
 	return (
 		<ThemeProvider theme={ theme }>
 			<div className="helpdesk-main">
 				<div className="helpdesk-tickets">
-					{ ticket &&
-						ticket.map( ( ticket ) => {
+					{ tickets &&
+						tickets.map( ( ticket ) => {
 							return (
 								<div
 									key={ ticket.id }
@@ -116,7 +147,7 @@ const Tickets = () => {
 						} ) }
 					<Stack spacing={ 2 }>
 						<Pagination
-							count={ totalPages }
+							count={ parseInt( totalPages ) }
 							page={ page }
 							color="primary"
 							shape="rounded"
@@ -131,4 +162,4 @@ const Tickets = () => {
 	);
 };
 
-export default Tickets;
+export default TicketsList;

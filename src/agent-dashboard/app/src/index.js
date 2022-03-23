@@ -1,15 +1,17 @@
 import App from './App';
-import TicketContextProvider from './contexts/TicketContext';
 import FiltersContextProvider from './contexts/FiltersContext';
 import SettingsContextProvider from './contexts/SettingsContext';
 
+import { store } from './app/store';
+import { Provider } from 'react-redux';
+
 ReactDOM.render(
-	<TicketContextProvider>
+	<Provider store={ store }>
 		<FiltersContextProvider>
 			<SettingsContextProvider>
 				<App />
 			</SettingsContextProvider>
 		</FiltersContextProvider>
-	</TicketContextProvider>,
+	</Provider>,
 	document.getElementById( 'helpdesk-agent-dashboard' )
 );

@@ -2,12 +2,12 @@ import { __ } from '@wordpress/i18n';
 import { useState, useContext } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { TicketContext } from '../contexts/TicketContext';
 import { FiltersContext } from '../contexts/FiltersContext';
 import { Category, Priority, Status, Type, Agent } from './FilterComponents';
+import { useDispatch } from 'react-redux';
+import { updateProperties } from '../features/tickets/ticketSlice';
 
 const Properties = ( { ticket, ticketContent } ) => {
-	const { updateProperties } = useContext( TicketContext );
 	const { category, type, agents, status, priority } = useContext(
 		FiltersContext
 	);
@@ -25,6 +25,8 @@ const Properties = ( { ticket, ticketContent } ) => {
 		type: filterType.value,
 		agent: filterAgent.value,
 	};
+
+	const dispatch = useDispatch();
 
 	const handleCategoryChange = ( category ) => {
 		setFilterCategory( category );
@@ -47,7 +49,11 @@ const Properties = ( { ticket, ticketContent } ) => {
 	};
 
 	const updateTicket = () => {
-		updateProperties( ticket, filters );
+		const args = {
+			ticket,
+			filters,
+		};
+		dispatch( updateProperties( args ) );
 	};
 
 	return (

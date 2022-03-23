@@ -2,12 +2,12 @@ import { __ } from '@wordpress/i18n';
 import { useContext, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { TicketContext } from '../contexts/TicketContext';
 import { FiltersContext } from '../contexts/FiltersContext';
 import { Category, Priority, Status, Type, Agent } from './FilterComponents';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTickets } from '../features/tickets/ticketSlice';
 
 const Filters = () => {
-	const { applyFilters, takeTickets } = useContext( TicketContext );
 	const {
 		category,
 		type,
@@ -22,12 +22,23 @@ const Filters = () => {
 		filters,
 	} = useContext( FiltersContext );
 
+	const dispatch = useDispatch();
+
 	const apply = () => {
-		applyFilters( filters );
+		const args = {
+			page: 1,
+			filters: filters,
+		};
+
+		dispatch( getTickets( args ) );
 	};
 
+	const { isError, message } = useSelector( ( state ) => state.ticket );
+
 	useEffect( () => {
-		takeTickets( 1, filters );
+		if ( isError ) {
+			console.log( message );
+		}
 	}, [] );
 
 	return (
