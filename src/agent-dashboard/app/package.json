@@ -22,11 +22,7 @@
         "sweetalert2-react-content": "^4.2.0"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^22.2.1",
-        "grunt": "^1.4.1",
-        "grunt-contrib-sass": "^2.0.0",
-        "grunt-contrib-uglify": "^5.0.1",
-        "grunt-contrib-watch": "^1.1.0"
+        "@wordpress/scripts": "^22.2.1"
     },
     "scripts": {
         "build": "wp-scripts build",
