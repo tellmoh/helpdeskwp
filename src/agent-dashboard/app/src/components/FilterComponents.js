@@ -192,7 +192,7 @@ export function Agent( { onChange, agents, parent, value } ) {
 	}
 
 	if ( parent === 'properties' ) {
-		const content = { value: value.ticket_agent[ 0 ], label: value.agent };
+		const content = { value: value.agent.id, label: value.agent.name };
 		return (
 			<div>
 				<p>{ __( 'Agent', 'helpdeskwp' ) }</p>

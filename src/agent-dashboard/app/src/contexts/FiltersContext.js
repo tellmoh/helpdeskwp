@@ -179,10 +179,18 @@ const FiltersContextProvider = ( props ) => {
 	};
 
 	const fetchAgents = async () => {
+		const config = {
+			headers: {
+				'X-WP-Nonce': helpdesk_agent_dashboard.nonce,
+				'Content-Type': 'application/json',
+			},
+		};
+
 		let data;
 		await axios
 			.get(
-				`${ helpdesk_agent_dashboard.url }wp/v2/ticket_agent/?per_page=50`
+				`${ helpdesk_agent_dashboard.url }helpdesk/v1/settings/agents/`,
+				config
 			)
 			.then( ( res ) => {
 				data = res.data;

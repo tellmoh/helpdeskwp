@@ -56,7 +56,6 @@ const Settings = () => {
 	const [ typeTerm, setType ] = useState( '' );
 	const [ priorityTerm, setPriority ] = useState( '' );
 	const [ statusTerm, setStatus ] = useState( '' );
-	const [ agentTerm, setAgent ] = useState( '' );
 
 	const { settings, pages, isLoading, isError, message } = useSelector(
 		( state ) => state.setting
@@ -78,12 +77,10 @@ const Settings = () => {
 	const {
 		category,
 		type,
-		agents,
 		status,
 		priority,
 		takeCategory,
 		takeType,
-		takeAgents,
 		takeStatus,
 		takePriority,
 		deleteTerms,
@@ -161,12 +158,6 @@ const Settings = () => {
 		takeStatus();
 	};
 
-	const addNewAgent = async () => {
-		await addNewTerm( 'ticket_agent', agentTerm );
-		setAgent( '' );
-		takeAgents();
-	};
-
 	const deleteCategory = async ( id, taxonomy ) => {
 		await deleteTerms( id, taxonomy );
 		takeCategory();
@@ -185,11 +176,6 @@ const Settings = () => {
 	const deleteStatus = async ( id, taxonomy ) => {
 		await deleteTerms( id, taxonomy );
 		takeStatus();
-	};
-
-	const deleteAgent = async ( id, taxonomy ) => {
-		await deleteTerms( id, taxonomy );
-		takeAgents();
 	};
 
 	let pagesList = [];
@@ -256,10 +242,6 @@ const Settings = () => {
 						<Tab
 							label={ __( 'Status', 'helpdeskwp' ) }
 							{ ...a11yProps( 7 ) }
-						/>
-						<Tab
-							label={ __( 'Agent', 'helpdeskwp' ) }
-							{ ...a11yProps( 8 ) }
 						/>
 					</Tabs>
 					<TabPanel value={ value } index={ 0 }>
@@ -551,52 +533,6 @@ const Settings = () => {
 														</svg>
 													</Button>
 												) }
-											</div>
-										</div>
-									);
-								} ) }
-						</div>
-					</TabPanel>
-					<TabPanel value={ value } index={ 8 }>
-						<input
-							type="text"
-							placeholder={ __( 'Agent', 'helpdeskwp' ) }
-							value={ agentTerm }
-							onChange={ ( e ) => setAgent( e.target.value ) }
-						/>
-						<Button
-							variant="contained"
-							className="add-new-btn"
-							onClick={ addNewAgent }
-						>
-							{ __( 'Add', 'helpdeskwp' ) }
-						</Button>
-						<div className="helpdesk-terms-list">
-							{ agents &&
-								agents.map( ( agents ) => {
-									return (
-										<div
-											key={ agents.id }
-											className="helpdesk-term"
-										>
-											<span>{ agents.name }</span>
-											<div className="helpdesk-delete-term">
-												<Button
-													onClick={ () =>
-														deleteAgent(
-															agents.id,
-															'ticket_agent'
-														)
-													}
-												>
-													<svg
-														width="20"
-														fill="#bfbdbd"
-														viewBox="0 0 24 24"
-													>
-														<path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-													</svg>
-												</Button>
 											</div>
 										</div>
 									);
