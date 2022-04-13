@@ -221,7 +221,7 @@ class Tickets {
         }
 
         if ( isset( $properties['agent'] ) && ! empty( $properties['agent'] ) ) {
-            wp_set_object_terms( $ticket, $properties['agent'], 'ticket_agent' );
+            update_post_meta( $ticket, 'ticket_agent', $properties['agent'] );
         }
     }
 
