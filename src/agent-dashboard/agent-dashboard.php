@@ -318,17 +318,12 @@ class AgentDashboard {
 	 */
 	public function get_agent( $object ) {
 
-		$agent = '';
+		$agent = array();
 
-		if ( isset( $object['ticket_agent'][0] ) ) {
-			$agent = get_term_by( 'id', $object['ticket_agent'][0], 'ticket_agent' )->name;
-		}
+		$agent['id']   = hdw_get_agent_id_from_ticket( $object['id'] );
+		$agent['name'] = hdw_get_agent_name_from_id( $agent['id'] );
 
-        if ( $agent ) {
-            return $agent;
-        }
-
-        return '';
+        return $agent;
 	}
 
     /**
@@ -353,15 +348,20 @@ class AgentDashboard {
 	 * @access public
 	 */
     public function dashboard_menu() {
-        add_menu_page(
-			__( 'Helpdesk Dashboard', 'helpdeskwp' ),
-			'Help Desk WP',
-			'manage_options',
-			'helpdesk',
-			array( $this, 'helpdesk_agent_dashboard' ),
-			'dashicons-tickets-alt',
-			10
-		);
+
+		global $current_user;
+
+   		if ( $current_user && in_array( $current_user->roles[0], array( 'hdw_support_agent', 'administrator' ) ) ) {
+			add_menu_page(
+				__( 'Helpdesk Dashboard', 'helpdeskwp' ),
+				'Help Desk WP',
+				$current_user->roles[0],
+				'helpdesk',
+				array( $this, 'helpdesk_agent_dashboard' ),
+				'dashicons-tickets-alt',
+				10
+			);
+        }
     }
 
 	/**
