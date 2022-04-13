@@ -44,6 +44,7 @@ class Main {
 	 */
 	private function __construct() {
 		$this->load_dependencies();
+		$this->init_pro();
 	}
 
 	/**
@@ -69,5 +70,18 @@ class Main {
         require_once HELPDESK_WP_PATH . 'src/docs/docs.php';
         require_once HELPDESK_WP_PATH . 'src/docs/image-meta/category-image-meta.php';
         require_once HELPDESK_WP_PATH . 'src/template/template.php';
+        require_once HELPDESK_WP_PATH . 'src/functions/functions-ticket.php';
+        require_once HELPDESK_WP_PATH . 'src/functions/functions-user.php';
     }
+
+	/**
+	 * Load the pro version.
+	 *
+	 * @since 1.3.0
+	 */
+	private function init_pro() {
+		if ( function_exists( 'helpdeskwp_pro' ) ) {
+			helpdeskwp_pro();
+		}
+	}
 }
