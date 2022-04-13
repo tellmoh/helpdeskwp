@@ -80,6 +80,16 @@ class Settings {
                 'args'                => array(),
             ),
         ));
+
+        register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/agents', array(
+            array(
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_agents' ),
+                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
     }
 
     public function get_options() {
@@ -182,6 +192,38 @@ class Settings {
         return $response;
     }
 
+    public function get_agents( $request ) {
+
+        $page = $request->get_param( 'page' );
+
+        $agents_query = $this->prepare_agents_query( '', $page );
+        $agents       = $this->prepare_agents_for_response( $agents_query );
+
+        $response = rest_ensure_response( $agents );
+
+        $per_page  = 20;
+        $max_pages = ceil( $this->total_customers / $per_page );
+
+        $response->header( 'hdw_totalpages', (int) $max_pages );
+
+        return $response;
+    }
+
+    public function prepare_agents_for_response( $query = array() ) {
+        $agents = array();
+
+        foreach ( $query as $post ) {
+            $agent = array();
+
+            $agent['id']   = $post->ID;
+            $agent['name'] = $post->display_name;
+
+			$agents[] = $agent;
+		}
+
+        return $agents;
+    }
+
     public function prepare_customers_for_response( $query = array() ) {
         $customers = array();
 
@@ -215,6 +257,24 @@ class Settings {
                         'compare' => '='
                     ),
             )
+        );
+        $user_query = new \WP_User_Query( $args );
+        $customers  = $user_query->get_results();
+
+        $this->total_customers = $user_query->get_total();
+
+        return $customers;
+    }
+
+    public function prepare_agents_query( $id, $page ) {
+
+        $id = $id ? array( $id ) : array();
+
+        $args = array(
+            'number'  => '20',
+            'paged'   => $page ? $page : 1,
+            'role'    => 'hdw_support_agent',
+            'include' => $id,
         );
         $user_query = new \WP_User_Query( $args );
         $customers  = $user_query->get_results();
