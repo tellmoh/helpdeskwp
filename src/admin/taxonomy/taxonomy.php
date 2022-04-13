@@ -126,34 +126,6 @@ class Taxonomy {
         register_taxonomy( 'ticket_status', array( 'ticket' ), $args );
     }
 
-    public static function agent() {
-        $labels = array(
-            'name'              => _x( 'Agents', 'taxonomy general name', 'helpdeskwp' ),
-            'singular_name'     => _x( 'Agent', 'taxonomy singular name', 'helpdeskwp' ),
-            'search_items'      => __( 'Search Agent', 'helpdeskwp' ),
-            'all_items'         => __( 'All Agents', 'helpdeskwp' ),
-            'parent_item'       => __( 'Parent Agent', 'helpdeskwp' ),
-            'parent_item_colon' => __( 'Parent Agent:', 'helpdeskwp' ),
-            'edit_item'         => __( 'Edit Agent', 'helpdeskwp' ),
-            'update_item'       => __( 'Update Agent', 'helpdeskwp' ),
-            'add_new_item'      => __( 'Add New Agent', 'helpdeskwp' ),
-            'new_item_name'     => __( 'New Agent Name', 'helpdeskwp' ),
-            'menu_name'         => __( 'Agent', 'helpdeskwp' ),
-        );
-
-        $args = array(
-            'hierarchical'      => true,
-            'labels'            => $labels,
-            'show_ui'           => true,
-            'show_in_menu'      => false,
-            'query_var'         => true,
-            'show_in_rest'      => true,
-            'rewrite'           => array( 'slug' => 'agent' ),
-        );
-
-        register_taxonomy( 'ticket_agent', array( 'ticket' ), $args );
-    }
-
     public static function docs_category() {
         $labels = array(
             'name'              => _x( 'Categories', 'taxonomy general name', 'helpdeskwp' ),
@@ -215,6 +187,5 @@ add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'category' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'types' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'priority' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'status' ) );
-add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'agent' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'docs_category' ) );
 add_action( 'init', array( 'HelpDeskWP\Admin\Taxonomy', 'docs_tag' ) );
