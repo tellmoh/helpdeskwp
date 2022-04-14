@@ -99,7 +99,7 @@ class Settings {
             return $options;
         }
 
-        return array();
+        return array( 'pageID' => '', 'pageName' => '' );
     }
 
     public function create_item( $request ) {
@@ -139,7 +139,7 @@ class Settings {
 
     public function update_options( $params ) {
 
-        if ( ! is_array( $params ) && ! isset( $params['settings'] ) ) {
+        if ( ! is_array( $params ) || ! isset( $params['settings'] ) || ! $params['settings'] ) {
             return;
         }
 

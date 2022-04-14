@@ -18,6 +18,13 @@ const getSettings = async () => {
 
 // Save settings
 const saveSettings = async ( settings ) => {
+	if (
+		'object' !== typeof settings ||
+		Object.entries( settings ).length === 0
+	) {
+		return;
+	}
+
 	const data = {
 		type: 'saveSettings',
 		settings: settings,
