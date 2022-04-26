@@ -79,6 +79,30 @@ export const settingSlice = createSlice( {
 			state.settings[ 'pageID' ] = pageID;
 			state.settings[ 'pageName' ] = pageName;
 		},
+		addEmails: ( state, action ) => {
+			const emails = [ ...state.settings.emails ];
+
+			emails.push( {
+				host: '',
+				user: '',
+				password: '',
+				port: '',
+				ssl: false,
+				protocol: '',
+				category: '',
+				agent: '',
+			} );
+
+			state.settings[ 'emails' ] = emails;
+		},
+		setEmails: ( state, action ) => {
+			const { name, value, index } = action.payload;
+
+			state.settings.emails[ index ][ name ] = value;
+		},
+		removeEmail: ( state, action ) => {
+			state.settings.emails.splice( action.payload, 1 );
+		},
 	},
 	extraReducers: ( builder ) => {
 		builder
@@ -124,5 +148,11 @@ export const settingSlice = createSlice( {
 	},
 } );
 
-export const { setSetting, setPage } = settingSlice.actions;
+export const {
+	setSetting,
+	setPage,
+	addEmails,
+	setEmails,
+	removeEmail,
+} = settingSlice.actions;
 export default settingSlice.reducer;
