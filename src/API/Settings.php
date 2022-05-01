@@ -99,7 +99,7 @@ class Settings {
             return $options;
         }
 
-        return array( 'pageID' => '', 'pageName' => '' );
+        return array( 'pageID' => '', 'pageName' => '', 'emails' => array() );
     }
 
     public function create_item( $request ) {
