@@ -80,27 +80,10 @@ class Tickets {
     public function add_ticket( string $title, string $type, string $category ) {
         $current_user = get_current_user_id();
 
-        if ( $title ) {
-            $ticket_id = wp_insert_post(
-                array(
-                    'post_title'  => $title,
-                    'post_type'   => 'ticket',
-                    'post_status' => 'publish',
-                    'post_author' => $current_user
-                )
-            );
+        $ticket_id = hdw_create_ticket( $title, $type, $category, $current_user );
 
-            if ( ! is_wp_error( $ticket_id ) ) {
-                if ( $type !== 'undefined' ) {
-                    wp_set_object_terms( $ticket_id, $type, 'ticket_type' );
-                }
-
-                if ( $category !== 'undefined' ) {
-                    wp_set_object_terms( $ticket_id, $category, 'ticket_category' );
-                }
-
-                return new \WP_REST_Response( $ticket_id, 201 );
-            }
+        if ( $ticket_id ) {
+            return new \WP_REST_Response( $ticket_id, 201 );
         }
 
         return new \WP_Error( 'cant-add-ticket', __( 'Can\'t add a new ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
@@ -109,20 +92,7 @@ class Tickets {
     public function add_reply( string $reply, string $ticket_id, array $images, string $type = '' ) {
         $current_user = get_current_user_id();
 
-        $reply_id = wp_insert_post(
-            array(
-                'post_title'   => $ticket_id,
-                'post_content' => $reply,
-                'post_type'    => 'reply',
-                'post_status'  => 'publish',
-                'post_parent'  => $ticket_id,
-                'post_author'  => $current_user,
-                'meta_input'   => array(
-                    'reply_images' => $images,
-                    'reply_type'   => $type,
-                ),
-            )
-        );
+        $reply_id = hdw_add_reply( $reply, $ticket_id, $current_user, $images, $type );
 
         if ( ! is_wp_error( $reply_id ) ) {
             return new \WP_REST_Response( $reply_id, 201 );
