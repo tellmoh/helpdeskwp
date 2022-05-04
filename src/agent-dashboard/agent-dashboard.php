@@ -94,6 +94,7 @@ class AgentDashboard {
 		add_action( 'init', array( $this, 'get_close_tickets' ), 99 );
 		add_action( 'init', array( $this, 'get_pending_tickets' ), 99 );
 		add_action( 'init', array( $this, 'get_resolved_tickets' ), 99 );
+		add_filter( 'rest_ticket_query', array( $this, 'query_ticket_by_agent' ), 10, 2 );
 	}
 
 	/**
@@ -105,6 +106,24 @@ class AgentDashboard {
 	 */
 	public function helpdesk_agent_dashboard() {
 		echo '<div id="helpdesk-agent-dashboard"></div>';
+	}
+
+	/**
+	 * Add custom query for ticket_agent.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array  $args WP_Query
+	 * @param object $request WP_REST_Request
+	 */
+	public function query_ticket_by_agent( $args, $request ) {
+
+		if ( isset( $request['ticket_agent'] ) ) {
+			$args['meta_key']   = 'ticket_agent';
+			$args['meta_value'] = intval( $request['ticket_agent'] );
+		}
+
+		return $args;
 	}
 
     /**
