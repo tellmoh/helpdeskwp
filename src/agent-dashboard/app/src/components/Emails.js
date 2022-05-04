@@ -214,7 +214,7 @@ const Emails = ( { onChange } ) => {
 												return (
 													<MenuItem
 														key={ category.id }
-														value={ category.id }
+														value={ category.name }
 													>
 														{ category.name }
 													</MenuItem>
@@ -246,7 +246,7 @@ const Emails = ( { onChange } ) => {
 												return (
 													<MenuItem
 														key={ agent.id }
-														value={ agent.id }
+														value={ agent.name }
 													>
 														{ agent.name }
 													</MenuItem>
