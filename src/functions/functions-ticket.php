@@ -19,10 +19,11 @@ function hdw_get_ticket_subject( string $id ) {
  * @param string $type Ticket type
  * @param string $category Ticket category
  * @param string $user Ticket user
+ * @param string $agent Ticket agent
  *
  * @return string Ticket ID
  */
-function hdw_create_ticket( string $title, string $type, string $category, string $user ) {
+function hdw_create_ticket( string $title, string $type, string $category, string $user, string $agent = '' ) {
     $ticket_id = wp_insert_post(
         array(
             'post_title'  => $title,
@@ -39,6 +40,10 @@ function hdw_create_ticket( string $title, string $type, string $category, strin
 
         if ( $category !== 'undefined' ) {
             wp_set_object_terms( $ticket_id, $category, 'ticket_category' );
+        }
+
+		if ( $agent ) {
+            update_post_meta( $ticket_id, 'ticket_agent', $agent );
         }
     }
 
