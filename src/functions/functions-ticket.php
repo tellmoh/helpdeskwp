@@ -83,3 +83,16 @@ function hdw_add_reply( string $reply, string $ticket_id, string $user, array $i
         return $reply_id;
     }
 }
+
+/**
+ * Send email reply.
+ *
+ * @since 1.3.0
+ *
+ * @param string $ticket_id Ticket ID
+ * @param string $reply Reply content
+ */
+function hdw_send_reply_email( $ticket_id, $reply ) {
+	$send_mail = new HelpDeskWP\SendMail( $ticket_id, $reply );
+	$send_mail->send();
+}
