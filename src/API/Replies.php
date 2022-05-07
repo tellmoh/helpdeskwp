@@ -116,7 +116,7 @@ class Replies extends Tickets {
         $image  = $this->save_image( $files );
         $ticket = $this->add_reply( $params['reply'], $params['parent'], $image->data, $type );
 
-        if ( $ticket ) {
+        if ( $ticket && 'private' !== $type ) {
 			hdw_send_reply_email( $params['parent'], $params['reply'] );
         }
 
