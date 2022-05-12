@@ -24,7 +24,7 @@ class Tickets {
             array(
                 'methods'             => \WP_REST_Server::CREATABLE,
                 'callback'            => array( $this, 'create_ticket' ),
-                'permission_callback' => array( $this, 'create_ticket_permissions_check' ),
+                'permission_callback' => array( $this, 'tickets_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -34,7 +34,7 @@ class Tickets {
             array(
                 'methods'             => \WP_REST_Server::EDITABLE,
                 'callback'            => array( $this, 'update_ticket' ),
-                'permission_callback' => array( $this, 'update_ticket_permissions_check' ),
+                'permission_callback' => array( $this, 'tickets_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -44,7 +44,7 @@ class Tickets {
             array(
                 'methods'             => \WP_REST_Server::DELETABLE,
                 'callback'            => array( $this, 'delete_ticket' ),
-                'permission_callback' => array( $this, 'delete_ticket_permissions_check' ),
+                'permission_callback' => array( $this, 'tickets_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -155,7 +155,7 @@ class Tickets {
         $updated_ticket = $this->prepare_update_ticket( $ticket, $properties );
 
         if ( ! is_wp_error( $updated_ticket ) ) {
-            return new \WP_REST_Response( $updated_ticket, 201 );
+            return new \WP_REST_Response( $updated_ticket, 200 );
         }
 
         return new \WP_Error( 'cant-update-ticket', __( 'Can\'t update the ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
@@ -200,16 +200,8 @@ class Tickets {
         wp_set_object_terms( $ticket_id, 'Open', 'ticket_status' );
     }
 
-    public function create_ticket_permissions_check() {
-        return current_user_can( 'edit_posts' );
-    }
-
-    public function update_ticket_permissions_check() {
-        return current_user_can( 'edit_posts' );
-    }
-
-    public function delete_ticket_permissions_check() {
-        return current_user_can( 'edit_posts' );
+    public function tickets_permissions_check() {
+        return ( current_user_can( 'manage_options' ) || current_user_can( 'hdw_support_agent' ) || current_user_can( 'edit_posts' ) );
     }
 }
 

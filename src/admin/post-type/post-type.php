@@ -27,6 +27,9 @@ class PostType {
             'show_ui'            => true,
             'show_in_menu'       => false,
             'capability_type'    => 'post',
+			'capabilities' => array(
+				'delete_post'        => 'delete_ticket',
+			),
             'has_archive'        => true,
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
             'show_in_rest'       => true
@@ -67,6 +70,15 @@ class PostType {
             'show_ui'            => true,
             'show_in_menu'       => false,
             'capability_type'    => 'post',
+			'capabilities' => array(
+				'edit_post'          => 'edit_documentation',
+				'delete_post'        => 'delete_documentation',
+				'edit_posts'         => 'edit_documentations',
+				'edit_others_posts'  => 'edit_others_documentations',
+				'publish_posts'      => 'publish_documentations',
+				'read_private_posts' => 'read_private_documentations',
+				'create_posts'       => 'edit_documentations',
+			),
             'has_archive'        => true,
             'show_in_rest'       => true,
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
@@ -87,6 +99,15 @@ class PostType {
             'show_ui'            => true,
             'show_in_menu'       => false,
             'capability_type'    => 'post',
+			'capabilities' => array(
+				'edit_post'          => 'edit_response',
+				'delete_post'        => 'delete_response',
+				'edit_posts'         => 'edit_responses',
+				'edit_others_posts'  => 'edit_others_responses',
+				'publish_posts'      => 'publish_responses',
+				'read_private_posts' => 'read_private_responses',
+				'create_posts'       => 'edit_responses',
+			),
             'show_in_rest'       => true,
             'supports'           => array( 'title', 'editor' ),
         );

@@ -24,7 +24,7 @@ class Replies extends Tickets {
             array(
                 'methods'             => \WP_REST_Server::READABLE,
                 'callback'            => array( $this, 'get_replies' ),
-                'permission_callback' => array( $this, 'get_replies_permissions_check' ),
+                'permission_callback' => array( $this, 'replies_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -34,7 +34,7 @@ class Replies extends Tickets {
             array(
                 'methods'             => \WP_REST_Server::CREATABLE,
                 'callback'            => array( $this, 'create_replies' ),
-                'permission_callback' => array( $this, 'create_replies_permissions_check' ),
+                'permission_callback' => array( $this, 'replies_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -44,7 +44,7 @@ class Replies extends Tickets {
             array(
                 'methods'             => \WP_REST_Server::DELETABLE,
                 'callback'            => array( $this, 'delete_replies' ),
-                'permission_callback' => array( $this, 'delete_replies_permissions_check' ),
+                'permission_callback' => array( $this, 'replies_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -55,13 +55,13 @@ class Replies extends Tickets {
                 array(
                     'methods'             => \WP_REST_Server::READABLE,
                     'callback'            => array( $this, 'get_reply' ),
-                    'permission_callback' => array( $this, 'get_replies_permissions_check' ),
+                    'permission_callback' => array( $this, 'replies_permissions_check' ),
                     'args'                => array(),
                 ),
                 array(
                     'methods'             => \WP_REST_Server::EDITABLE,
                     'callback'            => array( $this, 'update_reply' ),
-                    'permission_callback' => array( $this, 'get_replies_permissions_check' ),
+                    'permission_callback' => array( $this, 'replies_permissions_check' ),
                     'args'                => array(),
                 ),
             )
@@ -237,16 +237,8 @@ class Replies extends Tickets {
         return '';
     }
 
-    public function get_replies_permissions_check() {
-        return current_user_can( 'edit_posts' );
-    }
-
-    public function create_replies_permissions_check() {
-        return current_user_can( 'edit_posts' );
-    }
-
-    public function delete_replies_permissions_check() {
-        return current_user_can( 'edit_posts' );
+    public function replies_permissions_check() {
+        return ( current_user_can( 'manage_options' ) || current_user_can( 'hdw_support_agent' ) );
     }
 }
 

@@ -31,13 +31,6 @@ if ( ! function_exists( 'helpdeskwp' ) ) {
 	}
 	helpdeskwp();
 
-	/**
-	 * Add custom support agent role.
-	 *
-	 * @since 1.3.0
-	 */
-	function hdw_agent_role() {
-		add_role( 'hdw_support_agent', 'Support Agent', array( 'read' => true, 'helpdesk' => true ) );
-	}
-	register_activation_hook( __FILE__, 'hdw_agent_role' );
+	// Add agent role
+	register_activation_hook( __FILE__, array( 'HelpDeskWP\AgentDashboard', 'add_agent_role' ) );
 }

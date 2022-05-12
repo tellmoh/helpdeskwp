@@ -90,10 +90,11 @@ class AgentDashboard {
         add_action( 'rest_api_init', array( $this, 'register_status_field' ) );
         add_action( 'rest_api_init', array( $this, 'register_agent_field' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'init', array( $this, 'get_open_tickets' ), 99 );
-		add_action( 'init', array( $this, 'get_close_tickets' ), 99 );
-		add_action( 'init', array( $this, 'get_pending_tickets' ), 99 );
-		add_action( 'init', array( $this, 'get_resolved_tickets' ), 99 );
+		add_action( 'admin_init', array( $this, 'get_open_tickets' ), 99 );
+		add_action( 'admin_init', array( $this, 'get_close_tickets' ), 99 );
+		add_action( 'admin_init', array( $this, 'get_pending_tickets' ), 99 );
+		add_action( 'admin_init', array( $this, 'get_resolved_tickets' ), 99 );
+		add_action( 'admin_init', array( $this, 'add_cap_to_admin' ) );
 		add_filter( 'rest_ticket_query', array( $this, 'query_ticket_by_agent' ), 10, 2 );
 	}
 
@@ -357,6 +358,57 @@ class AgentDashboard {
         $author = get_the_author_meta( 'display_name', $object['author'] );
 
 		return $author;
+	}
+
+	/**
+	 * Add custom support agent role.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function add_agent_role() {
+		add_role( 'hdw_support_agent',
+			'Support Agent',
+			array(
+				'read' 							=> true,
+				'helpdesk' 						=> true,
+				'edit_documentation' 			=> true,
+				'delete_documentation' 			=> true,
+				'edit_documentations' 			=> true,
+				'edit_others_documentations' 	=> true,
+				'publish_documentations' 	 	=> true,
+				'read_private_documentations'	=> true,
+				'edit_response' 				=> true,
+				'delete_response' 				=> true,
+				'edit_responses' 				=> true,
+				'edit_others_responses' 		=> true,
+				'publish_responses'				=> true,
+				'read_private_responses' 		=> true,
+				'delete_ticket' 				=> true,
+			)
+		);
+	}
+
+	/**
+	 * Add agent cap to administrator.
+	 *
+	 * @since 1.3.0
+	 */
+	public function add_cap_to_admin() {
+		$role = get_role( 'administrator' );
+
+		$role->add_cap( 'edit_documentation' );
+		$role->add_cap( 'delete_documentation' );
+		$role->add_cap( 'edit_documentations' );
+		$role->add_cap( 'edit_others_documentations' );
+		$role->add_cap( 'publish_documentations' );
+		$role->add_cap( 'read_private_documentations' );
+		$role->add_cap( 'edit_response' );
+		$role->add_cap( 'delete_response' );
+		$role->add_cap( 'edit_responses' );
+		$role->add_cap( 'edit_others_responses' );
+		$role->add_cap( 'publish_responses' );
+		$role->add_cap( 'read_private_responses' );
+		$role->add_cap( 'delete_ticket' );
 	}
 
     /**

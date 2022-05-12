@@ -29,13 +29,13 @@ class Settings {
                 array(
                     'methods'             => \WP_REST_Server::READABLE,
                     'callback'            => array( $this, 'get_options' ),
-                    'permission_callback' => array( $this, 'options_permissions_check' ),
+                    'permission_callback' => array( $this, 'settings_permissions_check' ),
                     'args'                => array(),
                 ),
                 array(
                     'methods'             => \WP_REST_Server::EDITABLE,
                     'callback'            => array( $this, 'create_item' ),
-                    'permission_callback' => array( $this, 'create_item_permissions_check' ),
+                    'permission_callback' => array( $this, 'settings_permissions_check' ),
                     'args'                => array(),
                 ),
             )
@@ -46,7 +46,7 @@ class Settings {
             array(
                 'methods'             => \WP_REST_Server::DELETABLE,
                 'callback'            => array( $this, 'delete_item' ),
-                'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+                'permission_callback' => array( $this, 'settings_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -56,7 +56,7 @@ class Settings {
             array(
                 'methods'             => \WP_REST_Server::READABLE,
                 'callback'            => array( $this, 'get_overview' ),
-                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'permission_callback' => array( $this, 'settings_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -66,7 +66,7 @@ class Settings {
             array(
                 'methods'             => \WP_REST_Server::READABLE,
                 'callback'            => array( $this, 'get_customers' ),
-                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'permission_callback' => array( $this, 'settings_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -76,7 +76,7 @@ class Settings {
             array(
                 'methods'             => \WP_REST_Server::READABLE,
                 'callback'            => array( $this, 'get_customer' ),
-                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'permission_callback' => array( $this, 'settings_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -86,7 +86,7 @@ class Settings {
             array(
                 'methods'             => \WP_REST_Server::READABLE,
                 'callback'            => array( $this, 'get_agents' ),
-                'permission_callback' => array( $this, 'options_permissions_check' ),
+                'permission_callback' => array( $this, 'settings_permissions_check' ),
                 'args'                => array(),
             ),
         ));
@@ -294,17 +294,9 @@ class Settings {
         return $response;
     }
 
-    public function options_permissions_check() {
-        return current_user_can( 'manage_options' );
-    }
-
-    public function create_item_permissions_check() {
-        return current_user_can( 'manage_options' );
-    }
-
-    public function delete_item_permissions_check() {
-        return current_user_can( 'manage_options' );
-    }
+	public function settings_permissions_check() {
+		return ( current_user_can( 'manage_options' ) || current_user_can( 'hdw_support_agent' ) );
+	}
 }
 
 function Settings_API() {
