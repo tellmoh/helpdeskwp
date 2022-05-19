@@ -9,6 +9,8 @@ namespace HelpDeskWP\API;
 
 defined( 'ABSPATH' ) || exit;
 
+use Helpdeskwp\Settings;
+
 /**
  * Class Replies API
  */
@@ -116,7 +118,9 @@ class Replies extends Tickets {
         $image  = $this->save_image( $files );
         $ticket = $this->add_reply( $params['reply'], $params['parent'], $image->data, $type );
 
-        if ( $ticket && 'private' !== $type ) {
+		$notification = Settings::get_setting( 'email_notification' );
+
+        if ( $ticket && 'private' !== $type && $notification ) {
 			hdw_send_reply_email( $params['parent'], $params['reply'] );
         }
 

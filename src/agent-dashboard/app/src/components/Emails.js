@@ -56,12 +56,14 @@ const Emails = ( { onChange } ) => {
 						'How many messages should be imported at each connection?',
 						'helpdeskwp'
 					) }
+					{ helpdesk_agent_dashboard.is_core ? '' : ' (Pro)' }
 				</p>
 				<input
 					placeholder="20"
 					type="text"
 					name="limit"
 					defaultValue={ settings && settings.limit }
+					disabled={ helpdesk_agent_dashboard.is_core ? false : true }
 					onChange={ onChange }
 				/>
 			</Box>
@@ -75,9 +77,29 @@ const Emails = ( { onChange } ) => {
 								settings.is_email && settings.is_email
 							}
 							onChange={ onChange }
+							disabled={
+								helpdesk_agent_dashboard.is_core ? false : true
+							}
 						/>
 					}
 					label={ __( 'Enable email import', 'helpdeskwp' ) }
+				/>
+				{ helpdesk_agent_dashboard.is_core ? '' : '(Pro)' }
+			</Box>
+
+			<Box sx={ { marginBottom: '30px' } }>
+				<FormControlLabel
+					control={
+						<Switch
+							name="email_notification"
+							defaultChecked={
+								settings.email_notification &&
+								settings.email_notification
+							}
+							onChange={ onChange }
+						/>
+					}
+					label={ __( 'Enable email notification', 'helpdeskwp' ) }
 				/>
 			</Box>
 
@@ -262,8 +284,13 @@ const Emails = ( { onChange } ) => {
 				} ) }
 
 			<div style={ { marginTop: '16px' } }>
-				<Button variant="contained" onClick={ () => addMailbox() }>
+				<Button
+					variant="contained"
+					onClick={ () => addMailbox() }
+					disabled={ helpdesk_agent_dashboard.is_core ? false : true }
+				>
 					{ __( 'Add new mailbox', 'helpdeskwp' ) }
+					{ helpdesk_agent_dashboard.is_core ? '' : ' (Pro)' }
 				</Button>
 			</div>
 

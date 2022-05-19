@@ -22,7 +22,7 @@
         "sweetalert2-react-content": "^4.2.0"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^22.2.1"
+        "@wordpress/scripts": "^23.1.0"
     },
     "scripts": {
         "build": "wp-scripts build",

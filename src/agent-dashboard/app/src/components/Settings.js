@@ -325,11 +325,7 @@ const Settings = () => {
 						</div>
 					</TabPanel>
 					<TabPanel value={ value } index={ 2 }>
-						{ helpdesk_agent_dashboard.is_core ? (
-							<Emails onChange={ onSettingsChange } />
-						) : (
-							'Pro'
-						) }
+						<Emails onChange={ onSettingsChange } />
 					</TabPanel>
 					<TabPanel value={ value } index={ 3 }>
 						<p style={ { margin: '5px 0' } }>
