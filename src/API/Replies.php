@@ -191,7 +191,7 @@ class Replies extends Tickets {
         $current_user = get_current_user_id();
         $type         = get_post_meta( $reply_id, 'reply_type', true );
 
-        if ( user_can( $current_user, 'manage_options' ) ) {
+        if ( user_can( $current_user, 'manage_options' ) || user_can( $current_user, 'hdw_support_agent' ) ) {
             return true;
         } elseif ( 'private' === $type ) {
             return false;
