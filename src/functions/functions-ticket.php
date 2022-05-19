@@ -96,3 +96,44 @@ function hdw_send_reply_email( $ticket_id, $reply ) {
 	$send_mail = new HelpDeskWP\SendMail( $ticket_id, $reply );
 	$send_mail->send();
 }
+
+/**
+ * Get replies by ticket ID.
+ *
+ * @since 1.3.0
+ *
+ * @param string $ticket_id Ticket ID
+ */
+function hdw_get_replies_by_ticket_id( $ticket_id ) {
+	$args = array(
+		'post_parent'    => $ticket_id,
+		'post_type'      => 'reply',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1
+	);
+	$query   = new WP_Query( $args );
+	$replies = $query->get_posts();
+
+	return $replies;
+}
+
+/**
+ * Get replies ID.
+ *
+ * @since 1.3.0
+ *
+ * @param array $replies
+ */
+function hdw_get_replies_id( $replies ) {
+	$replies_id = array();
+
+	if ( $replies ) {
+		foreach ( $replies as $reply ) {
+			if ( $reply->ID ) {
+				$replies_id[] = $reply->ID;
+			}
+		}
+	}
+
+	return $replies_id;
+}

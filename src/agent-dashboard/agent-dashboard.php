@@ -96,6 +96,7 @@ class AgentDashboard {
 		add_action( 'admin_init', array( $this, 'get_resolved_tickets' ), 99 );
 		add_action( 'admin_init', array( $this, 'add_cap_to_admin' ) );
 		add_filter( 'rest_ticket_query', array( $this, 'query_ticket_by_agent' ), 10, 2 );
+		add_action( 'rest_delete_ticket', array( $this, 'delete_replies' ) );
 	}
 
 	/**
@@ -125,6 +126,25 @@ class AgentDashboard {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Delete replies after deleting the ticket.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param object $post The deleted or trashed post.
+	 */
+	public function delete_replies( $post ) {
+
+		$replies 	= hdw_get_replies_by_ticket_id( $post->ID );
+		$replies_id = hdw_get_replies_id( $replies );
+
+		if ( $replies_id ) {
+			foreach ( $replies_id as $reply_id ) {
+				wp_delete_post( $reply_id, true );
+			}
+		}
 	}
 
     /**
