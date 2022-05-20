@@ -2,679 +2,716 @@ $mainColor: #0051af;
 $boxShadowColor: #344585;
 
 body {
-    background-color: #e5e8f3 !important;
+	background-color: #e5e8f3 !important;
 }
 
 #helpdesk-agent-dashboard {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
 }
 
 .helpdesk-main {
-    max-width: 960px;
-    margin: 60px auto;
-    display: flex;
+	max-width: 960px;
+	margin: 60px auto;
+	display: flex;
+	position: relative;
 }
 
 #helpdesk-agent-dashboard .primary,
 .helpdesk-top-bar h2 {
-    color: $mainColor;
+	color: $mainColor;
 }
 
 button#new-ticket {
-    text-transform: capitalize;
-    padding-right: 33px;
-    padding-left: 12px;
+	text-transform: capitalize;
+	padding-right: 33px;
+	padding-left: 12px;
 }
 
 div#wpcontent {
-    padding: 0;
+	padding: 0;
 }
 
 .helpdesk-top-bar {
-    background: #fff;
-    padding: 20px 30px;
-    border: 1px solid #dbe0f3;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
+	background: #fff;
+	padding: 20px 30px;
+	border: 1px solid #dbe0f3;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
 
-    h2 {
-        margin: 0;
-        font-size: 16px;
-    }
+	h2 {
+		margin: 0;
+		font-size: 16px;
+	}
 
-    .helpdesk-menu {
-        li {
-            display: inline-block;
-            padding-left: 16px;
-        }
+	.helpdesk-menu {
+		li {
+			display: inline-block;
+			padding-left: 16px;
+		}
 
-        li a {
-            color: #000;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
+		li a {
+			color: #000;
+			text-decoration: none;
+			transition: all 0.2s;
+		}
 
-        li a:hover {
-            color: $mainColor;
-        }
-    }
+		li a:hover {
+			color: $mainColor;
+		}
+	}
 
-    .helpdesk-name,
-    .helpdesk-menu {
-        display: inline-block;
-    }
+	.helpdesk-name,
+	.helpdesk-menu {
+		display: inline-block;
+	}
 }
 
 .helpdesk-settings button {
-    text-transform: capitalize;
-    text-align: left !important;
-    display: block;
-    flex-direction: row;
+	text-transform: capitalize;
+	text-align: left !important;
+	display: block;
+	flex-direction: row;
 }
 
 button#new-ticket:after {
-    content: '';
-    position: absolute;
-    background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='edit' class='svg-inline--fa fa-edit fa-w-18' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%230051af' d='M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z'%3E%3C/path%3E%3C/svg%3E");
-    width: 15px;
-    height: 15px;
-    background-repeat: no-repeat;
-    right: 9px;
+	content: '';
+	position: absolute;
+	background-image: url( "data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='edit' class='svg-inline--fa fa-edit fa-w-18' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%230051af' d='M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z'%3E%3C/path%3E%3C/svg%3E" );
+	width: 15px;
+	height: 15px;
+	background-repeat: no-repeat;
+	right: 9px;
 }
 
 button#new-ticket:hover {
-    color: $mainColor;
-    text-decoration: underline;
-    background-color: inherit;
+	color: $mainColor;
+	text-decoration: underline;
+	background-color: inherit;
 }
 
 .helpdesk-ticket,
 .helpdesk-customer {
-    background: #fff;
-    padding: 13px 25px;
-    margin-bottom: 10px;
-    border-radius: 7px;
-    border: 1px solid #dbe0f3;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
+	background: #fff;
+	padding: 13px 25px;
+	margin-bottom: 10px;
+	border-radius: 7px;
+	border: 1px solid #dbe0f3;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
 }
 
 h4.ticket-title {
-    font-size: 18px;
-    font-weight: 600;
-    transition: all 0.2s;
-    margin: 7px 0 5px 0;
+	font-size: 18px;
+	font-weight: 600;
+	transition: all 0.2s;
+	margin: 7px 0 5px 0;
 }
 
 .ticket-meta {
-    margin-bottom: 3px;
-    margin-top: 12px;
-    position: relative;
+	margin-bottom: 3px;
+	margin-top: 12px;
+	position: relative;
 }
 
 .ticket-meta div {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 13px;
-    color: #858585;
-    font-weight: 300;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 13px;
+	color: #858585;
+	font-weight: 300;
 }
 
 .MuiPagination-root {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 
 .ticket-title:hover {
-    color: #8fa3f1 !important;
+	color: #8fa3f1 !important;
 }
 
 #helpdesk-agent-dashboard {
-    p {
-        margin: 14px 0 8px;
-        color: hsl(0, 0%, 50%);
-        font-size: 14px;
-    }
+	p {
+		margin: 14px 0 8px;
+		color: hsl( 0, 0%, 50% );
+		font-size: 14px;
+	}
 
-    h4 {
-        font-size: 18px;
-        color: hsl(0deg 0% 39%);
-        font-weight: 400;
-    }
+	h4 {
+		font-size: 18px;
+		color: hsl( 0deg 0% 39% );
+		font-weight: 400;
+	}
 
-    input[type="text"],
-    textarea {
-        border: 1px solid #8fa3f1;
-        border-radius: 7px;
-        padding: 10px 20px;
-        color: hsl(0, 0%, 50%);
-    }
+	input[type='text'],
+	textarea {
+		border: 1px solid #8fa3f1;
+		border-radius: 7px;
+		padding: 10px 20px;
+		color: hsl( 0, 0%, 50% );
+	}
 
-    input[type="text"]:focus,
-    textarea:focus {
-        border-color: #317fdb;
-    }
+	input[type='text']:focus,
+	textarea:focus {
+		border-color: #317fdb;
+	}
 
-    .css-1s2u09g-control {
-        border-color: #8fa3f1;
-        border-radius: 7px;
-    }
+	.css-1s2u09g-control {
+		border-color: #8fa3f1;
+		border-radius: 7px;
+	}
 
-    span.css-1okebmr-indicatorSeparator {
-        background-color: #8fa3f1 !important;
-    }
+	span.css-1okebmr-indicatorSeparator {
+		background-color: #8fa3f1 !important;
+	}
 
-    svg.css-tj5bde-Svg {
-        fill: #8fa3f1;
-    }
+	svg.css-tj5bde-Svg {
+		fill: #8fa3f1;
+	}
 
-    .css-1pahdxg-control {
-        border-color: #8fa3f1 !important;
-        box-shadow: none;
-        border-radius: 7px;
-    }
+	.css-1pahdxg-control {
+		border-color: #8fa3f1 !important;
+		box-shadow: none;
+		border-radius: 7px;
+	}
 
-    .helpdesk-upload {
-        background: transparent;
-        border: 1px solid $mainColor;
-        color: $mainColor;
-        box-shadow: unset;
-    }
+	.helpdesk-upload {
+		background: transparent;
+		border: 1px solid $mainColor;
+		color: $mainColor;
+		box-shadow: unset;
+	}
 
-    .helpdesk-upload:hover {
-        color: #fff;
-        background: $mainColor;
-    }
+	.helpdesk-upload:hover {
+		color: #fff;
+		background: $mainColor;
+	}
 }
 
 .css-1cclsxm-MuiButtonBase-root-MuiPaginationItem-root:hover,
 ul.MuiPagination-ul button:focus {
-    background-color: #8fa3f1 !important;
-    outline: none;
+	background-color: #8fa3f1 !important;
+	outline: none;
 }
 
 body .helpdesk-back {
-    padding: 0;
-    margin: 10px 0;
-    letter-spacing: 0;
-    font-family: inherit;
-    font-weight: inherit;
-    text-transform: capitalize;
-    line-height: 1.6;
-    min-width: auto;
-    border: 1px solid $mainColor;
-    border-radius: 5px;
+	padding: 0;
+	margin: 10px 0;
+	letter-spacing: 0;
+	font-family: inherit;
+	font-weight: inherit;
+	text-transform: capitalize;
+	line-height: 1.6;
+	min-width: auto;
+	border: 1px solid $mainColor;
+	border-radius: 5px;
 
-    span {
-        display: inline-block;
-        padding: 5px 15px;
-        font-size: 13px;
-        text-transform: none;
-    }
+	span {
+		display: inline-block;
+		padding: 5px 15px;
+		font-size: 13px;
+		text-transform: none;
+	}
 }
 
 .helpdesk-w-50 {
-    width: 50%;
-    display: inline-block;
+	width: 50%;
+	display: inline-block;
 }
 
 .helpdesk-submit-btn {
-    text-align: right;
-    margin: 10px 0;
+	text-align: right;
+	margin: 10px 0;
 }
 
 .helpdesk-add-ticket .helpdesk-submit {
-    text-align: right;
+	text-align: right;
 }
 
 .helpdesk-submit {
-    input[type="submit"] {
-        background: $mainColor;
-        border-color: $mainColor;
-        border-radius: 4px;
-        color: #fff;
-        display: inline-block;
-        font-weight: 400;
-        text-align: center;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        transition: all .3s;
-        cursor: pointer;
-    }
+	input[type='submit'] {
+		background: $mainColor;
+		border-color: $mainColor;
+		border-radius: 4px;
+		color: #fff;
+		display: inline-block;
+		font-weight: 400;
+		text-align: center;
+		padding: 0.5rem 1rem;
+		font-size: 1rem;
+		transition: all 0.3s;
+		cursor: pointer;
+	}
 
-    input[type="submit"]:hover {
-        background: #fff;
-        color: $mainColor;
-    }
+	input[type='submit']:hover {
+		background: #fff;
+		color: $mainColor;
+	}
 }
 
 .helpdesk-tickets {
-    flex-basis: 70%;
+	flex-basis: 70%;
 }
 
 .helpdesk-ticket-content {
-    background: #fff;
-    border: 1px solid #dbe0f3;
-    border-radius: 12px;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
-    padding: 20px 30px 30px;
+	background: #fff;
+	border: 1px solid #dbe0f3;
+	border-radius: 12px;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
+	padding: 20px 30px 30px;
 }
 
 .helpdesk-sidebar {
-    flex-basis: 30%;
-    margin-left: 10px;
+	flex-basis: 30%;
+	margin-left: 10px;
 }
 
 .helpdesk-properties {
-    background: #fff;
-    border: 1px solid #dbe0f3;
-    border-radius: 7px;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
-    padding: 19px;
+	background: #fff;
+	border: 1px solid #dbe0f3;
+	border-radius: 7px;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
+	padding: 19px;
 
-    button {
-        text-transform: capitalize;
-        background: $mainColor;
-        border-radius: 7px;
-        margin-top: 20px;
-        margin-bottom: 5px;
-    }
+	button {
+		text-transform: capitalize;
+		background: $mainColor;
+		border-radius: 7px;
+		margin-top: 20px;
+		margin-bottom: 5px;
+	}
 
-    button:focus {
-        background: #317fdb;
-        outline: none;
-    }
+	button:focus {
+		background: #317fdb;
+		outline: none;
+	}
 
-    h3 {
-        font-size: 18px;
-        margin: 0;
-    }
+	h3 {
+		font-size: 18px;
+		margin: 0;
+	}
 }
 
 .helpdesk-single-ticket h1 {
-    font-size: 24px;
-    line-height: 1.2;
+	font-size: 24px;
+	line-height: 1.2;
 }
 
 .helpdesk-single-ticket.ticket-meta {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .ticket-reply {
-    background: #fff;
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    margin: 15px 0;
-    padding: 10px 15px;
-    position: relative;
+	background: #fff;
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	margin: 15px 0;
+	padding: 10px 15px;
+	position: relative;
 }
 
-.ticket-reply[data-type="private"] {
-    background: #f9e38e !important;
+.ticket-reply[data-type='private'] {
+	background: #f9e38e !important;
 }
 
 span.by-name,
 span.reply-date {
-    color: hsl(0, 0%, 50%);
-    font-size: 13px;
+	color: hsl( 0, 0%, 50% );
+	font-size: 13px;
 }
 
 span.reply-date {
-    float: right;
-    margin-top: 5px;
+	float: right;
+	margin-top: 5px;
 }
 
 .helpdesk-ticket a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .helpdesk-editor {
-    .ProseMirror {
-        border: 1px solid #8fa3f1;
-        border-radius: 7px;
-        padding: 5px 20px;
-        color: hsl(0, 0%, 50%);
-        min-height: 180px;
-    }
+	.ProseMirror {
+		border: 1px solid #8fa3f1;
+		border-radius: 7px;
+		padding: 5px 20px;
+		color: hsl( 0, 0%, 50% );
+		min-height: 180px;
+	}
 
-    button {
-        border: unset;
-        background: transparent;
-        color: #8fa3f1;
-        line-height: 1.5;
-        font-size: 1rem;
-        padding: 4px 10px;
-    }
+	button {
+		border: unset;
+		background: transparent;
+		color: #8fa3f1;
+		line-height: 1.5;
+		font-size: 1rem;
+		padding: 4px 10px;
+	}
 
-    button:hover {
-        background: transparent;
-        color: #8fa3f1;
-    }
+	button:hover {
+		background: transparent;
+		color: #8fa3f1;
+	}
 }
 
 .ticket-reply-images {
-    border-top: 1px solid #e3e3e3;
-    padding-top: 15px;
+	border-top: 1px solid #e3e3e3;
+	padding-top: 15px;
 }
 
 .helpdesk-image img {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .helpdesk-image-modal img {
-    max-width: 100%;
+	max-width: 100%;
 }
 
 .helpdesk-image-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    max-width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate( -50%, -50% );
+	-moz-transform: translate( -50%, -50% );
+	-ms-transform: translate( -50%, -50% );
+	transform: translate( -50%, -50% );
+	max-width: 100%;
 }
 
 .helpdesk-delete-ticket {
-    opacity: 0;
-    position: absolute !important;
-    top: -22px;
-    right: -15px;
+	opacity: 0;
+	position: absolute !important;
+	top: -22px;
+	right: -15px;
 }
 
 .helpdesk-ticket:hover .helpdesk-delete-ticket {
-    opacity: 1;
+	opacity: 1;
 }
 
 .helpdesk-delete-ticket:hover,
 .helpdesk-delete-reply:hover button {
-    background: inherit !important;
+	background: inherit !important;
 }
 
 .helpdesk-delete-ticket:hover svg,
 .helpdesk-delete-reply button:hover svg {
-    fill: #f39e9e;
+	fill: #f39e9e;
 }
 
 .helpdesk-delete-reply {
-    position: absolute;
-    right: -5px;
-    top: 36px;
-    opacity: 0;
-    transition: all 0.2s;
+	position: absolute;
+	right: -5px;
+	top: 36px;
+	opacity: 0;
+	transition: all 0.2s;
 }
 
 .ticket-reply:hover .helpdesk-delete-reply {
-    opacity: 1;
+	opacity: 1;
 }
 
 .refresh-ticket {
-    display: inline-block;
+	display: inline-block;
 
-    button:hover {
-        background: transparent;
-    }
+	button:hover {
+		background: transparent;
+	}
 
-    button:focus {
-        background: transparent;
-        outline: none;
-    }
+	button:focus {
+		background: transparent;
+		outline: none;
+	}
 }
 
-.helpdesk-ticket[data-ticket-status="Close"] {
-    opacity: 0.7;
+.helpdesk-ticket[data-ticket-status='Close'] {
+	opacity: 0.7;
 }
 
 .add-new-btn {
-    display: inline-block !important;
-    margin: -5px 10px 0 !important;
-    padding: 12px 20px !important;
+	display: inline-block !important;
+	margin: -5px 10px 0 !important;
+	padding: 12px 20px !important;
 }
 
 .MuiTabs-vertical {
-    flex-basis: 18%;
+	flex-basis: 18%;
 }
 
 .helpdesk-term {
-    position: relative;
-    border-bottom: 1px solid #ebe6e6;
-    padding: 15px 5px;
+	position: relative;
+	border-bottom: 1px solid #ebe6e6;
+	padding: 15px 5px;
 
-    &:last-child {
-        border-color: transparent;
-    }
+	&:last-child {
+		border-color: transparent;
+	}
 
-    a {
-        margin-right: 15px;
-        color: $mainColor;
-        text-decoration: none;
-    }
+	a {
+		margin-right: 15px;
+		color: $mainColor;
+		text-decoration: none;
+	}
 }
 
 .helpdesk-terms-list {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 
 .helpdesk-delete-term {
-    position: absolute;
-    right: 0;
-    top: 9px;
+	position: absolute;
+	right: 0;
+	top: 9px;
 }
 
 .helpdesk-delete-term button:hover {
-    background: inherit;
+	background: inherit;
 }
 
 .helpdesk-delete-term button:hover svg {
-    fill: #f39e9e;
+	fill: #f39e9e;
 }
 
 .helpdesk-image {
-    display: inline-block;
-    margin-right: 15px;
+	display: inline-block;
+	margin-right: 15px;
 }
 
 .helpdesk-image img {
-    border-radius: 7px;
+	border-radius: 7px;
 }
 
 .helpdesk-overview {
-    border: 1px solid #dbe0f3;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
-    border-radius: 7px;
-    background: #fff;
-    padding: 35px;
-    margin: 14px 7px;
+	border: 1px solid #dbe0f3;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
+	border-radius: 7px;
+	background: #fff;
+	padding: 35px;
+	margin: 14px 7px;
 }
 
 .helpdesk-overview.hdw-box {
-    display: inline-block;
-    width: 100%;
-    max-width: 16%;
-    margin: 0 7px;
+	display: inline-block;
+	width: 100%;
+	max-width: 16%;
+	margin: 0 7px;
 }
 
 .overview-wrap {
-    display: block;
+	display: block;
 }
 
 .hdw-box-in {
-    font-size: 20px;
+	font-size: 20px;
 }
 
 .helpdesk-search {
-    position: relative;
-    float: right;
-    margin-top: -7px;
+	position: relative;
+	float: right;
+	margin-top: -7px;
 
-    .helpdesk-search-btn {
-        text-transform: capitalize;
-        margin-left: 5px;
-        border-radius: 7px;
-        margin-top: -3px;
-    }
+	.helpdesk-search-btn {
+		text-transform: capitalize;
+		margin-left: 5px;
+		border-radius: 7px;
+		margin-top: -3px;
+	}
 
-    li {
-        position: relative;
-        padding-left: 14px;
-    }
+	li {
+		position: relative;
+		padding-left: 14px;
+	}
 
-    li:after {
-        position: absolute;
-        content: '';
-        background: $mainColor;
-        width: 6px;
-        height: 6px;
-        top: 12px;
-        left: 4px;
-        border-radius: 50px;
-    }
+	li:after {
+		position: absolute;
+		content: '';
+		background: $mainColor;
+		width: 6px;
+		height: 6px;
+		top: 12px;
+		left: 4px;
+		border-radius: 50px;
+	}
 
-    a {
-        text-decoration: none;
-        font-size: 14px;
-        color: #343434;
-        margin: 15px 7px;
-        padding: 5px 0 !important;
-        display: block;
-        transition: all 0.3s;
-    }
+	a {
+		text-decoration: none;
+		font-size: 14px;
+		color: #343434;
+		margin: 15px 7px;
+		padding: 5px 0 !important;
+		display: block;
+		transition: all 0.3s;
+	}
 
-    a:hover {
-        color: $mainColor;
-    }
+	a:hover {
+		color: $mainColor;
+	}
 }
 
-#helpdesk-agent-dashboard .helpdesk-search input[type="text"] {
-    padding: 5px 15px;
+#helpdesk-agent-dashboard .helpdesk-search input[type='text'] {
+	padding: 5px 15px;
 }
 
 .helpdesk-search-toggle {
-    display: block;
-    position: absolute;
-    top: 45px;
-    background: #fff;
-    width: 275px;
-    min-height: 44px;
-    left: -300px;
-    padding: 20px 25px;
-    margin-bottom: 10px;
-    border-radius: 7px;
-    border: 1px solid #dbe0f3;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
-    z-index: 99;
+	display: block;
+	position: absolute;
+	top: 45px;
+	background: #fff;
+	width: 275px;
+	min-height: 44px;
+	left: -300px;
+	padding: 20px 25px;
+	margin-bottom: 10px;
+	border-radius: 7px;
+	border: 1px solid #dbe0f3;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
+	z-index: 99;
 }
 
 .helpdesk-docs {
-    div#vertical-tabpanel-0 {
-        flex-basis: 83%;
-    }
+	div#vertical-tabpanel-0 {
+		flex-basis: 83%;
+	}
 
-    .MuiTabs-vertical {
-        flex-basis: 17%;
-    }
+	.MuiTabs-vertical {
+		flex-basis: 17%;
+	}
 }
 
 .MuiPagination-root {
-    button {
-        display: flex;
-    }
+	button {
+		display: flex;
+	}
 }
 
 #canned-responses {
-    display: inline-block;
-    position: relative;
+	display: inline-block;
+	position: relative;
 
-    button {
-        margin-top: -5px;
-        text-align: left;
-        text-transform: none;
-    }
+	button {
+		margin-top: -5px;
+		text-align: left;
+		text-transform: none;
+	}
 }
 
 #helpdesk-responses {
-    position: absolute;
-    z-index: 99;
-    width: 250px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 7px;
-    border: 1px solid #dbe0f3;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
-    left: -25px;
+	position: absolute;
+	z-index: 99;
+	width: 250px;
+	background: #fff;
+	padding: 20px;
+	border-radius: 7px;
+	border: 1px solid #dbe0f3;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
+	left: -25px;
 
-    input {
-        width: 100%;
-    }
+	input {
+		width: 100%;
+	}
 
-    .helpdesk-search-result-item {
-        text-align: left;
-    }
+	.helpdesk-search-result-item {
+		text-align: left;
+	}
 }
 
 .reply-edit {
-    position: relative;
-    float: right;
+	position: relative;
+	float: right;
 
-    .edit-reply-btn {
-        margin: -4px 4px 4px;
-        text-transform: inherit;
-    }
+	.edit-reply-btn {
+		margin: -4px 4px 4px;
+		text-transform: inherit;
+	}
 }
 
 #reply-edit {
-    position: absolute;
-    width: 580px;
-    min-height: 250px;
-    z-index: 99;
-    background: #fff;
-    padding: 20px;
-    border-radius: 7px;
-    border: 1px solid #dbe0f3;
-    box-shadow: 0 0 20px -15px $boxShadowColor;
-    left: -525px;
+	position: absolute;
+	width: 580px;
+	min-height: 250px;
+	z-index: 99;
+	background: #fff;
+	padding: 20px;
+	border-radius: 7px;
+	border: 1px solid #dbe0f3;
+	box-shadow: 0 0 20px -15px $boxShadowColor;
+	left: -525px;
 
-    input[type="submit"] {
-        float: right;
-        margin-top: 16px;
-    }
+	input[type='submit'] {
+		float: right;
+		margin-top: 16px;
+	}
 
-    .edit-close-btn {
-        background: transparent;
-        border: transparent;
-        float: right;
-        cursor: pointer;
+	.edit-close-btn {
+		background: transparent;
+		border: transparent;
+		float: right;
+		cursor: pointer;
 
-        svg {
-            fill: #ee5454;
-        }
-    }
+		svg {
+			fill: #ee5454;
+		}
+	}
 }
 
 .MuiDrawer-modal {
-    z-index: 999999 !important;
+	z-index: 999999 !important;
 }
 
 .merge-drawer {
-    display: inline-block;
+	display: inline-block;
 }
 
-.merge-box input[type="text"] {
-    border: 1px solid #8fa3f1;
-    border-radius: 7px;
-    padding: 10px 20px;
-    color: hsl(0, 0%, 50%);
-    width: 100%;
+.merge-box input[type='text'] {
+	border: 1px solid #8fa3f1;
+	border-radius: 7px;
+	padding: 10px 20px;
+	color: hsl( 0, 0%, 50% );
+	width: 100%;
 }
 
-.ticket-reply[data-merge="1"] {
-    background: #b8dffc;
+.ticket-reply[data-merge='1'] {
+	background: #b8dffc;
 }
 
 #hdw-loading {
-    span {
-        margin: 0 auto;
-        position: fixed;
-        right: 0;
-        left: 0;
-        top: 50%;
-    }
+	span {
+		margin: 0 auto;
+		position: fixed;
+		right: 0;
+		left: 0;
+		top: 50%;
+	}
+}
+
+.tickets-list-item {
+	&:hover {
+		.ticket-check {
+			.MuiCheckbox-root {
+				visibility: visible;
+			}
+		}
+	}
+
+	& .Mui-checked {
+		visibility: visible !important;
+	}
+
+	.ticket-check {
+		padding: 5px;
+		width: 30px;
+		height: 30px;
+		margin-right: 5px;
+		margin-top: -5px;
+
+		.MuiCheckbox-root {
+			visibility: hidden;
+		}
+
+		&:hover {
+			background: transparent;
+		}
+	}
+}
+
+.bulk-action-tickets {
+	position: absolute;
+	top: -42px;
+	left: 36px;
 }

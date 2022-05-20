@@ -48,6 +48,16 @@ class Tickets {
                 'args'                => array(),
             ),
         ));
+
+		register_rest_route(
+            $this->namespace . '/' . $this->version, '/' . $this->base . '/bulk', array(
+            array(
+                'methods'             => \WP_REST_Server::EDITABLE,
+                'callback'            => array( $this, 'bulk_action' ),
+                'permission_callback' => array( $this, 'tickets_permissions_check' ),
+                'args'                => array(),
+            ),
+        ));
     }
 
     public function create_ticket( $request ) {
@@ -172,6 +182,39 @@ class Tickets {
 
         return new \WP_Error( 'cant-delete-ticket', __( 'Can\'t delete the ticket', 'helpdeskwp' ), array( 'status' => 500 ) );
     }
+
+	public function bulk_action( $request ) {
+		$tickets = $request->get_param( 'tickets' );
+		$action  = $request->get_param( 'action' );
+
+		if ( ! $tickets && ! $action ) {
+			return;
+		}
+
+		switch ( $action ) {
+			case 'delete':
+
+				foreach ( $tickets as $ticket ) {
+					wp_delete_post( $ticket, true );
+				}
+
+				$response = rest_ensure_response( $tickets );
+
+				return $response;
+				break;
+
+			case 'close':
+
+				foreach ( $tickets as $ticket ) {
+					wp_set_object_terms( $ticket, 'Close', 'ticket_status' );
+				}
+				break;
+
+			default:
+
+				break;
+		}
+	}
 
     public function prepare_update_ticket( string $ticket, array $properties ) {
         if ( isset( $properties['category'] ) && ! empty( $properties['category'] ) ) {

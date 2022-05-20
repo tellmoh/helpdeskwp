@@ -66,10 +66,29 @@ const updateProperties = async ( args ) => {
 	);
 };
 
+// Bulk delete tickets
+const bulkAction = async ( args ) => {
+	const { tickets, action } = args;
+
+	const data = {
+		tickets,
+		action,
+	};
+
+	const response = await axios.post(
+		`${ helpdesk_agent_dashboard.url }helpdesk/v1/tickets/bulk`,
+		JSON.stringify( data ),
+		config
+	);
+
+	return response.data;
+};
+
 const ticketService = {
 	getTickets,
 	deleteTicket,
 	updateProperties,
+	bulkAction,
 };
 
 export default ticketService;

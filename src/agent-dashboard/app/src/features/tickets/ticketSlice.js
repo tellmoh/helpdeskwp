@@ -64,6 +64,24 @@ export const updateProperties = createAsyncThunk(
 	}
 );
 
+// Bulk action tickets
+export const bulkAction = createAsyncThunk(
+	'tickets/bulkaction',
+	async ( args, thunkAPI ) => {
+		try {
+			return await ticketService.bulkAction( args );
+		} catch ( error ) {
+			const message =
+				( error.response &&
+					error.response.data &&
+					error.response.data.message ) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue( message );
+		}
+	}
+);
+
 export const ticketSlice = createSlice( {
 	name: 'ticket',
 	initialState,
@@ -107,6 +125,26 @@ export const ticketSlice = createSlice( {
 				state.isSuccess = true;
 			} )
 			.addCase( updateProperties.rejected, ( state, action ) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			} )
+			.addCase( bulkAction.pending, ( state ) => {
+				state.isLoading = true;
+			} )
+			.addCase( bulkAction.fulfilled, ( state, action ) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+
+				if ( action.payload ) {
+					action.payload.map( ( id ) => {
+						state.tickets = state.tickets.filter(
+							( ticket ) => ticket.id !== id
+						);
+					} );
+				}
+			} )
+			.addCase( bulkAction.rejected, ( state, action ) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
