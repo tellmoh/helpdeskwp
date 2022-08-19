@@ -19,6 +19,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CannedResponses from './CannedResponses';
 import CircularProgress from '@mui/material/CircularProgress';
 import Emails from './Emails';
+import Automations from '../components/modules/Automations';
 
 const theme = createTheme( {
 	palette: {
@@ -225,28 +226,32 @@ const Settings = () => {
 							{ ...a11yProps( 2 ) }
 						/>
 						<Tab
-							label={ __( 'Docs', 'helpdeskwp' ) }
+							label={ __( 'Automations', 'helpdeskwp' ) }
 							{ ...a11yProps( 3 ) }
 						/>
 						<Tab
-							label={ __( 'Canned Responses', 'helpdeskwp' ) }
+							label={ __( 'Docs', 'helpdeskwp' ) }
 							{ ...a11yProps( 4 ) }
 						/>
 						<Tab
-							label={ __( 'Category', 'helpdeskwp' ) }
+							label={ __( 'Canned Responses', 'helpdeskwp' ) }
 							{ ...a11yProps( 5 ) }
 						/>
 						<Tab
-							label={ __( 'Type', 'helpdeskwp' ) }
+							label={ __( 'Category', 'helpdeskwp' ) }
 							{ ...a11yProps( 6 ) }
 						/>
 						<Tab
-							label={ __( 'Priority', 'helpdeskwp' ) }
+							label={ __( 'Type', 'helpdeskwp' ) }
 							{ ...a11yProps( 7 ) }
 						/>
 						<Tab
-							label={ __( 'Status', 'helpdeskwp' ) }
+							label={ __( 'Priority', 'helpdeskwp' ) }
 							{ ...a11yProps( 8 ) }
+						/>
+						<Tab
+							label={ __( 'Status', 'helpdeskwp' ) }
+							{ ...a11yProps( 9 ) }
 						/>
 					</Tabs>
 					<TabPanel value={ value } index={ 0 }>
@@ -328,6 +333,9 @@ const Settings = () => {
 						<Emails onChange={ onSettingsChange } />
 					</TabPanel>
 					<TabPanel value={ value } index={ 3 }>
+						<Automations />
+					</TabPanel>
+					<TabPanel value={ value } index={ 4 }>
 						<p style={ { margin: '5px 0' } }>
 							{ __( 'Docs slug', 'helpdeskwp' ) }
 						</p>
@@ -356,10 +364,10 @@ const Settings = () => {
 							</Button>
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 4 }>
+					<TabPanel value={ value } index={ 5 }>
 						<CannedResponses />
 					</TabPanel>
-					<TabPanel value={ value } index={ 5 }>
+					<TabPanel value={ value } index={ 6 }>
 						<input
 							type="text"
 							placeholder={ __( 'Category', 'helpdeskwp' ) }
@@ -405,7 +413,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 6 }>
+					<TabPanel value={ value } index={ 7 }>
 						<input
 							type="text"
 							placeholder={ __( 'Type', 'helpdeskwp' ) }
@@ -451,7 +459,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 7 }>
+					<TabPanel value={ value } index={ 8 }>
 						<input
 							type="text"
 							placeholder={ __( 'Priority', 'helpdeskwp' ) }
@@ -497,7 +505,7 @@ const Settings = () => {
 								} ) }
 						</div>
 					</TabPanel>
-					<TabPanel value={ value } index={ 8 }>
+					<TabPanel value={ value } index={ 9 }>
 						<input
 							type="text"
 							placeholder={ __( 'Status', 'helpdeskwp' ) }

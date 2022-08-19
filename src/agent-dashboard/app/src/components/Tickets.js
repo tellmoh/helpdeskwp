@@ -204,7 +204,8 @@ const TicketsList = () => {
 													tabIndex={ -1 }
 													disableRipple
 													inputProps={ {
-														'aria-labelledby': labelId,
+														'aria-labelledby':
+															labelId,
 													} }
 												/>
 											</ListItemIcon>

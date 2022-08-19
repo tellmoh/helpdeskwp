@@ -6,7 +6,7 @@ body {
 }
 
 #helpdesk-agent-dashboard {
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
 }
 
 .helpdesk-main {
@@ -73,9 +73,9 @@ div#wpcontent {
 }
 
 button#new-ticket:after {
-	content: '';
+	content: "";
 	position: absolute;
-	background-image: url( "data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='edit' class='svg-inline--fa fa-edit fa-w-18' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%230051af' d='M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z'%3E%3C/path%3E%3C/svg%3E" );
+	background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='edit' class='svg-inline--fa fa-edit fa-w-18' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%230051af' d='M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z'%3E%3C/path%3E%3C/svg%3E");
 	width: 15px;
 	height: 15px;
 	background-repeat: no-repeat;
@@ -130,25 +130,25 @@ h4.ticket-title {
 #helpdesk-agent-dashboard {
 	p {
 		margin: 14px 0 8px;
-		color: hsl( 0, 0%, 50% );
+		color: hsl(0, 0%, 50%);
 		font-size: 14px;
 	}
 
 	h4 {
 		font-size: 18px;
-		color: hsl( 0deg 0% 39% );
+		color: hsl(0deg 0% 39%);
 		font-weight: 400;
 	}
 
-	input[type='text'],
+	input[type="text"],
 	textarea {
 		border: 1px solid #8fa3f1;
 		border-radius: 7px;
 		padding: 10px 20px;
-		color: hsl( 0, 0%, 50% );
+		color: hsl(0, 0%, 50%);
 	}
 
-	input[type='text']:focus,
+	input[type="text"]:focus,
 	textarea:focus {
 		border-color: #317fdb;
 	}
@@ -226,7 +226,7 @@ body .helpdesk-back {
 }
 
 .helpdesk-submit {
-	input[type='submit'] {
+	input[type="submit"] {
 		background: $mainColor;
 		border-color: $mainColor;
 		border-radius: 4px;
@@ -240,7 +240,7 @@ body .helpdesk-back {
 		cursor: pointer;
 	}
 
-	input[type='submit']:hover {
+	input[type="submit"]:hover {
 		background: #fff;
 		color: $mainColor;
 	}
@@ -307,13 +307,13 @@ body .helpdesk-back {
 	position: relative;
 }
 
-.ticket-reply[data-type='private'] {
+.ticket-reply[data-type="private"] {
 	background: #f9e38e !important;
 }
 
 span.by-name,
 span.reply-date {
-	color: hsl( 0, 0%, 50% );
+	color: hsl(0, 0%, 50%);
 	font-size: 13px;
 }
 
@@ -331,7 +331,7 @@ span.reply-date {
 		border: 1px solid #8fa3f1;
 		border-radius: 7px;
 		padding: 5px 20px;
-		color: hsl( 0, 0%, 50% );
+		color: hsl(0, 0%, 50%);
 		min-height: 180px;
 	}
 
@@ -367,10 +367,10 @@ span.reply-date {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	-webkit-transform: translate( -50%, -50% );
-	-moz-transform: translate( -50%, -50% );
-	-ms-transform: translate( -50%, -50% );
-	transform: translate( -50%, -50% );
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	max-width: 100%;
 }
 
@@ -420,7 +420,7 @@ span.reply-date {
 	}
 }
 
-.helpdesk-ticket[data-ticket-status='Close'] {
+.helpdesk-ticket[data-ticket-status="Close"] {
 	opacity: 0.7;
 }
 
@@ -520,7 +520,7 @@ span.reply-date {
 
 	li:after {
 		position: absolute;
-		content: '';
+		content: "";
 		background: $mainColor;
 		width: 6px;
 		height: 6px;
@@ -544,7 +544,7 @@ span.reply-date {
 	}
 }
 
-#helpdesk-agent-dashboard .helpdesk-search input[type='text'] {
+#helpdesk-agent-dashboard .helpdesk-search input[type="text"] {
 	padding: 5px 15px;
 }
 
@@ -633,7 +633,7 @@ span.reply-date {
 	box-shadow: 0 0 20px -15px $boxShadowColor;
 	left: -525px;
 
-	input[type='submit'] {
+	input[type="submit"] {
 		float: right;
 		margin-top: 16px;
 	}
@@ -650,23 +650,26 @@ span.reply-date {
 	}
 }
 
-.MuiDrawer-modal {
-	z-index: 999999 !important;
+.toplevel_page_helpdesk {
+	div#adminmenuwrap,
+	div#wpadminbar {
+		z-index: 1200;
+	}
 }
 
 .merge-drawer {
 	display: inline-block;
 }
 
-.merge-box input[type='text'] {
+.merge-box input[type="text"] {
 	border: 1px solid #8fa3f1;
 	border-radius: 7px;
 	padding: 10px 20px;
-	color: hsl( 0, 0%, 50% );
+	color: hsl(0, 0%, 50%);
 	width: 100%;
 }
 
-.ticket-reply[data-merge='1'] {
+.ticket-reply[data-merge="1"] {
 	background: #b8dffc;
 }
 
@@ -714,4 +717,18 @@ span.reply-date {
 	position: absolute;
 	top: -42px;
 	left: 36px;
+}
+
+.add-new-rule {
+	input[type="text"] {
+		border: 1px solid #8fa3f1;
+		border-radius: 7px;
+		padding: 6px 20px;
+		color: hsl(0, 0%, 50%);
+	}
+
+	.css-1s2u09g-control {
+		border-color: #8fa3f1;
+		border-radius: 7px;
+	}
 }

@@ -103,6 +103,74 @@ export const settingSlice = createSlice( {
 		removeEmail: ( state, action ) => {
 			state.settings.emails.splice( action.payload, 1 );
 		},
+		addRule: ( state, action ) => {
+			const rules = [ ...state.settings.rules ];
+
+			rules.push( {
+				status: {
+					status: false,
+				},
+				actions: [
+					{
+						action: '',
+						actionValue: '',
+					},
+				],
+				filters: [
+					{
+						name: '',
+						match: '',
+						filter: '',
+						operation: '',
+						value: '',
+						normal_value: '',
+					},
+				],
+			} );
+
+			state.settings[ 'rules' ] = rules;
+		},
+		addFilter: ( state, action ) => {
+			const filters = [
+				...state.settings.rules[ action.payload ].filters,
+			];
+
+			filters.push( {
+				name: '',
+				match: '',
+				filter: '',
+				operation: '',
+				value: '',
+				normal_value: '',
+			} );
+
+			state.settings[ 'rules' ][ action.payload ].filters = filters;
+		},
+		setFilter: ( state, action ) => {
+			const { name, value, index, ruleIndex } = action.payload;
+
+			state.settings.rules[ ruleIndex ].filters[ index ][ name ] = value;
+		},
+		addAction: ( state, action ) => {
+			const actions = [
+				...state.settings.rules[ action.payload ].actions,
+			];
+
+			actions.push( {
+				action: '',
+				actionValue: '',
+			} );
+
+			state.settings[ 'rules' ][ action.payload ].actions = actions;
+		},
+		setAction: ( state, action ) => {
+			const { name, value, index, ruleIndex } = action.payload;
+
+			state.settings.rules[ ruleIndex ].actions[ index ][ name ] = value;
+		},
+		removeRule: ( state, action ) => {
+			state.settings.rules.splice( action.payload, 1 );
+		},
 	},
 	extraReducers: ( builder ) => {
 		builder
@@ -154,5 +222,11 @@ export const {
 	addEmails,
 	setEmails,
 	removeEmail,
+	addRule,
+	setFilter,
+	removeRule,
+	addFilter,
+	setAction,
+	addAction,
 } = settingSlice.actions;
 export default settingSlice.reducer;
