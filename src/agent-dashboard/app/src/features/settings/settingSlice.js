@@ -103,13 +103,23 @@ export const settingSlice = createSlice( {
 		removeEmail: ( state, action ) => {
 			state.settings.emails.splice( action.payload, 1 );
 		},
+		setRuleName: ( state, action ) => {
+			const { value, index } = action.payload;
+
+			state.settings.rules[ index ].name = value;
+		},
+		setMatch: ( state, action ) => {
+			const { value, index } = action.payload;
+
+			state.settings.rules[ index ].match = value;
+		},
 		addRule: ( state, action ) => {
 			const rules = [ ...state.settings.rules ];
 
 			rules.push( {
-				status: {
-					status: false,
-				},
+				name: '',
+				match: '',
+				status: false,
 				actions: [
 					{
 						action: '',
@@ -118,8 +128,6 @@ export const settingSlice = createSlice( {
 				],
 				filters: [
 					{
-						name: '',
-						match: '',
 						filter: '',
 						operation: '',
 						value: '',
@@ -128,7 +136,7 @@ export const settingSlice = createSlice( {
 				],
 			} );
 
-			state.settings[ 'rules' ] = rules;
+			state.settings.rules = rules;
 		},
 		addFilter: ( state, action ) => {
 			const filters = [
@@ -144,7 +152,7 @@ export const settingSlice = createSlice( {
 				normal_value: '',
 			} );
 
-			state.settings[ 'rules' ][ action.payload ].filters = filters;
+			state.settings.rules[ action.payload ].filters = filters;
 		},
 		setFilter: ( state, action ) => {
 			const { name, value, index, ruleIndex } = action.payload;
@@ -170,6 +178,7 @@ export const settingSlice = createSlice( {
 		},
 		removeRule: ( state, action ) => {
 			state.settings.rules.splice( action.payload, 1 );
+			settingService.saveSettings( state.settings );
 		},
 	},
 	extraReducers: ( builder ) => {
@@ -228,5 +237,7 @@ export const {
 	addFilter,
 	setAction,
 	addAction,
+	setRuleName,
+	setMatch,
 } = settingSlice.actions;
 export default settingSlice.reducer;

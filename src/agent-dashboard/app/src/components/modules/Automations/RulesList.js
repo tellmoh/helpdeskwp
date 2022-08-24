@@ -10,8 +10,10 @@ import {
 	addFilter,
 	saveSettings,
 } from '../../../features/settings/settingSlice';
+import RuleName from './RuleName';
+import Match from './Match';
 
-const RulesList = () => {
+const RulesList = ( { ruleIndex } ) => {
 	const { settings } = useSelector( ( state ) => state.setting );
 
 	const dispatch = useDispatch();
@@ -39,103 +41,76 @@ const RulesList = () => {
 			} }
 			className="add-new-rule"
 		>
-			{ settings.rules &&
-				settings.rules.map( ( rule, ruleIndex ) => {
-					return (
-						<Box>
-							{ settings.rules[ ruleIndex ].filters &&
-								settings.rules[ ruleIndex ].filters.map(
-									( filter, index ) => {
-										return (
-											<Box>
-												{
-													<AddFilter
-														ruleIndex={ ruleIndex }
-														index={ index }
-														onChange={
-															onRulesChange
-														}
-													/>
-												}
-
-												<Box>
-													<Button
-														className="helpdesk-back"
-														onClick={ () =>
-															dispatch(
-																addFilter(
-																	index
-																)
-															)
-														}
-													>
-														<span className="primary">
-															{ __(
-																'Add new filter',
-																'helpdeskwp'
-															) }
-														</span>
-													</Button>
-												</Box>
-											</Box>
-										);
+			<RuleName index={ ruleIndex } />
+			<Match index={ ruleIndex } />
+			<Box>
+				{ settings.rules[ ruleIndex ].filters &&
+					settings.rules[ ruleIndex ].filters.map(
+						( filter, index ) => {
+							return (
+								<Box>
+									{
+										<AddFilter
+											index={ index }
+											ruleIndex={ ruleIndex }
+											onChange={ onRulesChange }
+										/>
 									}
-								) }
+								</Box>
+							);
+						}
+					) }
 
-							{ settings.rules[ ruleIndex ].actions &&
-								settings.rules[ ruleIndex ].actions.map(
-									( action, index ) => {
-										return (
-											<Box>
-												{
-													<AddAction
-														ruleIndex={ ruleIndex }
-														index={ index }
-														onChange={
-															onRulesChange
-														}
-													/>
-												}
+				<Box>
+					<Button
+						className="helpdesk-back"
+						onClick={ () => dispatch( addFilter( ruleIndex ) ) }
+					>
+						<span className="primary">
+							{ __( 'Add new filter', 'helpdeskwp' ) }
+						</span>
+					</Button>
+				</Box>
 
-												<Box>
-													<Button
-														className="helpdesk-back"
-														onClick={ () =>
-															dispatch(
-																addAction(
-																	index
-																)
-															)
-														}
-													>
-														<span className="primary">
-															{ __(
-																'Add new action',
-																'helpdeskwp'
-															) }
-														</span>
-													</Button>
-												</Box>
-											</Box>
-										);
+				{ settings.rules[ ruleIndex ].actions &&
+					settings.rules[ ruleIndex ].actions.map(
+						( action, index ) => {
+							return (
+								<Box>
+									{
+										<AddAction
+											index={ index }
+											ruleIndex={ ruleIndex }
+											onChange={ onRulesChange }
+										/>
 									}
-								) }
+								</Box>
+							);
+						}
+					) }
 
-							<Box>
-								<Button
-									className="helpdesk-back"
-									onClick={ () =>
-										dispatch( saveSettings( settings ) )
-									}
-								>
-									<span className="primary">
-										{ __( 'Save', 'helpdeskwp' ) }
-									</span>
-								</Button>
-							</Box>
-						</Box>
-					);
-				} ) }
+				<Box>
+					<Button
+						className="helpdesk-back"
+						onClick={ () => dispatch( addAction( ruleIndex ) ) }
+					>
+						<span className="primary">
+							{ __( 'Add new action', 'helpdeskwp' ) }
+						</span>
+					</Button>
+				</Box>
+
+				<Box>
+					<Button
+						className="helpdesk-back"
+						onClick={ () => dispatch( saveSettings( settings ) ) }
+					>
+						<span className="primary">
+							{ __( 'Save', 'helpdeskwp' ) }
+						</span>
+					</Button>
+				</Box>
+			</Box>
 		</Box>
 	);
 };

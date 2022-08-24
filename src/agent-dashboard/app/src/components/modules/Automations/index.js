@@ -5,7 +5,9 @@ import { addRule } from '../../../features/settings/settingSlice';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import RulesList from './RulesList';
+import Edit from './Edit';
+import Add from './Add';
+import DeleteRule from './DeleteRule';
 
 const Automations = () => {
 	const { settings } = useSelector( ( state ) => state.setting );
@@ -36,25 +38,24 @@ const Automations = () => {
 					</span>
 				</Button>
 				<Drawer open={ toggle } onClose={ closeDrawer }>
-					{ <RulesList /> }
+					{ <Add /> }
 				</Drawer>
 			</Box>
 
 			<Box>
 				{ settings.rules &&
-					settings.rules.map( ( rule, ruleIndex ) => {
+					settings.rules.map( ( rule, index ) => {
 						return (
-							<Box>
-								{ settings.rules[ ruleIndex ].filters &&
-									settings.rules[ ruleIndex ].filters.map(
-										( filter, index ) => {
-											return (
-												<Box>
-													<h4>{ filter.name }</h4>
-												</Box>
-											);
-										}
-									) }
+							<Box className="helpdesk-ticket">
+								<h4 className="ticket-title primary">
+									{ settings.rules[ index ].name }
+								</h4>
+								{
+									<>
+										<Edit index={ index } />
+										<DeleteRule index={ index } />
+									</>
+								}
 							</Box>
 						);
 					} ) }

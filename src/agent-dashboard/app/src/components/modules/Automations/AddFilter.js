@@ -1,9 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Divider from '@mui/material/Divider';
 import { useSelector, useDispatch } from 'react-redux';
@@ -90,58 +86,6 @@ const AddFilter = ( { index, ruleIndex } ) => {
 
 	return (
 		<Box>
-			<Box sx={ { marginBottom: '30px' } }>
-				<Typography variant="caption" gutterBottom component="div">
-					{ __( 'Name', 'helpdeskwp' ) }
-				</Typography>
-				<FormControl fullWidth>
-					<input
-						placeholder={ __( 'Rule name', 'helpdeskwp' ) }
-						type="text"
-						name="name"
-						value={
-							settings.rules[ ruleIndex ].filters[ index ].name &&
-							settings.rules[ ruleIndex ].filters[ index ].name
-						}
-						onChange={ ( e ) =>
-							onFilterChange( e, index, ruleIndex )
-						}
-					/>
-				</FormControl>
-			</Box>
-
-			<Box>
-				<Typography variant="caption" gutterBottom component="div">
-					{ __( 'Rule', 'helpdeskwp' ) }
-				</Typography>
-				<FormControl>
-					<RadioGroup
-						row
-						aria-labelledby="match-label"
-						name="match"
-						value={
-							settings.rules[ ruleIndex ].filters[ index ]
-								.match &&
-							settings.rules[ ruleIndex ].filters[ index ].match
-						}
-						onChange={ ( e ) =>
-							onFilterChange( e, index, ruleIndex )
-						}
-					>
-						<FormControlLabel
-							value="any"
-							control={ <Radio /> }
-							label={ __( 'Match Any', 'helpdeskwp' ) }
-						/>
-						<FormControlLabel
-							value="all"
-							control={ <Radio /> }
-							label={ __( 'Match All', 'helpdeskwp' ) }
-						/>
-					</RadioGroup>
-				</FormControl>
-			</Box>
-
 			<Box>
 				<Box sx={ { marginBottom: '30px', marginTop: '30px' } }>
 					<FormControl fullWidth>

@@ -332,7 +332,11 @@ const Settings = () => {
 					<TabPanel value={ value } index={ 2 }>
 						<Emails onChange={ onSettingsChange } />
 					</TabPanel>
-					<TabPanel value={ value } index={ 3 }>
+					<TabPanel
+						value={ value }
+						index={ 3 }
+						className="automations-tab"
+					>
 						<Automations />
 					</TabPanel>
 					<TabPanel value={ value } index={ 4 }>
