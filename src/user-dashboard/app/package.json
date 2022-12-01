@@ -14,8 +14,8 @@
         "react-hot-toast": "^2.2.0",
         "react-router-dom": "^6.2.1",
         "react-select": "^5.2.1",
-        "sweetalert2": "^11.3.4",
-        "sweetalert2-react-content": "^4.2.0"
+        "sweetalert2": "^11.6.15",
+        "sweetalert2-react-content": "^5.0.7"
     },
     "devDependencies": {
         "@wordpress/scripts": "^22.2.1"
